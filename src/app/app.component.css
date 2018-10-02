@@ -1,0 +1,25 @@
+img, li {
+    border-radius: 10px;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.25), 0 7px 7px rgba(0,0,0,0.22);
+}
+
+li {
+    list-style-type: none;
+    padding: 10px 5px;
+    width: 200px;
+    border-radius: 5px;
+    background: radial-gradient(#222426, #131315);
+    text-align: center;
+}
+
+li h2 {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    background: -webkit-repeating-radial-gradient(#837f7b, #eee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #837f7b;
+}
