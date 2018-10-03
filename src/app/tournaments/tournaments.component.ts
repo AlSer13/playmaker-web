@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Tournament} from '../Tournament';
+import {TournamentService} from '../tournament.service';
 
 @Component({
-  selector: 'app-tournaments',
-  templateUrl: './tournaments.component.html',
-  styleUrls: ['./tournaments.component.css']
+    selector: 'app-tournaments',
+    templateUrl: './tournaments.component.html',
+    styleUrls: ['./tournaments.component.css']
 })
 export class TournamentsComponent implements OnInit {
+    tours: Tournament[];
 
-  constructor() { }
+    constructor(private tourService: TournamentService) {
+    }
 
-  ngOnInit() {
-  }
+    getTours() {
+        this.tourService.getTours()
+            .subscribe(data => this.tours = data['tournaments']);
+    }
+
+    ngOnInit() {
+        this.getTours();
+    }
 
 }

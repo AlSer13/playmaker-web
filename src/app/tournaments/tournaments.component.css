@@ -1,0 +1,11 @@
+#tour_div {
+    margin: 0 auto 20px;
+    width: 700px;
+}
+#content {
+    display: table;
+    padding: 20px;
+    width: 100vw;
+    height: 100vh;
+    background: #444444;
+}
