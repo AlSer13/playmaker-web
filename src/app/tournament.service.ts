@@ -12,8 +12,8 @@ export class TournamentService {
     }
 
     getTours() {
-        return this.http.get(this.tournamentsUrl);
-        // of(resp);
+        // return this.http.get(this.tournamentsUrl);
+        return of(resp);
 
     }
 
