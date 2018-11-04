@@ -1,6 +1,7 @@
 <div *ngIf="tour">
     <h1>
-        <clr-icon shape="history" class="btn btn-link" (click)="goBack()"></clr-icon>
+        <clr-icon id="back_btn" shape="circle-arrow" class="btn btn-link"
+                  (click)="goBack()"></clr-icon>
         {{tour.name}}
     </h1>
     <h4>
