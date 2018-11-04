@@ -1,11 +1,30 @@
-#tour_div {
-    margin: 0 auto 20px;
-    width: 700px;
+.card, .search {
+    min-width: 300px;
+    max-width: 700px;
+    width: 50%;
+    margin: 0 auto 20px auto;
 }
-#content {
-    display: table;
-    padding: 20px;
-    width: 100vw;
-    height: 100vh;
-    /*background: #444444;*/
+
+.subscribe_btn {
+    margin-left: auto;
 }
+
+.card-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.card-footer {
+    text-align: left;
+}
+
+.search {
+    background: white;
+    padding-top: .3rem;
+}
+
+.search input, .search label {
+    width: 100%;
+    color: black;
+}
+

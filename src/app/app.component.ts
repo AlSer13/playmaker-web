@@ -9,21 +9,22 @@ export class AppComponent {
     title = 'Playmaker';
     nav_components = [
         {
-            text: 'Главная',
+            text: 'Main',
             link: '/main',
 
         },
         {
-            text: 'Турниры',
+            text: 'Tournaments',
             link: '/tournaments'
         },
         {
-            text: 'Команды',
+            text: 'Teams',
             link: '/teams'
         },
         {
-            text: 'Помощь',
+            text: 'Help',
             link: '/help'
         }
     ];
 }
+

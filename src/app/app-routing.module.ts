@@ -5,11 +5,13 @@ import {TournamentsComponent} from './tournaments/tournaments.component';
 import {TeamsComponent} from './teams/teams.component';
 import {HelpComponent} from './help/help.component';
 import {ProfileComponent} from './profile/profile.component';
+import {TournamentComponent} from './tournament/tournament.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'main', pathMatch: 'full'},
     {path: 'main', component: MainComponent},
     {path: 'tournaments', component: TournamentsComponent},
+    {path: 'tournaments/:id', component: TournamentComponent},
     {path: 'teams', component: TeamsComponent},
     {path: 'help', component: HelpComponent},
     {path: 'profile', component: ProfileComponent},

@@ -1,13 +1,40 @@
-<div id="content">
-    <div id="tour_div" *ngFor="let tour of tours" class="card">
-        <div class="card-header"> {{tour.name}}</div>
-        <div class="card-block">
-            <div class="card-media-text">
-                tournament_id = {{tour._id}}
-                <br>
-                <img src="../../assets/dlc.jpeg">
+<form class="search">
+    <label for="search_input">
+        <input #searchInput id="search_input" (keyup)="search(searchInput.value)" type="text"
+                placeholder="Search for keywords...">
+    </label>
+</form>
+
+<div *ngFor="let tour of tours" class="card">
+    <div class="card-header">
+        <span style="align-self: center">{{tour.name}}</span>
+        <button class="btn btn-sm btn-outline subscribe_btn" [disabled]="!auth">
+            Subscribe
+        </button>
+    </div>
+    <div class="card-block">
+        <div class="card-media-block">
+            <img src="../../assets/dlc.jpeg" class="card-media-image">
+            <div class="card-media-description">
+                        <span class="card-media-title">
+                            Id: {{tour._id}}
+                        </span>
+                <span class="card-media-text">
+                            Owner: John Doe
+                    <!--{{tour.ownerName}}-->
+                        </span>
             </div>
         </div>
+        <div class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+            mollit anim id est laborum.
+            <!--{{tour.description}}-->
+        </div>
+
         <!--<p-accordion>-->
         <!--<p-accordionTab *ngFor="let team of tour.teams"-->
         <!--header="{{team._id}}: {{team.name}}">-->
@@ -15,6 +42,9 @@
         <!--id={{player.player_id}}</p>-->
         <!--</p-accordionTab>-->
         <!--</p-accordion>-->
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-link" routerLink="/tournaments/{{tour._id}}">view page</button>
     </div>
 </div>
 

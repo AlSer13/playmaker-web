@@ -3,6 +3,6 @@
 /*@import url("../node_modules/primeng/resources/primeng.min.css");*/
 /*@import url("../node_modules/primeng/resources/themes/luna-blue/theme.css");*/
 
-body {
+html, body {
     margin: 0;
 }

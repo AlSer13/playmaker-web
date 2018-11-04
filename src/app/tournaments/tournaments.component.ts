@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Tournament} from '../Tournament';
 import {TournamentService} from '../tournament.service';
+import {AuthService} from '../auth.service';
 
 @Component({
     selector: 'app-tournaments',
@@ -9,17 +10,23 @@ import {TournamentService} from '../tournament.service';
 })
 export class TournamentsComponent implements OnInit {
     tours: Tournament[];
+    auth: boolean;
 
-    constructor(private tourService: TournamentService) {
+    constructor(private tourService: TournamentService, private authService: AuthService) {
     }
 
-    getTours() {
+    getTours(): void {
         this.tourService.getTours()
-            .subscribe(data => this.tours = data['tournaments']);
+            .subscribe(tours => this.tours = tours);
     }
 
     ngOnInit() {
         this.getTours();
+        this.auth = this.authService.isAuthed();
+    }
+
+    search() {
+
     }
 
 }

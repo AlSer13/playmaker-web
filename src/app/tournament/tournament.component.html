@@ -1,0 +1,18 @@
+<div *ngIf="tour">
+    <h1>
+        <clr-icon shape="history" class="btn btn-link" (click)="goBack()"></clr-icon>
+        {{tour.name}}
+    </h1>
+    <h4>
+        Id: {{tour._id}}
+    </h4>
+
+    <h4>
+        Prize pool: {{tour.prize_pool}}
+    </h4>
+
+    <h4>Teams:</h4>
+    <ol>
+        <li *ngFor="let team of tour?.teams">{{team.name}}</li>
+    </ol>
+</div>
