@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {AuthService} from '../services/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -7,6 +8,7 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
     title = 'Playmaker';
+
     nav_components = [
         {
             text: 'Main',
@@ -26,5 +28,10 @@ export class AppComponent {
             link: '/help'
         }
     ];
+
+    constructor(private authService: AuthService) {
+    }
+
+    hasPermission = this.authService.hasPermission('USER');
 }
 

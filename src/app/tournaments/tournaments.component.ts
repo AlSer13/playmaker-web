@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Tournament} from '../Tournament';
-import {TournamentService} from '../tournament.service';
-import {AuthService} from '../auth.service';
+import {Tournament} from '../../entities/Tournament';
+import {TournamentService} from '../../services/tournament.service';
 
 @Component({
     selector: 'app-tournaments',
@@ -10,9 +9,8 @@ import {AuthService} from '../auth.service';
 })
 export class TournamentsComponent implements OnInit {
     tours: Tournament[];
-    auth: boolean;
 
-    constructor(private tourService: TournamentService, private authService: AuthService) {
+    constructor(private tourService: TournamentService) {
     }
 
     getTours(): void {
@@ -22,7 +20,6 @@ export class TournamentsComponent implements OnInit {
 
     ngOnInit() {
         this.getTours();
-        this.auth = this.authService.isAuthed();
     }
 
     search() {

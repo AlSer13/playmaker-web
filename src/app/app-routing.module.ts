@@ -5,7 +5,9 @@ import {TournamentsComponent} from './tournaments/tournaments.component';
 import {TeamsComponent} from './teams/teams.component';
 import {HelpComponent} from './help/help.component';
 import {ProfileComponent} from './profile/profile.component';
-import {TournamentComponent} from './tournament/tournament.component';
+import {TournamentComponent} from './tournaments/tournament/tournament.component';
+import {AuthGuardService} from '../services/auth-guard.service';
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -14,7 +16,21 @@ const routes: Routes = [
     {path: 'tournaments/:id', component: TournamentComponent},
     {path: 'teams', component: TeamsComponent},
     {path: 'help', component: HelpComponent},
-    {path: 'profile', component: ProfileComponent},
+    {
+        path: 'login',
+        canActivate: [AuthGuardService],
+        data: {auth: 'VISITOR', redirect: '/profile'},
+        // ОСТОРОЖНО, если у пользователя не будет
+        // ни USER, ни VISITOR, всему конец
+        // (кольцевой redirect profile <-> login)
+        component: LoginComponent
+    },
+    {
+        path: 'profile',
+        canActivate: [AuthGuardService],
+        data: {auth: 'USER', redirect: '/login'},
+        component: ProfileComponent
+    },
 ];
 
 @NgModule({

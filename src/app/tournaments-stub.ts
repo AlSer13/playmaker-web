@@ -1,4 +1,4 @@
-import {Tournament} from './Tournament';
+import {Tournament} from '../entities/Tournament';
 
 const TOURS: Tournament[] = [
     {

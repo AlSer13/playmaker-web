@@ -9,7 +9,7 @@
                routerLink={{component.link}} class="nav-link nav-text">{{component.text}}</a>
         </div>
         <div class="header-actions">
-            <form class="search">
+            <form class="search"> <!--TODO: expanding on click search field-->
                 <label for="search_input">
                     <input id="search_input" type="text" placeholder=" Search for keywords...">
                 </label>
@@ -20,9 +20,14 @@
                     <clr-icon shape="caret down"></clr-icon>
                 </button>
                 <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                    <a routerLink="/profile" clrDropdownItem>Profile</a>
-                    <a clrDropdownItem>Preferences</a>
-                    <a clrDropdownItem>Log out</a>
+                    <div *ngIf="hasPermission">
+                        <a routerLink="/profile" clrDropdownItem>Profile</a>
+                        <a clrDropdownItem>Preferences</a>
+                        <a clrDropdownItem>Log out</a>
+                    </div>
+                    <div *ngIf="!hasPermission">
+                        <a routerLink="/login" clrDropdownItem>Log In</a>
+                    </div>
                 </clr-dropdown-menu>
             </clr-dropdown>
         </div>
