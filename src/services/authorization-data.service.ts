@@ -9,7 +9,7 @@ import {HttpClient} from '@angular/common/http';
 })
 // service for api call to get roles
 export class AuthorizationDataService {
-    private authURL = environment.localURL + '/roles';
+    private authURL = environment.localURL + '/user/roles';
 
     getPermissions(): Promise<AuthGroup[]> {
         return this.http.get(this.authURL).pipe(map(data => data['authGroup'])).toPromise();

@@ -5,9 +5,9 @@ export class Tournament {
     name: string;
     team_count: number;
     prize_pool: number;
+    owner: string;
     teams: Team[];
     // description: string;
-    // ownerName: string;
     //
     // constructor() {
     //     this.description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,' +

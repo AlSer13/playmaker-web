@@ -15,7 +15,10 @@ export class TournamentsComponent implements OnInit {
 
     getTours(): void {
         this.tourService.getTours()
-            .subscribe(tours => this.tours = tours);
+            .subscribe(tours => {
+              this.tours = tours;
+              console.log(tours);
+            });
     }
 
     ngOnInit() {
