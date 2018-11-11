@@ -17,7 +17,6 @@ export class TournamentsComponent implements OnInit {
         this.tourService.getTours()
             .subscribe(tours => {
               this.tours = tours;
-              console.log(tours);
             });
     }
 

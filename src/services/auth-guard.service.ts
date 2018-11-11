@@ -12,14 +12,13 @@ export class AuthGuardService implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot): Promise<boolean> | boolean {
-        console.log(route);
-        if (this.hasRequiredPermission(route.data['auth'])) {
+        if (this.hasRequiredPermission(route.data['required'])) {
             return true;
         } else {
             if (!(this.authService.hasPermission('USER') || this.authService.hasPermission('VISITOR'))) {
                 route.data['redirect'] = '/help';
             }
-            this.router.navigate([route.data['redirect']]);
+            this.router.navigate([route.data['redirect']]).then();
             return false;
         }
     }

@@ -8,6 +8,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {TournamentComponent} from './tournaments/tournament/tournament.component';
 import {AuthGuardService} from '../services/auth-guard.service';
 import {LoginComponent} from './login/login.component';
+import {SignupComponent} from './signup/signup.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -17,9 +18,15 @@ const routes: Routes = [
     {path: 'teams', component: TeamsComponent},
     {path: 'help', component: HelpComponent},
     {
+        path: 'signup',
+        canActivate: [AuthGuardService],
+        data: {required: 'VISITOR', redirect: '/profile'},
+        component: SignupComponent
+    },
+    {
         path: 'login',
         canActivate: [AuthGuardService],
-        data: {auth: 'VISITOR', redirect: '/profile'},
+        data: {required: 'VISITOR', redirect: '/profile'},
         // ОСТОРОЖНО, если у пользователя не будет
         // ни USER, ни VISITOR, всему конец
         // (кольцевой redirect profile <-> login)
@@ -28,7 +35,7 @@ const routes: Routes = [
     {
         path: 'profile',
         canActivate: [AuthGuardService],
-        data: {auth: 'USER', redirect: '/login'},
+        data: {required: 'USER', redirect: '/login'},
         component: ProfileComponent
     },
 ];

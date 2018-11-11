@@ -1,4 +1,35 @@
-<p>
-    login works!
-</p>
+<div class="login-wrapper">
+    <form class="login" (submit)="logIn()">
+        <section class="title">
+            <h3 class="welcome">Welcome to</h3>
+            Playmaker
+            <h5 class="hint">Use your e-mail and password to login</h5>
+        </section>
+        <div class="login-group">
+            <clr-select-container *ngIf="asadmin">
+                <select clrSelect name="type" title="admin">
+                    <option value="local">User</option>
+                    <option value="admin">Administrator</option>
+                </select>
+            </clr-select-container>
+            <clr-input-container>
+                <input type="text" name="username" clrInput="username"
+                       placeholder="Username" [(ngModel)]="username"/>
+            </clr-input-container>
+            <clr-password-container>
+                <input type="password" name="password" [(ngModel)]="password" clrPassword
+                       placeholder="Password"/>
+            </clr-password-container>
+            <clr-checkbox-wrapper>
+                <label>Remember me</label>
+                <input type="checkbox" name="rememberMe" clrCheckbox title="rememberme"/>
+            </clr-checkbox-wrapper>
+            <div class="error" [class.active]="error">
+                Invalid user name or password
+            </div>
+            <button type="submit" class="btn btn-primary">NEXT</button>
+            <a class="signup" routerLink="signup">Sign up</a>
+        </div>
+    </form>
+</div>
 

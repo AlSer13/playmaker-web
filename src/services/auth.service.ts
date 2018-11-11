@@ -17,10 +17,10 @@ export class AuthService {
 
     initializePermissions() {
         return new Promise((resolve, reject) => {
-            // Call API to retrieve the list of actions this user is permitted to perform.
-            // In this case, the method returns a Promise, but it could have been implemented as an Observable
+            // Call API to retrieve the list of roles.
             this.authorizationDataService.getPermissions()
                 .then(permissions => {
+                    console.log('received permissions from server: ' + permissions);
                     this.permissions = permissions;
                     resolve();
                 })

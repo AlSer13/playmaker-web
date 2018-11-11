@@ -16,6 +16,8 @@ import {LoginComponent} from './login/login.component';
 import {HideForbiddenDirective} from '../directives/hide-forbidden.directive';
 import {DisableForbiddenDirective} from '../directives/disable-forbidden.directive';
 import {AuthorizationDataService} from '../services/authorization-data.service';
+import {SignupComponent} from './signup/signup.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -28,14 +30,16 @@ import {AuthorizationDataService} from '../services/authorization-data.service';
         TournamentComponent,
         LoginComponent,
         HideForbiddenDirective,
-        DisableForbiddenDirective
+        DisableForbiddenDirective,
+        SignupComponent,
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        ClarityModule, // clarity
+        ClarityModule,
+        FormsModule
     ],
     providers: [
         AuthorizationDataService,
