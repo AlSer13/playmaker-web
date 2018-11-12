@@ -1,37 +1,44 @@
 <form class="search">
     <label for="search_input">
         <input #searchInput id="search_input" (keyup)="search(searchInput.value)" type="text"
-                placeholder="Search for keywords...">
+               placeholder="Search for keywords...">
     </label>
 </form>
 
 <div *ngFor="let tour of tours" class="card">
     <div class="card-header">
         <span style="align-self: center">{{tour.name}}</span>
-        <button class="btn btn-sm btn-outline subscribe_btn" [appDisableForbidden]="'USER'">
-            Subscribe
-        </button>
+        <div role="tooltip" aria-haspopup="true"
+             class="tooltip tooltip-bottom-right tooltip-sm subscribe_btn">
+            <span [appHideForbidden]="'VISITOR'"
+                  class="tooltip-content">Log in to subscribe</span>
+            <button class="btn btn-sm btn-outline" [appDisableForbidden]="'USER'">
+                Subscribe
+            </button>
+        </div>
     </div>
     <div class="card-block">
         <div class="card-media-block">
             <img src="../../assets/dlc.jpeg" class="card-media-image">
             <div class="card-media-description">
-                        <span class="card-media-title">
-                            Id: {{tour._id}}
-                        </span>
+                <!--<span class="card-media-text">-->
+                <!--Id: {{tour._id}}-->
+                <!--</span>-->
                 <span class="card-media-text">
-                            Owner: {{tour.owner}}
-                        </span>
+                    Owner: <a>{{tour.owner}}</a>
+                </span>
+                <span class="card-media-text">
+                    Teams: {{tour.team_count}}
+                </span>
+                <span class="card-media-text">
+                    Prize pool: {{tour.prize_pool}}
+                </span>
             </div>
         </div>
         <div class="card-text">
+            {{tour.description}}
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-            mollit anim id est laborum.
-            <!--{{tour.description}}-->
+            incididunt ut labore et dolore magna aliqua.
         </div>
     </div>
     <div class="card-footer">

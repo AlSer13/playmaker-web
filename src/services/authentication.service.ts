@@ -13,8 +13,7 @@ export class AuthenticationService {
     private logoutURL = environment.localURL + '/user/logout';
 
     constructor(private http: HttpClient,
-                private authorizationService: AuthService,
-                protected router: Router) {
+                private authorizationService: AuthService) {
 
     }
 
@@ -42,6 +41,5 @@ export class AuthenticationService {
         };
         await this.http.post(this.logoutURL, {}, options).toPromise();
         await this.authorizationService.initializePermissions();
-        this.router.navigate(['/']);
     }
 }

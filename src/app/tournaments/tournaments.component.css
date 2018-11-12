@@ -9,6 +9,13 @@
     margin-left: auto;
 }
 
+.tooltip-content {
+    left: 80% !important;
+    margin-top: .5rem !important;
+    width: 6rem !important;
+    padding: 0.2rem 0.5rem !important;
+}
+
 .card-header {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -18,6 +25,9 @@
     text-align: left;
 }
 
+.card-media-text {
+    line-height: 1.5;
+}
 .search {
     background: white;
     padding-top: .3rem;
