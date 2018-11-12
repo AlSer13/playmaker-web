@@ -3,30 +3,33 @@
         <section class="title">
             <h3 class="welcome">Welcome to</h3>
             Playmaker
-            <h5 class="hint">Use your e-mail and password to login</h5>
+            <h5 class="hint">Use your username and password to login</h5>
         </section>
         <div class="login-group">
-            <clr-select-container *ngIf="asadmin">
-                <select clrSelect name="type" title="admin">
-                    <option value="local">User</option>
-                    <option value="admin">Administrator</option>
-                </select>
-            </clr-select-container>
-            <clr-input-container>
-                <input type="text" name="username" clrInput="username"
-                       placeholder="Username" [(ngModel)]="username"/>
-            </clr-input-container>
-            <clr-password-container>
-                <input type="password" name="password" [(ngModel)]="password" clrPassword
-                       placeholder="Password"/>
-            </clr-password-container>
-            <clr-checkbox-wrapper>
-                <label>Remember me</label>
-                <input type="checkbox" name="rememberMe" [(ngModel)]="rememberMe" clrCheckbox
-                       title="rememberme"/>
-            </clr-checkbox-wrapper>
+            <div class="spinner" *ngIf="loading">Loading...</div>
+            <div *ngIf="!loading">
+                <clr-select-container *ngIf="asadmin">
+                    <select clrSelect name="type" title="admin">
+                        <option value="local">User</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                </clr-select-container>
+                <clr-input-container>
+                    <input type="text" name="username" clrInput="username"
+                           placeholder="Username" [(ngModel)]="username"/>
+                </clr-input-container>
+                <clr-password-container>
+                    <input type="password" name="password" [(ngModel)]="password" clrPassword
+                           placeholder="Password"/>
+                </clr-password-container>
+                <clr-checkbox-wrapper>
+                    <label>Remember me</label>
+                    <input type="checkbox" name="rememberMe" [(ngModel)]="rememberMe" clrCheckbox
+                           title="rememberme"/>
+                </clr-checkbox-wrapper>
+            </div>
             <div class="error" [class.active]="error">
-                Invalid user name or password
+                Invalid username or password
             </div>
             <button type="submit" class="btn btn-primary">Log In</button>
             <a class="signup" routerLink="signup">Sign up</a>

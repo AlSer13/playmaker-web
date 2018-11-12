@@ -11,6 +11,7 @@ import {AuthenticationService} from '../../services/authentication.service';
 export class LoginComponent {
     combination = [];
     trueCombination = [50, 49, 52, 18, 17];
+    loading = false;
     rememberMe = true;
     asadmin = false;
     username: string;
@@ -50,10 +51,13 @@ export class LoginComponent {
     }
 
     async logIn() {
+        this.loading = true;
         if (await this.authenticationService.logIn(this.asadmin, this.username, this.password, this.rememberMe)) {
             this.error = false;
             this.router.navigate(['/profile']);
+            this.loading = false;
         } else {
+            this.loading = false;
             this.error = true;
         }
     }
