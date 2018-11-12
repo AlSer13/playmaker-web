@@ -17,6 +17,7 @@ export class LoginComponent {
     username: string;
     password: string;
     error = false;
+    errorMessage = 'error';
 
     // ctrl alt 4 1 2
     @HostListener('document:keydown', ['$event'])
@@ -51,14 +52,23 @@ export class LoginComponent {
     }
 
     async logIn() {
-        this.loading = true;
-        if (await this.authenticationService.logIn(this.asadmin, this.username, this.password, this.rememberMe)) {
-            this.error = false;
-            this.router.navigate(['/profile']);
-            this.loading = false;
+        if (this.username && this.password) {
+            this.loading = true;
+            if (await this.authenticationService.logIn(this.asadmin, this.username, this.password, this.rememberMe)) {
+                this.error = false;
+                this.router.navigate(['/profile']);
+                this.loading = false;
+            } else {
+                this.loading = false;
+                this.displayError('Invalid username or password');
+            }
         } else {
-            this.loading = false;
-            this.error = true;
+            this.displayError('All fields should be filled out');
         }
+    }
+
+    displayError(text: string) {
+        this.error = true;
+        this.errorMessage = text;
     }
 }

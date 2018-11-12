@@ -29,9 +29,10 @@
                 </clr-checkbox-wrapper>
             </div>
             <div class="error" [class.active]="error">
-                Invalid username or password
+                {{errorMessage}}
             </div>
-            <button type="submit" class="btn btn-primary">Log In</button>
+            <button id="submit_btn" type="submit" class="btn btn-primary"
+                    [class.small_margin]="error">Log In</button>
             <a class="signup" routerLink="signup">Sign up</a>
         </div>
     </form>
