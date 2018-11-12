@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthService} from '../services/auth.service';
+import {AuthenticationService} from '../services/authentication.service';
 
 @Component({
     selector: 'app-root',
@@ -29,9 +30,12 @@ export class AppComponent {
         }
     ];
 
-    constructor(private authService: AuthService) {
+    logOut() {
+        this.authenticationService.logOut();
     }
 
-    hasPermission = this.authService.hasPermission('USER');
+    constructor(private authenticationService: AuthenticationService) {
+    }
+
 }
 

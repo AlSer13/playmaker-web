@@ -20,12 +20,12 @@
                     <clr-icon shape="caret down"></clr-icon>
                 </button>
                 <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                    <div *ngIf="hasPermission">
+                    <div [appHideForbidden]="'USER'">
                         <a routerLink="/profile" clrDropdownItem>Profile</a>
                         <a clrDropdownItem>Preferences</a>
-                        <a clrDropdownItem>Log out</a>
+                        <a clrDropdownItem (click)="logOut()">Log out</a>
                     </div>
-                    <div *ngIf="!hasPermission">
+                    <div [appHideForbidden]="'VISITOR'">
                         <a routerLink="/login" clrDropdownItem>Log In</a>
                         <a routerLink="/signup" clrDropdownItem>Sign Up</a>
                     </div>

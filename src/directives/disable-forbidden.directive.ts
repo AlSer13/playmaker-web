@@ -6,7 +6,7 @@ import {AuthGroup} from '../models/authorization.types';
     selector: '[appDisableForbidden]'
 })
 export class DisableForbiddenDirective implements OnInit {
-    @Input('appDisableForbidden') appDisableForbidden: AuthGroup; // Required appHideForbidden passed in
+    @Input('appDisableForbidden') appDisableForbidden: AuthGroup; // Required permission passed in
     constructor(private el: ElementRef, private authorizationService: AuthService) { }
     ngOnInit() {
         if (!this.authorizationService.hasPermission(this.appDisableForbidden)) {

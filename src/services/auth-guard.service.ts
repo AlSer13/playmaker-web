@@ -23,7 +23,7 @@ export class AuthGuardService implements CanActivate {
         }
     }
 
-    protected hasRequiredPermission(authGroup: AuthGroup): Promise<boolean> | boolean {
+    protected async hasRequiredPermission(authGroup: AuthGroup): Promise<boolean> {
         console.log('GUARD' +
             '\nrequired: ' + authGroup +
             '\nhave: ' + this.authService.permissions);
@@ -36,19 +36,16 @@ export class AuthGuardService implements CanActivate {
             }
         } else {
             // Otherwise, must request permissions from the API first
-            return new Promise<boolean>((resolve) => {
-                this.authService.initializePermissions()
-                    .then(() => {
-                        if (authGroup) {
-                            resolve(this.authService.hasPermission(authGroup));
-                        } else {
-                            resolve(this.authService.hasPermission(null));
-                        }
-
-                    }).catch(() => {
-                    resolve(false);
-                });
-            });
+            try {
+                await this.authService.initializePermissions();
+                if (authGroup) {
+                    return this.authService.hasPermission(authGroup);
+                } else {
+                    return this.authService.hasPermission(null);
+                }
+            } catch (error) {
+                return false;
+            }
         }
     }
 }

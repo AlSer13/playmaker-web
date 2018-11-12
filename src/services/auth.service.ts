@@ -15,18 +15,8 @@ export class AuthService {
         }));
     }
 
-    initializePermissions() {
-        return new Promise((resolve, reject) => {
-            // Call API to retrieve the list of roles.
-            this.authorizationDataService.getPermissions()
-                .then(permissions => {
-                    console.log('received permissions from server: ' + permissions);
-                    this.permissions = permissions;
-                    resolve();
-                })
-                .catch((e) => {
-                    reject(e);
-                });
-        });
+    async initializePermissions() {
+        this.permissions = await this.authorizationDataService.getPermissions();
+        console.log('received permissions from server: ' + this.permissions);
     }
 }

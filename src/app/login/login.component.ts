@@ -1,8 +1,7 @@
-import {Component, HostListener, NgModule} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
 @Component({
     selector: 'app-login',
@@ -12,6 +11,7 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 export class LoginComponent {
     combination = [];
     trueCombination = [50, 49, 52, 18, 17];
+    rememberMe = true;
     asadmin = false;
     username: string;
     password: string;
@@ -45,21 +45,16 @@ export class LoginComponent {
         this.trueCombination = [50, 49, 52, 18, 17];
     }
 
-    constructor(private authenticationService: AuthenticationService, private authorizationService: AuthService, protected router: Router) {
+    constructor(private authenticationService: AuthenticationService,
+                protected router: Router) {
     }
 
-    logIn() {
-        this.authenticationService.logIn(this.asadmin, this.username, this.password).subscribe(
-            () => {
-                this.error = false;
-                this.authorizationService.initializePermissions().then(
-                    () => {
-                        this.router.navigate(['/profile']);
-                    }
-                );
-            },
-            (error: HttpErrorResponse) => {
-                this.error = true;
-            });
+    async logIn() {
+        if (await this.authenticationService.logIn(this.asadmin, this.username, this.password, this.rememberMe)) {
+            this.error = false;
+            this.router.navigate(['/profile']);
+        } else {
+            this.error = true;
+        }
     }
 }

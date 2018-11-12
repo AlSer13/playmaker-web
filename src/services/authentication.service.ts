@@ -4,6 +4,7 @@ import {environment} from '../environments/environment';
 import {AuthService} from './auth.service';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 
 @Injectable({
@@ -13,19 +14,36 @@ export class AuthenticationService {
     private loginURL = environment.localURL + '/user/login';
     private logoutURL = environment.localURL + '/user/logout';
 
-    constructor(private http: HttpClient, private authorizationService: AuthService) {
+    constructor(private http: HttpClient,
+                private authorizationService: AuthService,
+                protected router: Router) {
 
     }
 
-    logIn(asadmin: boolean, username: string, password: string): Observable<any> {
+    async logIn(asadmin: boolean, username: string, password: string, rememberMe: boolean): Promise<boolean> {
         const options = {
-            headers: new HttpHeaders({'Content-Type': 'application/json'})
+            headers: new HttpHeaders({'Content-Type': 'application/json'}),
+            withCredentials: true
+
         };
-        const body = {username: username, password: password};
-        return this.http.post(this.loginURL, body, options);
+        const body = {username: username, password: password, asadmin: asadmin, rememberMe: rememberMe};
+        try {
+            await this.http.post(this.loginURL, body, options).toPromise();
+            await this.authorizationService.initializePermissions();
+            return true;
+        } catch (error) {
+            console.log('error: ' + error.statusText);
+            return false;
+        }
     }
 
-    logOut() {
-
+    async logOut() {
+        const options = {
+            headers: new HttpHeaders({'Content-Type': 'application/json'}),
+            withCredentials: true
+        };
+        await this.http.post(this.logoutURL, {}, options).toPromise();
+        await this.authorizationService.initializePermissions();
+        this.router.navigate(['/']);
     }
 }
