@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {AuthService} from './auth.service';
-import {Router} from '@angular/router';
 
 
 @Injectable({
@@ -34,12 +33,30 @@ export class AuthenticationService {
         }
     }
 
-    async logOut() {
+    async logOut(): Promise<any> {
         const options = {
             headers: new HttpHeaders({'Content-Type': 'application/json'}),
             withCredentials: true
         };
         await this.http.post(this.logoutURL, {}, options).toPromise();
         await this.authorizationService.initializePermissions();
+    }
+
+    async usernameExists(username: string): Promise<boolean> {
+        const options = {params: new HttpParams().set('username', username)};
+        const data = await this.http.get(environment.localURL + '/user/uexists', options).toPromise();
+        return data['exists'];
+    }
+
+    async emailExists(email: string): Promise<boolean> {
+        const options = {params: new HttpParams().set('email', email)};
+        const data = await this.http.get(environment.localURL + '/user/eexists', options).toPromise();
+        return data['exists'];
+    }
+
+    async signUp(username: string, email: string, password: string): Promise<any> {
+        const body = {username: username, password: password, email: email};
+        const options = {};
+        return await this.http.post(environment.localURL + '/user/signup', body, options).toPromise();
     }
 }

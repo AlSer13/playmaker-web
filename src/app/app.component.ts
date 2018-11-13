@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {AuthService} from '../services/auth.service';
 import {AuthenticationService} from '../services/authentication.service';
 
 @Component({
@@ -32,6 +31,7 @@ export class AppComponent {
 
     logOut() {
         this.authenticationService.logOut();
+        window.location.reload();
     }
 
     constructor(private authenticationService: AuthenticationService) {

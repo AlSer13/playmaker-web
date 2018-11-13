@@ -17,7 +17,7 @@ import {HideForbiddenDirective} from '../directives/hide-forbidden.directive';
 import {DisableForbiddenDirective} from '../directives/disable-forbidden.directive';
 import {AuthorizationDataService} from '../services/authorization-data.service';
 import {SignupComponent} from './signup/signup.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -39,7 +39,8 @@ import {FormsModule} from '@angular/forms';
         AppRoutingModule,
         BrowserAnimationsModule,
         ClarityModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [
         AuthorizationDataService,
