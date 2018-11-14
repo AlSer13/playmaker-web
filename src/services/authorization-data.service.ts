@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../environments/environment';
-import {AuthGroup} from '../models/authorization.types';
-import {map} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
@@ -11,7 +9,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class AuthorizationDataService {
     private authURL = environment.localURL + '/user/roles';
 
-    getPermissions(): Promise<AuthGroup[]> {
+    getPermissions(): Promise<any> {
         const options = {
             headers: new HttpHeaders({
                 'If-Modified-Since': '0'
@@ -19,7 +17,7 @@ export class AuthorizationDataService {
             withCredentials: true
 
         };
-        return this.http.get(this.authURL, options).pipe(map(data => data['authGroup'])).toPromise();
+        return this.http.get(this.authURL, options).toPromise();
     }
 
     constructor(private http: HttpClient) {

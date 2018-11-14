@@ -24,7 +24,7 @@ export class AuthGuardService implements CanActivate {
     }
 
     protected hasRequiredPermission(authGroup: AuthGroup): Promise<boolean> | boolean {
-        console.log('GUARD' +
+        console.log('ROUTE GUARD' +
             '\nrequired: ' + authGroup +
             '\nhave: ' + this.authService.permissions);
         // If user’s permissions already retrieved from the API

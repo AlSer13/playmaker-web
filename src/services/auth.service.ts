@@ -5,6 +5,8 @@ import {AuthorizationDataService} from './authorization-data.service';
 @Injectable()
 export class AuthService {
     permissions: Array<string>; // Store the actions for which this user has appHideForbidden
+    username: string;
+
     constructor(private authorizationDataService: AuthorizationDataService) {
     }
 
@@ -16,7 +18,9 @@ export class AuthService {
     }
 
     async initializePermissions() {
-        this.permissions = await this.authorizationDataService.getPermissions();
-        console.log('received permissions from server: ' + this.permissions);
+        const data = await this.authorizationDataService.getPermissions();
+        this.permissions = data['authGroup'];
+        this.username = data['username'];
+        console.log('Received permissions from server: ' + this.permissions + '\nFor user: ' + this.username);
     }
 }

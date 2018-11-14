@@ -54,8 +54,11 @@ export class LoginComponent {
     async logIn() {
         if (this.username && this.password) {
             this.loading = true;
-            if (await this.authenticationService.logIn(this.asadmin, this.username, this.password, this.rememberMe)) {
+            const data = await this.authenticationService.logIn(this.asadmin, this.username, this.password, this.rememberMe);
+            if (data) {
                 this.error = false;
+                // this.authenticationService.username = data['username'];
+                // console.log('Logged in as ' + this.authenticationService.username);
                 this.router.navigate(['/profile']);
                 this.loading = false;
             } else {
@@ -68,7 +71,7 @@ export class LoginComponent {
     }
 
     displayError(text: string) {
-        this.error = true;
         this.errorMessage = text;
+        this.error = true;
     }
 }

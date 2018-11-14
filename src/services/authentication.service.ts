@@ -10,13 +10,12 @@ import {AuthService} from './auth.service';
 export class AuthenticationService {
     private loginURL = environment.localURL + '/user/login';
     private logoutURL = environment.localURL + '/user/logout';
-
     constructor(private http: HttpClient,
                 private authorizationService: AuthService) {
 
     }
 
-    async logIn(asadmin: boolean, username: string, password: string, rememberMe: boolean): Promise<boolean> {
+    async logIn(asadmin: boolean, username: string, password: string, rememberMe: boolean): Promise<any> {
         const options = {
             headers: new HttpHeaders({'Content-Type': 'application/json'}),
             withCredentials: true
@@ -24,12 +23,11 @@ export class AuthenticationService {
         };
         const body = {username: username, password: password, asadmin: asadmin, rememberMe: rememberMe};
         try {
-            await this.http.post(this.loginURL, body, options).toPromise();
+            const data = await this.http.post(this.loginURL, body, options).toPromise();
             await this.authorizationService.initializePermissions();
-            return true;
+            return data;
         } catch (error) {
-            console.log('error: ' + error.statusText);
-            return false;
+            return null;
         }
     }
 
