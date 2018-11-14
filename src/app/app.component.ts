@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
+import {AuthService} from '../services/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -8,6 +9,7 @@ import {AuthenticationService} from '../services/authentication.service';
 })
 export class AppComponent {
     title = 'Playmaker';
+    username = this.authService.username;
 
     nav_components = [
         {
@@ -34,7 +36,7 @@ export class AppComponent {
         window.location.reload();
     }
 
-    constructor(private authenticationService: AuthenticationService) {
+    constructor(private authenticationService: AuthenticationService, private authService: AuthService) {
     }
 
 }

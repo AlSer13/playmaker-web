@@ -21,7 +21,8 @@
                 </button>
                 <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
                     <div [appHideForbidden]="'USER'">
-                        <a routerLink="/profile" clrDropdownItem>Profile</a>
+                        <a routerLink="/user/{{username}}" clrDropdownItem><b>{{username
+                            | uppercase}}</b></a>
                         <a clrDropdownItem>Preferences</a>
                         <a clrDropdownItem (click)="logOut()">Log out</a>
                     </div>

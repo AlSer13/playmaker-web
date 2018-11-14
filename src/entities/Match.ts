@@ -1,6 +1,6 @@
-import {Player} from './Player';
+import {User} from './User';
 
 export class Match {
     match_id: number;
-    players: Player[];
+    players: User[];
 }

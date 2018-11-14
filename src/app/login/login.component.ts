@@ -47,7 +47,7 @@ export class LoginComponent {
         this.trueCombination = [50, 49, 52, 18, 17];
     }
 
-    constructor(private authenticationService: AuthenticationService,
+    constructor(private authenticationService: AuthenticationService, private authService: AuthService,
                 protected router: Router) {
     }
 
@@ -59,8 +59,9 @@ export class LoginComponent {
                 this.error = false;
                 // this.authenticationService.username = data['username'];
                 // console.log('Logged in as ' + this.authenticationService.username);
-                this.router.navigate(['/profile']);
+                this.router.navigate(['/user/' + this.authService.username]);
                 this.loading = false;
+                window.location.reload();
             } else {
                 this.loading = false;
                 this.displayError('Invalid username or password');

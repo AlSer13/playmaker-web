@@ -6,7 +6,7 @@ import {MainComponent} from './main/main.component';
 import {TournamentsComponent} from './tournaments/tournaments.component';
 import {TeamsComponent} from './teams/teams.component';
 import {HelpComponent} from './help/help.component';
-import {ProfileComponent} from './profile/profile.component';
+import {UserComponent} from './user/user.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {ClarityModule} from '@clr/angular';
@@ -18,6 +18,7 @@ import {DisableForbiddenDirective} from '../directives/disable-forbidden.directi
 import {AuthorizationDataService} from '../services/authorization-data.service';
 import {SignupComponent} from './signup/signup.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
@@ -26,12 +27,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         TournamentsComponent,
         TeamsComponent,
         HelpComponent,
-        ProfileComponent,
+        UserComponent,
         TournamentComponent,
         LoginComponent,
         HideForbiddenDirective,
         DisableForbiddenDirective,
         SignupComponent,
+        PageNotFoundComponent,
     ],
     imports: [
         BrowserModule,
