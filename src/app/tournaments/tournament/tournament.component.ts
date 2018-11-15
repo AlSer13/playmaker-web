@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Tournament} from '../../../entities/Tournament';
 import {ActivatedRoute} from '@angular/router';
-import {TournamentService} from '../../../services/tournament.service';
+import {TournamentService} from '../../../services/entity/tournament.service';
 import {Location} from '@angular/common';
 
 @Component({

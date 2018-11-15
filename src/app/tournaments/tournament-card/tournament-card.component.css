@@ -1,0 +1,30 @@
+.card {
+    min-width: 300px;
+    max-width: 700px;
+    width: 50%;
+    margin: 0 auto 20px auto;
+}
+
+.subscribe_btn {
+    margin-left: auto;
+}
+
+.tooltip-content {
+    left: 80% !important;
+    margin-top: .5rem !important;
+    width: 6rem !important;
+    padding: 0.2rem 0.5rem !important;
+}
+
+.card-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.card-footer {
+    text-align: left;
+}
+
+.card-media-text {
+    line-height: 1.5;
+}

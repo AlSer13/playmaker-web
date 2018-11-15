@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap} from '@angular/router';
-import {switchMap} from 'rxjs/operators';
+import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../entities/User';
-import {UserService} from '../../services/user.service';
+import {UserService} from '../../services/entity/user.service';
 
 @Component({
     selector: 'app-user',
@@ -11,14 +10,31 @@ import {UserService} from '../../services/user.service';
 })
 export class UserComponent implements OnInit {
     user: User;
+    _404 = false;
 
-    constructor(private route: ActivatedRoute, private userService: UserService) {
+    constructor(private route: ActivatedRoute,
+                private userService: UserService,
+                private router: Router) {
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         const username = this.route.snapshot.paramMap.get('username');
-        this.userService.getUser(username)
-            .subscribe(user => this.user = user);
+        try {
+            this.user = await this.userService.getUser(username);
+            console.log(this.user);
+        } catch (error) {
+            this.handleError(error);
+        }
+    }
+
+    handleError(error) {
+        switch (error.status) {
+            case 404:
+                this._404 = true;
+                break;
+            default:
+                throw error;
+        }
     }
 
 }

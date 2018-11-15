@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {User} from '../entities/User';
+import {User} from '../../entities/User';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {environment} from '../environments/environment';
+import {environment} from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -14,8 +13,8 @@ export class UserService {
     constructor(private http: HttpClient) {
     }
 
-    getUser(username: string): Observable<User> {
+    getUser(username: string): Promise<User> {
         return this.http.get<User>(this.userURL + '/' + username)
-            .pipe(map(data => data['user_info']));
+            .pipe(map(data => data['user_info'])).toPromise();
     }
 }

@@ -5,43 +5,4 @@
     </label>
 </form>
 
-<div *ngFor="let tour of tours" class="card">
-    <div class="card-header">
-        <span style="align-self: center">{{tour.name}}</span>
-        <div role="tooltip" aria-haspopup="true"
-             class="tooltip tooltip-bottom-right tooltip-sm subscribe_btn">
-            <span [appHideForbidden]="'VISITOR'"
-                  class="tooltip-content">Log in to subscribe</span>
-            <button class="btn btn-sm btn-outline" [appDisableForbidden]="'USER'">
-                Subscribe
-            </button>
-        </div>
-    </div>
-    <div class="card-block">
-        <div class="card-media-block">
-            <img src="../../assets/dlc.jpeg" class="card-media-image">
-            <div class="card-media-description">
-                <!--<span class="card-media-text">-->
-                <!--Id: {{tour._id}}-->
-                <!--</span>-->
-                <span class="card-media-text">
-                    Owner: <a>{{tour.owner}}</a>
-                </span>
-                <span class="card-media-text">
-                    Teams: {{tour.team_count}}
-                </span>
-                <span class="card-media-text">
-                    Prize pool: {{tour.prize_pool}}
-                </span>
-            </div>
-        </div>
-        <div class="card-text">
-            {{tour.description}}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua.
-        </div>
-    </div>
-    <div class="card-footer">
-        <button class="btn btn-link" routerLink="/tournaments/{{tour._id}}">view page</button>
-    </div>
-</div>
+<app-tournament-card *ngFor="let tour of tours" [tournament]="tour"></app-tournament-card>

@@ -5,6 +5,7 @@ export class Tournament {
     name: string;
     team_count: number;
     prize_pool: number;
+    description: string;
     owner: string;
     teams: Team[];
     // description: string;

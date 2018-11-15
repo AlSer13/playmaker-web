@@ -10,6 +10,7 @@ import {AuthGuardService} from '../services/auth-guard.service';
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {TeamComponent} from './teams/team/team.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -17,6 +18,7 @@ const routes: Routes = [
     {path: 'tournaments', component: TournamentsComponent},
     {path: 'tournaments/:id', component: TournamentComponent},
     {path: 'teams', component: TeamsComponent},
+    {path: 'teams/:id', component: TeamComponent},
     {path: 'help', component: HelpComponent},
     {
         path: 'signup',

@@ -1,0 +1,9 @@
+<div *ngIf="team && !_404">
+    <h1>
+        id: {{team._id}}
+    </h1>
+    <h1>
+        name: {{team.name}}
+    </h1>
+</div>
+<app-page-not-found *ngIf="_404"></app-page-not-found>

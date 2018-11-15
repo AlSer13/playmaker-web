@@ -1,3 +1,6 @@
-<p *ngIf="user">
-  id: {{user._id}}
-</p>
+<div *ngIf="!_404 && user">
+    <h1>id: {{user._id}}</h1>
+    <h1>{{user.email}}</h1>
+    <h1>{{user.accountId}}</h1>
+</div>
+<app-page-not-found *ngIf="_404"></app-page-not-found>
