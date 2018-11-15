@@ -21,7 +21,6 @@ export class UserComponent implements OnInit {
         const username = this.route.snapshot.paramMap.get('username');
         try {
             this.user = await this.userService.getUser(username);
-            console.log(this.user);
         } catch (error) {
             this.handleError(error);
         }

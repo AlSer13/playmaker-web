@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {User} from '../../entities/User';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 
@@ -14,7 +14,14 @@ export class UserService {
     }
 
     getUser(username: string): Promise<User> {
-        return this.http.get<User>(this.userURL + '/' + username)
+        const options = {
+            headers: new HttpHeaders({
+                'If-Modified-Since': '0'
+            }),
+            withCredentials: true
+
+        };
+        return this.http.get<User>(this.userURL + '/' + username, options)
             .pipe(map(data => data['user_info'])).toPromise();
     }
 }

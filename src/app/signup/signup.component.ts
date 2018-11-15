@@ -36,7 +36,6 @@ export class SignupComponent implements OnInit {
     }
 
     async submit() {
-        console.log(this.signUpForm.value);
         const data = await this.authenticationService.signUp(this.signUpForm.get('username').value,
             this.signUpForm.get('email').value,
             this.signUpForm.get('password').value);

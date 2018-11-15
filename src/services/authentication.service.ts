@@ -16,14 +16,9 @@ export class AuthenticationService {
     }
 
     async logIn(asadmin: boolean, username: string, password: string, rememberMe: boolean): Promise<any> {
-        const options = {
-            headers: new HttpHeaders({'Content-Type': 'application/json'}),
-            withCredentials: true
-
-        };
         const body = {username: username, password: password, asadmin: asadmin, rememberMe: rememberMe};
         try {
-            const data = await this.http.post(this.loginURL, body, options).toPromise();
+            const data = await this.http.post(this.loginURL, body).toPromise();
             await this.authorizationService.initializePermissions();
             return data;
         } catch (error) {
@@ -32,11 +27,7 @@ export class AuthenticationService {
     }
 
     async logOut(): Promise<any> {
-        const options = {
-            headers: new HttpHeaders({'Content-Type': 'application/json'}),
-            withCredentials: true
-        };
-        await this.http.post(this.logoutURL, {}, options).toPromise();
+        await this.http.post(this.logoutURL, {}).toPromise();
         await this.authorizationService.initializePermissions();
     }
 

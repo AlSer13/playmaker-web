@@ -8,7 +8,7 @@ import {TeamsComponent} from './teams/teams.component';
 import {HelpComponent} from './help/help.component';
 import {UserComponent} from './user/user.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ClarityModule} from '@clr/angular';
 import {AuthService} from '../services/auth.service';
 import {TournamentComponent} from './tournaments/tournament/tournament.component';
@@ -22,6 +22,7 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {TeamComponent} from './teams/team/team.component';
 import {TournamentCardComponent} from './tournaments/tournament-card/tournament-card.component';
 import {TeamCardComponent} from './teams/team-card/team-card.component';
+import {CookieInterceptor} from '../services/cookie-interceptor';
 
 @NgModule({
     declarations: [
@@ -59,6 +60,11 @@ import {TeamCardComponent} from './teams/team-card/team-card.component';
             multi: true,
             deps: [AuthService]
         },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: CookieInterceptor,
+            multi: true
+        }
     ],
     bootstrap: [AppComponent]
 })
