@@ -8,7 +8,7 @@ import {environment} from '../../environments/environment';
     providedIn: 'root'
 })
 export class UserService {
-    private userURL = environment.localURL + '/user';
+    private userURL = environment.localURL + '/user/info';
 
     constructor(private http: HttpClient) {
     }
