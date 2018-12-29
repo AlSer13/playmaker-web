@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {AuthService} from './auth.service';
+import {DOCUMENT} from '@angular/common';
 
 
 @Injectable({
@@ -10,8 +11,10 @@ import {AuthService} from './auth.service';
 export class AuthenticationService {
     private loginURL = environment.localURL + '/user/login';
     private logoutURL = environment.localURL + '/user/logout';
+    private steamLoginURL = environment.localURL + '/user/steam/login';
+
     constructor(private http: HttpClient,
-                private authorizationService: AuthService) {
+                private authorizationService: AuthService, @Inject(DOCUMENT) private document: any) {
 
     }
 
@@ -24,6 +27,10 @@ export class AuthenticationService {
         } catch (error) {
             return null;
         }
+    }
+
+    steamLogIn(){
+        this.document.location.href = this.steamLoginURL;
     }
 
     async logOut(): Promise<any> {

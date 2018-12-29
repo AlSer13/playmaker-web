@@ -71,6 +71,10 @@ export class LoginComponent {
         }
     }
 
+    steamLogIn() {
+        this.authenticationService.steamLogIn();
+    }
+
     displayError(text: string) {
         this.errorMessage = text;
         this.error = true;
