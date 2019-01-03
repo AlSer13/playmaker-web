@@ -23,6 +23,7 @@ import {TeamComponent} from './teams/team/team.component';
 import {TournamentCardComponent} from './tournaments/tournament-card/tournament-card.component';
 import {TeamCardComponent} from './teams/team-card/team-card.component';
 import {CookieInterceptor} from '../services/cookie-interceptor';
+import { UserSettingsComponent } from './user/user-settings/user-settings.component';
 import { AddTeamWizardComponent } from './user/add-team-wizard/add-team-wizard.component';
 
 @NgModule({
@@ -43,6 +44,7 @@ import { AddTeamWizardComponent } from './user/add-team-wizard/add-team-wizard.c
         TournamentCardComponent,
         TeamCardComponent,
         AddTeamWizardComponent,
+        UserSettingsComponent,
     ],
     imports: [
         BrowserModule,

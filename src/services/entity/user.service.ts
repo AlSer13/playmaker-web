@@ -9,6 +9,7 @@ import {environment} from '../../environments/environment';
 })
 export class UserService {
     private userURL = environment.localURL + '/user/info';
+    private updateUserURL = environment.localURL + '/user';
 
     constructor(private http: HttpClient) {
     }
@@ -19,9 +20,24 @@ export class UserService {
                 'If-Modified-Since': '0'
             }),
             withCredentials: true
-
         };
         return this.http.get<User>(this.userURL + '/' + username, options)
             .pipe(map(data => data['user_info'])).toPromise();
+    }
+
+    updateUser(user: User): Promise<User> {
+        const options = {
+            headers: new HttpHeaders({
+                'If-Modified-Since': '0'
+            }),
+            withCredentials: true
+        };
+
+        const body = {
+            jid: user.jid
+        };
+
+        return this.http.patch<User>(this.updateUserURL, body, options)
+            .pipe(map(data => data['user'])).toPromise();
     }
 }
