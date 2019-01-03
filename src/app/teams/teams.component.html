@@ -1,8 +1,8 @@
 <form class="search">
-  <label for="search_input">
-    <input #searchInput id="search_input" (keyup)="search(searchInput.value)" type="text"
-           placeholder="Search for keywords...">
-  </label>
+    <label for="search_input">
+        <input #searchInput id="search_input" (keyup)="search(searchInput.value)" type="text"
+               placeholder="Search for keywords...">
+    </label>
 </form>
 
 <app-team-card *ngFor="let team of teams" [team]="team"></app-team-card>

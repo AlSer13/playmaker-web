@@ -1,0 +1,123 @@
+<button class="btn btn-primary" (click)="teamWizardOpen = true">{{button_text}}</button>
+<clr-wizard #teamWizard
+            [(clrWizardOpen)]="teamWizardOpen"
+            (clrWizardOnFinish)="doFinish()"
+            (clrWizardOnCancel)="doCancel()"
+            clrWizardSize="xl">
+    <clr-wizard-title>Add team</clr-wizard-title>
+
+    <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
+    <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+    <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+    <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+
+
+    <clr-wizard-page [clrWizardPageNextDisabled]="!nameForm.valid || !contactsForm.valid">
+        <ng-template clrPageTitle>Info</ng-template>
+        <h4>Name</h4>
+        <form clrForm [formGroup]="nameForm">
+            <clr-input-container>
+                <input
+                    clrInput
+                    type="text"
+                    placeholder="Enter team name"
+                    formControlName="name"
+                />
+            </clr-input-container>
+        </form>
+        <h4>Contacts</h4>
+        <div id="contacts_wrap">
+
+            <form class="contacts_form"
+                  *ngFor="let contact of contactsForm.controls; let i = index;"
+                  clrForm
+                  [formGroup]="contact">
+                <select clrSelect
+                        type="text"
+                        formControlName="contact_type">
+                    <option *ngFor="let c of contactTypes">{{c.name}}</option>
+                </select>
+                <input
+                    clrInput
+                    type="text"
+                    formControlName="contact_value"
+                />
+                <clr-icon *ngIf="contactsForm.controls.length>0" shape="trash"
+                          class="btn btn-link remove-contact-btn" size="27"
+                          (click)="removeContact(i)"></clr-icon>
+            </form>
+
+            <clr-icon *ngIf="contactsForm.controls.length<=20" size="32" id="add_contact"
+                      shape="plus-circle"
+                      class="btn btn-link"
+                      (click)="addContact()"></clr-icon>
+        </div>
+    </clr-wizard-page>
+
+
+    <clr-wizard-page [clrWizardPageNextDisabled]="!playersForm.valid">
+        <ng-template clrPageNavTitle>Members</ng-template>
+        <ng-template clrPageTitle>{{nameForm.value.name}}</ng-template>
+        <h4>Captain</h4>
+        <div id="captain">
+            <div class="player_img_wrap">
+                <img src="https://via.placeholder.com/85" alt="Captain">
+            </div>
+            <h5 class="input_nickname">{{captain_name}}</h5>
+        </div>
+        <h4>Other players</h4>
+
+        <form clrForm [formGroup]="playersForm" id="players_form">
+            <form class="player_form" *ngFor="let player of playersForm.controls; let i = index;"
+                  clrForm
+                  [formGroup]="player">
+                <div class="player_img_wrap">
+                    <img src="https://via.placeholder.com/70" alt="player {{i}}">
+                </div>
+                <clr-select-container class="input_id_type">
+                    <select clrSelect
+                            type="text"
+                            formControlName="id_type">
+                        <option *ngFor="let c of idTypes">{{c.name}}</option>
+                    </select>
+                </clr-select-container>
+                <clr-input-container class="input_id">
+                    <input
+                        clrInput
+                        type="text"
+                        [placeholder]="'Enter ' +
+                                player.value.id_type.toLowerCase()"
+                        formControlName="identifier"
+                    />
+                </clr-input-container>
+                <clr-icon *ngIf="playersForm.controls.length>0" size="25" id="remove_player"
+                          shape="trash"
+                          class="btn btn-link"
+                          (click)="removePlayer(i)"></clr-icon>
+            </form>
+            <clr-icon *ngIf="playersForm.controls.length<4" id="add_player"
+                      shape="plus-circle"
+                      size="32"
+                      class="btn btn-link"
+                      (click)="addPlayer()"></clr-icon>
+        </form>
+    </clr-wizard-page>
+
+    <clr-wizard-page>
+        <ng-template clrPageNavTitle>Summary</ng-template>
+        <ng-template clrPageTitle>Summary</ng-template>
+        <div id="summary">
+            <h4>Team name: <b>{{nameForm.value.name}}</b></h4>
+            <h4>Captain: <b>{{captain_name}}</b></h4>
+            <h4>Players: </h4>
+            <h6 *ngFor="let player of playersForm.controls; let i = index;">
+                Player {{i + 1}} {{player.value.id_type.toLowerCase()}}:
+                <b>{{player.value.identifier}}</b>
+            </h6>
+            <p *ngIf="playersForm.controls.length<4">You will be able to add other players later.</p>
+            <h4 *ngIf="contactsForm.controls.length!=0">Team contacts: </h4>
+            <h6 *ngFor="let contact of contactsForm.controls">{{contact.value.contact_type}}:
+                {{contact.value.contact_value}}</h6>
+        </div>
+    </clr-wizard-page>
+</clr-wizard>

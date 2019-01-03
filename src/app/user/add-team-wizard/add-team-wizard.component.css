@@ -1,0 +1,100 @@
+#contacts_wrap{
+    display: grid;
+    width: 420px;
+    grid-template-columns: 1fr;
+    align-items: start;
+    justify-items: start;
+}
+
+.remove-contact-btn {
+    margin: 0;
+    align-self: end;
+    justify-self: start;
+}
+
+.contacts_form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.3fr;
+    grid-gap: 15px;
+    width: 420px;
+    justify-items: center;
+    align-items: center;
+}
+
+#add_contact {
+    margin: 14px 0;
+    justify-self: center;
+}
+
+clr-icon {
+    margin: auto 0;
+}
+
+#captain {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+    justify-items: center;
+    align-items: center;
+    margin: 30px;
+    width: 300px;
+}
+
+#players_form {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(356px, 1fr));
+    grid-gap: 15px;
+    margin-top: 20px;
+
+}
+
+h5 {
+    margin: 0;
+}
+
+.player_form {
+    display: grid;
+    grid-template: "a b d" "a c d";
+    grid-template-columns: 1fr 3fr 0.5fr;
+    grid-gap: 5px;
+    justify-items: center;
+    align-items: center;
+    width: 356px;
+}
+
+.player_form > div.player_img_wrap {
+    grid-area: a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+select, input {
+    width: 162px;
+}
+
+.player_form > .input_id_type {
+    grid-area: b;
+    margin: 0;
+}
+
+.player_form > clr-input-container.input_id {
+    grid-area: c;
+    margin: 0;
+}
+
+#remove_player {
+    grid-area: d;
+    margin-left: 20px;
+}
+
+#add_player {
+    margin: 25px 0;
+}
+
+#summary > h6 {
+    margin-left: 20px;
+    margin-top: 10px
+}

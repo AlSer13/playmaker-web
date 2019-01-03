@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
 import {AuthService} from '../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -31,12 +32,12 @@ export class AppComponent {
         }
     ];
 
-    logOut() {
-        this.authenticationService.logOut();
+    async logOut() {
+        await this.authenticationService.logOut();
         window.location.reload();
     }
 
-    constructor(private authenticationService: AuthenticationService, private authService: AuthService) {
+    constructor(private authenticationService: AuthenticationService, private authService: AuthService, protected router: Router) {
     }
 
 }

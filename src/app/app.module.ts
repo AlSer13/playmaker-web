@@ -23,6 +23,7 @@ import {TeamComponent} from './teams/team/team.component';
 import {TournamentCardComponent} from './tournaments/tournament-card/tournament-card.component';
 import {TeamCardComponent} from './teams/team-card/team-card.component';
 import {CookieInterceptor} from '../services/cookie-interceptor';
+import { AddTeamWizardComponent } from './user/add-team-wizard/add-team-wizard.component';
 
 @NgModule({
     declarations: [
@@ -41,6 +42,7 @@ import {CookieInterceptor} from '../services/cookie-interceptor';
         TeamComponent,
         TournamentCardComponent,
         TeamCardComponent,
+        AddTeamWizardComponent,
     ],
     imports: [
         BrowserModule,

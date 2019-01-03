@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../entities/User';
 import {UserService} from '../../services/entity/user.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
     selector: 'app-user',
@@ -11,8 +12,10 @@ import {UserService} from '../../services/entity/user.service';
 export class UserComponent implements OnInit {
     user: User;
     _404 = false;
+    you: boolean; // is it current users page?
 
     constructor(private route: ActivatedRoute,
+                private authService: AuthService,
                 private userService: UserService,
                 private router: Router) {
     }
@@ -24,6 +27,7 @@ export class UserComponent implements OnInit {
         } catch (error) {
             this.handleError(error);
         }
+        this.you = this.user.username === this.authService.username;
     }
 
     handleError(error) {
