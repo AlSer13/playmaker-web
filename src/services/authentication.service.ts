@@ -12,6 +12,8 @@ export class AuthenticationService {
     private loginURL = environment.localURL + '/user/login';
     private logoutURL = environment.localURL + '/user/logout';
     private steamLoginURL = environment.localURL + '/user/steam/login';
+    private connectSteamURL = environment.localURL + '/user/steam/add';
+
 
     constructor(private http: HttpClient,
                 private authorizationService: AuthService, @Inject(DOCUMENT) private document: any) {
@@ -31,6 +33,10 @@ export class AuthenticationService {
 
     steamLogIn(){
         this.document.location.href = this.steamLoginURL;
+    }
+
+    connectSteam(){
+        this.document.location.href = this.connectSteamURL;
     }
 
     async logOut(): Promise<any> {
