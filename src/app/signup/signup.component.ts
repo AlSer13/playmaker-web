@@ -45,6 +45,7 @@ export class SignupComponent implements OnInit {
         }
     }
 
+    // TODO: уменьшить частоту запросов (не на каждую нажатую клавишу)
     // custom Validators
     usernameExistsValidator(): AsyncValidatorFn {
         return async (control: AbstractControl): Promise<ValidationErrors> => {

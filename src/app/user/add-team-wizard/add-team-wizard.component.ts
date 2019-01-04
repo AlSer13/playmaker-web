@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ClrWizard} from '@clr/angular';
+import {TeamService} from '../../../services/entity/team.service';
 import {User} from '../../../entities/User';
 
 @Component({
@@ -8,6 +9,8 @@ import {User} from '../../../entities/User';
     templateUrl: './add-team-wizard.component.html',
     styleUrls: ['./add-team-wizard.component.css']
 })
+
+// TODO: async validation
 export class AddTeamWizardComponent implements OnInit {
     @ViewChild('teamWizard') teamWizard: ClrWizard;
     @Input() button_text: string;
@@ -57,18 +60,36 @@ export class AddTeamWizardComponent implements OnInit {
         this.playersForm.removeAt(i);
     }
 
-    constructor() {
+    constructor(private teamService: TeamService) {
     }
 
     ngOnInit() {
     }
 
-    doFinish() {
-        this.doReset();
+    async doFinish() {
+        const name = this.nameForm.value.name;
+        console.log(name);
+        const addedTeam = await this.teamService.addTeam(name);
+        console.log(addedTeam);
+        if (addedTeam !== null) {
+            this.playersForm.controls.forEach(pf => {
+                if (pf.value.id_type.toLowerCase() === 'username') {
+                    this.teamService.invitePlayer(addedTeam, pf.value.identifier).then();
+                }
+            });
+            this.doReset();
+            this.displayAlert('Success');
+        } else {
+            this.displayAlert('Failure');
+        }
     }
 
     doCancel() {
         this.doReset();
+    }
+
+    displayAlert(text: string) {
+        console.log(text);
     }
 
     private doReset() {

@@ -7,7 +7,7 @@ import {TournamentService} from '../../services/entity/tournament.service';
     templateUrl: './tournaments.component.html',
     styleUrls: ['./tournaments.component.css']
 })
-export class TournamentsComponent implements OnInit { // TODO: extract tournament card to a separate component
+export class TournamentsComponent implements OnInit {
     tours: Tournament[];
 
     constructor(private tourService: TournamentService) {
