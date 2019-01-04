@@ -61,9 +61,9 @@
         <h4>Captain</h4>
         <div id="captain">
             <div class="player_img_wrap">
-                <img src="https://via.placeholder.com/85" alt="Captain">
+                <img class="player_img_wrap" [src]="captain.avatar" alt="Captain">
             </div>
-            <h5 class="input_nickname">{{captain_name}}</h5>
+            <h5 class="input_nickname">{{captain.username}}</h5>
         </div>
         <h4>Other players</h4>
 
@@ -108,7 +108,7 @@
         <ng-template clrPageTitle>Summary</ng-template>
         <div id="summary">
             <h4>Team name: <b>{{nameForm.value.name}}</b></h4>
-            <h4>Captain: <b>{{captain_name}}</b></h4>
+            <h4>Captain: <b>{{captain.username}}</b></h4>
             <h4>Players: </h4>
             <h6 *ngFor="let player of playersForm.controls; let i = index;">
                 Player {{i + 1}} {{player.value.id_type.toLowerCase()}}:

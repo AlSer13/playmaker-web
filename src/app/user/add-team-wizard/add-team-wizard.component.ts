@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ClrWizard} from '@clr/angular';
+import {User} from '../../../entities/User';
 
 @Component({
     selector: 'app-add-team-wizard',
@@ -10,7 +11,7 @@ import {ClrWizard} from '@clr/angular';
 export class AddTeamWizardComponent implements OnInit {
     @ViewChild('teamWizard') teamWizard: ClrWizard;
     @Input() button_text: string;
-    @Input() captain_name: string;
+    @Input() captain: User;
     teamWizardOpen: boolean;
 
     nameForm = new FormGroup({
