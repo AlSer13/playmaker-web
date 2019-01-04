@@ -42,6 +42,10 @@ export class UserSettingsComponent implements OnInit {
         this.authenticationService.connectSteam();
     }
 
+    async disconnectSteam() {
+        this.user = await this.authenticationService.disconnectSteam();
+    }
+
     async updateUserInfo() {
         this.updateBtnState = ClrLoadingState.LOADING;
         this.user = await this.userService.updateUser(this.user);

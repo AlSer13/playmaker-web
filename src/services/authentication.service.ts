@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {AuthService} from './auth.service';
 import {DOCUMENT} from '@angular/common';
+import {User} from '../entities/User';
+import {map} from 'rxjs/operators';
 
 
 @Injectable({
@@ -13,6 +15,7 @@ export class AuthenticationService {
     private logoutURL = environment.localURL + '/user/logout';
     private steamLoginURL = environment.localURL + '/user/steam/login';
     private connectSteamURL = environment.localURL + '/user/steam/add';
+    private disconnectSteamURL = environment.localURL + '/user/steam/delete';
 
 
     constructor(private http: HttpClient,
@@ -31,12 +34,17 @@ export class AuthenticationService {
         }
     }
 
-    steamLogIn(){
+    steamLogIn() {
         this.document.location.href = this.steamLoginURL;
     }
 
-    connectSteam(){
+    connectSteam() {
         this.document.location.href = this.connectSteamURL;
+    }
+
+    disconnectSteam() {
+        return this.http.post<User>(this.disconnectSteamURL, {})
+            .pipe(map(data => data['user'])).toPromise();
     }
 
     async logOut(): Promise<any> {
