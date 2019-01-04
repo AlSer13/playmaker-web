@@ -16,6 +16,7 @@ export class UserSettingsComponent implements OnInit {
     _404 = false;
     loading = false;
     updateBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
+    avatar: File = null;
 
     constructor(private userService: UserService, private authService: AuthService, private authenticationService: AuthenticationService) {
     }
@@ -48,7 +49,13 @@ export class UserSettingsComponent implements OnInit {
 
     async updateUserInfo() {
         this.updateBtnState = ClrLoadingState.LOADING;
-        this.user = await this.userService.updateUser(this.user);
+        console.log(this.avatar);
+        this.user = await this.userService.updateUser(this.user, this.avatar);
         this.updateBtnState = ClrLoadingState.SUCCESS;
+    }
+
+    onFileSelected(event) {
+        this.avatar = <File>event.target.files[0];
+        console.log(event);
     }
 }

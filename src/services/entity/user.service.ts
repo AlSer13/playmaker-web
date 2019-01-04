@@ -22,10 +22,13 @@ export class UserService {
             withCredentials: true
         };
         return this.http.get<User>(this.userURL + '/' + username, options)
-            .pipe(map(data => data['user_info'])).toPromise();
+            .pipe(map(data => {
+                data['user_info'].avatar = environment.localURL + '/user/avatar/' + data['user_info'].username;
+                return data['user_info'];
+            })).toPromise();
     }
 
-    updateUser(user: User): Promise<User> {
+    updateUser(user: User, avatar: File): Promise<User> {
         const options = {
             headers: new HttpHeaders({
                 'If-Modified-Since': '0'
@@ -33,11 +36,15 @@ export class UserService {
             withCredentials: true
         };
 
-        const body = {
-            jid: user.jid
-        };
+
+        let body = new FormData();
+        body.set('jid', user.jid);
+        body.set('avatar', avatar);
 
         return this.http.patch<User>(this.updateUserURL, body, options)
-            .pipe(map(data => data['user'])).toPromise();
+            .pipe(map(data => {
+                data['user'].avatar = environment.localURL + '/user/avatar/' + data['user'].username;
+                return data['user'];
+            })).toPromise();
     }
 }

@@ -1,5 +1,7 @@
 <div *ngIf="!_404 && user">
     <form clrForm clrLayout="vertical" (submit)="updateUserInfo()">
+        <img [src]="user.avatar" alt="none" width="250" height="250">
+        <input type="file" (change)="onFileSelected($event)">
         <p class="p1">id: {{user._id}}</p>
         <p class="p1">{{user.email}}</p>
         <p class="p1" *ngIf="user.accountId">steam id: {{user.accountId}}
