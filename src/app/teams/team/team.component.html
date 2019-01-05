@@ -21,5 +21,34 @@
             </div>
         </div>
     </div>
+    <div class="clr-row" *ngIf="team.players.length < 5 && isCaptain">
+        <div class="clr-col-lg-4 clr-col-md-6 clr-col-sm-12 clr-col-xs-12">
+            <div class="card">
+                <div class="card-block">
+                    <div class="card-media-block clr-align-items-center">
+                        <button type="button" class="add_player_btn btn btn-icon btn-outline"
+                                (click)="inviteOpen = true">
+                            <clr-icon shape="plus-circle"></clr-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <clr-modal [(clrModalOpen)]="inviteOpen" [clrModalSize]="'sm'">
+        <h3 class="modal-title">Player invitation</h3>
+        <div class="modal-body">
+                <label for="username" class="clr-control-label">Username</label>
+                <input id="username" type="text" name="username"
+                       placeholder="" [(ngModel)]="username" autocomplete="off"/>
+                <clr-control-error class="error" *ngIf="userNotFound">User not found</clr-control-error>
+        </div>
+        <div class="modal-footer">
+            <button [clrLoading]="inviteBtnState" type="button" class="btn btn-primary" (click)="invitePlayer()">
+                Invite
+            </button>
+        </div>
+    </clr-modal>
 </div>
 <app-page-not-found *ngIf="_404"></app-page-not-found>

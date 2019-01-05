@@ -6,6 +6,7 @@ import {AuthorizationDataService} from './authorization-data.service';
 export class AuthService {
     permissions: Array<string>; // Store the actions for which this user has appHideForbidden
     username: string;
+    userId: string;
 
     constructor(private authorizationDataService: AuthorizationDataService) {
     }
@@ -21,6 +22,7 @@ export class AuthService {
         const data = await this.authorizationDataService.getPermissions();
         this.permissions = data['authGroup'];
         this.username = data['username'];
+        this.userId = data['userId'];
         console.log('Received permissions from server: ' + this.permissions + '\nFor user: ' + this.username);
     }
 }
