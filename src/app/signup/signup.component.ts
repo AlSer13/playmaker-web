@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
+import {map, filter, debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-signup',
@@ -13,11 +14,12 @@ export class SignupComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private authenticationService: AuthenticationService,
                 protected router: Router) {
+        //this.signUpForm.controls['username'].valueChanges.pipe(debounceTime(500), switchMap(this.usernameExistsValidator)).subscribe(x => console.log(x));
     }
 
     signUpForm = new FormGroup({
-        username: new FormControl('', [Validators.required, Validators.minLength(5)], [this.usernameExistsValidator()]),
-        email: new FormControl('', [Validators.required, Validators.email], [this.emailExistsValidator()]),
+        username: new FormControl('', [Validators.required, Validators.minLength(5)], [this.usernameExistsValidator.bind(this)]),
+        email: new FormControl('', [Validators.required, Validators.email], [this.emailExistsValidator.bind(this)]),
         password: new FormControl('', [Validators.required]),
         confirmPassword: new FormControl('', [Validators.required, SignupComponent.passwordMatchValidator])
     });
@@ -47,17 +49,25 @@ export class SignupComponent implements OnInit {
 
     // TODO: уменьшить частоту запросов (не на каждую нажатую клавишу)
     // custom Validators
-    usernameExistsValidator(): AsyncValidatorFn {
-        return async (control: AbstractControl): Promise<ValidationErrors> => {
-            const forbidden = await this.authenticationService.usernameExists(control.value);
-            return forbidden ? {'usernameExists': {value: control.value}} : null;
-        };
+    usernameExistsValidator(ctr: AbstractControl) {
+        return ctr
+            .valueChanges
+            .pipe(
+                debounceTime(800),
+                distinctUntilChanged(),
+                switchMap(_ => this.authenticationService.usernameExists(ctr.value)),
+                map(x => x ? ctr.setErrors({'usernameExists': {value: ctr.value}}) : ctr.setErrors(null))
+            );
     }
 
-    emailExistsValidator(): AsyncValidatorFn {
-        return async (control: AbstractControl): Promise<ValidationErrors> => {
-            const forbidden = await this.authenticationService.emailExists(control.value);
-            return forbidden ? {'emailExists': {value: control.value}} : null;
-        };
+    emailExistsValidator(ctr: AbstractControl) {
+        return ctr
+            .valueChanges
+            .pipe(
+                debounceTime(800),
+                distinctUntilChanged(),
+                switchMap(_ => this.authenticationService.emailExists(ctr.value)),
+                map(x => x ? ctr.setErrors({'emailExists': {value: ctr.value}}) : ctr.setErrors(null))
+            );
     }
 }
