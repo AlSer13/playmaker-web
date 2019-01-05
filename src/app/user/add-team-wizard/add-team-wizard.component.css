@@ -55,7 +55,7 @@ h5 {
 }
 
 .player_img_wrap {
-    object-fit: contain;
+    object-fit: cover;
     height: 85px;
     width: 85px;
 }

@@ -5,5 +5,21 @@
     <h1>
         name: {{team.name}}
     </h1>
+    <div class="clr-row" *ngFor="let player of team.players">
+        <div class="clr-col-lg-4 clr-col-md-6 clr-col-sm-12 clr-col-xs-12">
+            <div class="card" routerLink="/user/{{player.username}}">
+                <div class="card-block">
+                    <div class="card-media-block clr-align-items-center">
+                        <img [src]="avatarURL + player.username" class="card-media-image avatar">
+                        <div class="card-media-description">
+                        <span class="card-media-text">
+                           {{player.username}}
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <app-page-not-found *ngIf="_404"></app-page-not-found>

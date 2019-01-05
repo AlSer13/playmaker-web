@@ -4,7 +4,8 @@
 
 export const environment = {
     production: false,
-    localURL: 'http://localhost:3000/api'
+    localURL: 'http://localhost:3000/api',
+    avatarURL: 'http://localhost:3000/api/user/avatar/'
 };
 
 /*

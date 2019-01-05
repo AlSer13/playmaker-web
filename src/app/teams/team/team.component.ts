@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Team} from '../../../entities/Team';
 import {TeamService} from '../../../services/entity/team.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
     selector: 'app-team',
@@ -11,6 +12,7 @@ import {TeamService} from '../../../services/entity/team.service';
 export class TeamComponent implements OnInit {
     team: Team;
     _404 = false;
+    avatarURL = environment.avatarURL;
 
     constructor(private route: ActivatedRoute,
                 private teamService: TeamService) {
