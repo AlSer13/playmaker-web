@@ -52,7 +52,6 @@ export class LoginComponent {
     }
 
     async logIn() {
-        // TODO BUG#2: на firefox не редиректится на свой профиль после логина
         if (this.username && this.password) {
             this.loading = true;
             const data = await this.authenticationService.logIn(this.asadmin, this.username, this.password, this.rememberMe);
@@ -60,7 +59,8 @@ export class LoginComponent {
                 this.error = false;
                 // this.authenticationService.username = data['username'];
                 // console.log('Logged in as ' + this.authenticationService.username);
-                this.router.navigate(['/user/' + this.authService.username]);
+                console.log(this.authService.username);
+                await this.router.navigate(['/user/' + this.authService.username]);
                 this.loading = false;
                 window.location.reload();
             } else {

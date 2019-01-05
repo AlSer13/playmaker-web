@@ -43,11 +43,10 @@ export class SignupComponent implements OnInit {
             this.signUpForm.get('password').value);
         if (data) {
             // TODO: app level alert: success
-            this.router.navigate(['/login']);
+            await this.router.navigate(['/login']);
         }
     }
 
-    // TODO: уменьшить частоту запросов (не на каждую нажатую клавишу)
     // custom Validators
     usernameExistsValidator(ctr: AbstractControl) {
         return ctr
