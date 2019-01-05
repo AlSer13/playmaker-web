@@ -3,6 +3,7 @@ import {User} from '../../entities/User';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
+import {Team} from '../../entities/Team';
 
 @Injectable({
     providedIn: 'root'
@@ -10,6 +11,7 @@ import {environment} from '../../environments/environment';
 export class UserService {
     private userURL = environment.localURL + '/user/info';
     private updateUserURL = environment.localURL + '/user';
+    private userInvitesURL = environment.localURL + '/user/invites';
 
     constructor(private http: HttpClient) {
     }
@@ -46,5 +48,17 @@ export class UserService {
                 data['user'].avatar = environment.localURL + '/user/avatar/' + data['user'].username;
                 return data['user'];
             })).toPromise();
+    }
+
+    getInvites(): Promise<Team[]> {
+        const options = {
+            headers: new HttpHeaders({
+                'If-Modified-Since': '0'
+            }),
+            withCredentials: true
+        };
+
+        return this.http.get<User>(this.userInvitesURL, options)
+            .pipe(map(data => data['invites'])).toPromise();
     }
 }

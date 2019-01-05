@@ -1,0 +1,27 @@
+<div *ngIf="!_404 && invites">
+    <div class="clr-row" *ngFor="let invite of invites">
+        <div class="clr-col-lg-4 clr-col-md-6 clr-col-sm-12 clr-col-xs-12">
+            <div class="card" routerLink="/teams/{{invite._id}}">
+                <div class="card-block">
+                    <div class="card-media-block clr-align-items-center">
+                        <!--<img [src]="avatarURL + player.username" class="card-media-image avatar">-->
+                        <div class="card-media-description">
+                        <span class="card-media-text">
+                           {{invite.name}}
+                        </span>
+                        </div>
+
+                        <button type="button" class="accept_btn btn btn-icon btn-success-outline" (click)="acceptInvite($event, invite)">
+                            <clr-icon shape="check"></clr-icon>
+                        </button>
+
+                        <button type="button" class="decline_btn btn btn-icon btn-danger-outline" (click)="declineInvite($event, invite)">
+                            <clr-icon shape="times"></clr-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-page-not-found *ngIf="_404"></app-page-not-found>

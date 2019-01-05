@@ -12,6 +12,7 @@ import {SignupComponent} from './signup/signup.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {TeamComponent} from './teams/team/team.component';
 import {UserSettingsComponent} from './user/user-settings/user-settings.component';
+import {UserInvitesComponent} from './user/user-invites/user-invites.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -43,6 +44,10 @@ const routes: Routes = [
     {
         path: 'settings',
         component: UserSettingsComponent
+    },
+    {
+        path: 'invites',
+        component: UserInvitesComponent
     },
     {path: '**', component: PageNotFoundComponent}
 ];

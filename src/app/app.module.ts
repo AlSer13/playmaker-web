@@ -25,6 +25,7 @@ import {TeamCardComponent} from './teams/team-card/team-card.component';
 import {CookieInterceptor} from '../services/cookie-interceptor';
 import { UserSettingsComponent } from './user/user-settings/user-settings.component';
 import { AddTeamWizardComponent } from './user/add-team-wizard/add-team-wizard.component';
+import { UserInvitesComponent } from './user/user-invites/user-invites.component';
 
 @NgModule({
     declarations: [
@@ -45,6 +46,7 @@ import { AddTeamWizardComponent } from './user/add-team-wizard/add-team-wizard.c
         TeamCardComponent,
         AddTeamWizardComponent,
         UserSettingsComponent,
+        UserInvitesComponent,
     ],
     imports: [
         BrowserModule,

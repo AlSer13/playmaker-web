@@ -38,4 +38,9 @@ export class TeamService {
         const url = this.teamURL + '/' + team._id + '/players';
         return await this.http.post<Team>(url, body).toPromise();
     }
+
+    async joinTeam(team: Team) : Promise<any>{
+        const url = this.teamURL + '/' + team._id + '/join';
+        return await this.http.post<Team>(url, {}).toPromise();
+    }
 }
