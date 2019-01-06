@@ -23,11 +23,11 @@ export class UserComponent implements OnInit {
     async ngOnInit() {
         const username = this.route.snapshot.paramMap.get('username');
         try {
-            this.user = await this.userService.getUser(username);
+            this.user = new User(await this.userService.getUser(username));
+            this.you = this.user.equals(this.authService.user);
         } catch (error) {
             this.handleError(error);
         }
-        this.you = this.user.equals(this.authService.user);
     }
 
     handleError(error) {

@@ -21,10 +21,11 @@ export class AuthService {
 
     async initializePermissions() {
         const data = await this.authorizationDataService.getPermissions();
-        this.user = new User();
+        this.user = new User({
+            username: data['username'],
+            _id: data['userId']
+        });
         this.permissions = data['authGroup'];
-        this.user.username = data['username'];
-        this.user._id = data['userId'];
         console.log('Received permissions from server: ' + this.permissions + '\nFor user: ' + this.user.username);
     }
 }
