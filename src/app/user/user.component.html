@@ -1,11 +1,50 @@
-<div *ngIf="!_404 && user">
-    <img class="avatar" [src]="user.avatar" alt="none" width="250" height="250">
-    <h1>{{user.username}}</h1>
-    <h2>id: {{user._id}}</h2>
-    <h2>email: {{user.email}}</h2>
-    <h2>{{user.accountId}}</h2>
-    <app-add-team-wizard *ngIf="you"
-                         [captain]="user"
-                         [button_text]="'add a new team'"></app-add-team-wizard>
-</div>
+<main *ngIf="!_404 && user">
+    <section class="business-card">
+
+        <figure class="avatar">
+            <figcaption>
+                {{user.username}}
+            </figcaption>
+            <img class="avatar_image" [src]="user.avatar" alt="none" width="250" height="250">
+        </figure>
+
+        <section id="bio">
+
+        </section>
+
+        <section class="debug_info">
+            <h4>id: {{user._id}}</h4>
+            <h4>email: {{user.email}}</h4>
+            <h4>account_id: {{user.accountId}}</h4>
+        </section>
+    </section>
+
+    <section id="teams">
+        <div class="caption">Teams</div>
+
+        <ul *ngIf="teams && teams.length != 0">
+            <li *ngFor="let team of teams">
+                {{team.name}}
+            </li>
+        </ul>
+        <div class="no-found" *ngIf="teams && teams.length === 0">
+            <hr size="1px">
+            <div>No teams yet</div>
+        </div>
+        <app-add-team-wizard *ngIf="you"
+                             [captain]="user"
+                             [button_text]="'add a new team'"></app-add-team-wizard>
+    </section>
+
+    <section id="tours">
+        <div class="caption">Tournaments</div>
+
+    </section>
+
+    <section id="favorites">
+        <div class="caption">Favorites</div>
+        <section id="fav_tours"></section>
+        <section id="fav_teams"></section>
+    </section>
+</main>
 <app-page-not-found *ngIf="_404"></app-page-not-found>

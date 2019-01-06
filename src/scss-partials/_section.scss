@@ -1,0 +1,22 @@
+%section-with-caption {
+    $sec-caption-bg: #1a2a32;
+    $sec-caption-height: 20px;
+    $sec-padding: 20px;
+
+    border: 1px solid #adbbc4;
+    border-radius: 5px;
+    padding: 20px;
+    display: grid;
+
+    .caption {
+        line-height: $sec-caption-height - 2.5px;
+        font-size: $sec-caption-height - 7px;
+        padding: 0 5px;
+        height: $sec-caption-height;
+        width: fit-content;
+        background: $sec-caption-bg;
+        position: relative;
+        top: -($sec-caption-height)/2 - $sec-padding;
+        left: 20px - $sec-padding;
+}
+}

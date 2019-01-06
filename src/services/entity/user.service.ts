@@ -9,21 +9,15 @@ import {Team} from '../../entities/Team';
     providedIn: 'root'
 })
 export class UserService {
-    private userURL = environment.localURL + '/user/info';
-    private updateUserURL = environment.localURL + '/user';
-    private userInvitesURL = environment.localURL + '/user/invites';
+    private userURL = environment.localURL + '/user';
 
     constructor(private http: HttpClient) {
     }
 
-    getUser(username: string): Promise<User> {
-        const options = {
-            headers: new HttpHeaders({
-                'If-Modified-Since': '0'
-            }),
-            withCredentials: true
-        };
-        return this.http.get<User>(this.userURL + '/' + username, options)
+    getUserInfo(username: string): Promise<User> {
+        // ./cookie-interceptor.ts встраивает опции всем запросам
+
+        return this.http.get(this.userURL + '/info/' + username)
             .pipe(map(data => {
                 data['user_info'].avatar = environment.avatarURL + data['user_info'].username;
                 return data['user_info'];
@@ -31,19 +25,13 @@ export class UserService {
     }
 
     updateUser(user: User, avatar: File): Promise<User> {
-        const options = {
-            headers: new HttpHeaders({
-                'If-Modified-Since': '0'
-            }),
-            withCredentials: true
-        };
-
+        // ./cookie-interceptor.ts встраивает опции всем запросам
 
         const body = new FormData();
         body.set('jid', user.jid);
         body.set('avatar', avatar);
 
-        return this.http.patch<User>(this.updateUserURL, body, options)
+        return this.http.patch(this.userURL, body)
             .pipe(map(data => {
                 data['user'].avatar = environment.localURL + '/user/avatar/' + data['user'].username;
                 return data['user'];
@@ -51,14 +39,14 @@ export class UserService {
     }
 
     getInvites(): Promise<Team[]> {
-        const options = {
-            headers: new HttpHeaders({
-                'If-Modified-Since': '0'
-            }),
-            withCredentials: true
-        };
+        // ./cookie-interceptor.ts встраивает опции всем запросам
 
-        return this.http.get<User>(this.userInvitesURL, options)
+        return this.http.get(this.userURL + '/invites')
             .pipe(map(data => data['invites'])).toPromise();
+    }
+
+    getTeams(userId: string) {
+        return this.http.get(this.userURL + '/teams')
+            .pipe(map(data => data['teams'])).toPromise();
     }
 }

@@ -1,0 +1,79 @@
+@import "../../scss-partials/section";
+
+main {
+    margin: 25px auto auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 40px;
+    min-width: 600px;
+    max-width: 1200px;
+
+    > section:not(.business-card) {
+        @extend %section-with-caption;
+        grid-template-rows: 0;
+    }
+}
+
+.business-card {
+    margin: -12px 40px 40px 25px;
+
+    figure {
+        margin: 0;
+
+        figcaption {
+            color: #e9ecef;
+            font-size: 25px;
+        }
+
+        .avatar_image {
+            object-fit: cover;
+            height: 250px;
+            width: 250px;
+        }
+    }
+
+    grid-row: 1;
+    grid-column: 1;
+}
+
+#favorites {
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: 5;
+}
+
+#teams {
+    grid-row: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    app-add-team-wizard {
+        align-self: end;
+        justify-self: center;
+    }
+}
+
+#tours {
+    grid-row: 2;
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+
+.no-found {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    div, hr {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    div {
+        padding: 5px;
+        background: #1a2a32;
+    }
+    hr {
+        width: 100%;
+    }
+}
+
+
