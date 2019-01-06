@@ -7,8 +7,7 @@
 }
 
 .add_player_btn {
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto !important;
 }
 
 .modal-body {

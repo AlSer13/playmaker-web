@@ -1,7 +1,7 @@
 import {Team} from './Team';
 
 export class User {
-    _id: number;
+    _id: string;
     avatar: string;
     email: string;
     jid: string;

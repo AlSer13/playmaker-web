@@ -57,8 +57,6 @@ export class LoginComponent {
             const data = await this.authenticationService.logIn(this.asadmin, this.username, this.password, this.rememberMe);
             if (data) {
                 this.error = false;
-                // this.authenticationService.username = data['username'];
-                // console.log('Logged in as ' + this.authenticationService.username);
                 console.log(this.authService.username);
                 await this.router.navigate(['/user/' + this.authService.username]);
                 this.loading = false;

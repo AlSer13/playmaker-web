@@ -30,7 +30,7 @@ export class TeamComponent implements OnInit {
         const id = this.route.snapshot.paramMap.get('id');
         try {
             this.team = await this.teamService.getTeam(id);
-            this.isCaptain = this.authService.userId === this.team.captain;
+            this.isCaptain = this.authService.userId === this.team.captain._id;
         } catch (error) {
             this.handleError(error);
         }

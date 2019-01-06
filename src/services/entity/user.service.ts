@@ -25,7 +25,7 @@ export class UserService {
         };
         return this.http.get<User>(this.userURL + '/' + username, options)
             .pipe(map(data => {
-                data['user_info'].avatar = environment.localURL + '/user/avatar/' + data['user_info'].username;
+                data['user_info'].avatar = environment.avatarURL + data['user_info'].username;
                 return data['user_info'];
             })).toPromise();
     }
@@ -39,7 +39,7 @@ export class UserService {
         };
 
 
-        let body = new FormData();
+        const body = new FormData();
         body.set('jid', user.jid);
         body.set('avatar', avatar);
 
