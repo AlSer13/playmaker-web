@@ -27,7 +27,7 @@ export class UserComponent implements OnInit {
         } catch (error) {
             this.handleError(error);
         }
-        this.you = this.user.username === this.authService.username;
+        this.you = this.user.equals(this.authService.user);
     }
 
     handleError(error) {

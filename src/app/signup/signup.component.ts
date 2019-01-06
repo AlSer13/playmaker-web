@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication.service';
 import {Router} from '@angular/router';
-import {map, filter, debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {map, debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-signup',
@@ -14,7 +14,6 @@ export class SignupComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private authenticationService: AuthenticationService,
                 protected router: Router) {
-        //this.signUpForm.controls['username'].valueChanges.pipe(debounceTime(500), switchMap(this.usernameExistsValidator)).subscribe(x => console.log(x));
     }
 
     signUpForm = new FormGroup({
@@ -54,7 +53,7 @@ export class SignupComponent implements OnInit {
             .pipe(
                 debounceTime(800),
                 distinctUntilChanged(),
-                switchMap(_ => this.authenticationService.usernameExists(ctr.value)),
+                switchMap(() => this.authenticationService.usernameExists(ctr.value)),
                 map(x => x ? ctr.setErrors({'usernameExists': {value: ctr.value}}) : ctr.setErrors(null))
             );
     }
@@ -65,7 +64,7 @@ export class SignupComponent implements OnInit {
             .pipe(
                 debounceTime(800),
                 distinctUntilChanged(),
-                switchMap(_ => this.authenticationService.emailExists(ctr.value)),
+                switchMap(() => this.authenticationService.emailExists(ctr.value)),
                 map(x => x ? ctr.setErrors({'emailExists': {value: ctr.value}}) : ctr.setErrors(null))
             );
     }

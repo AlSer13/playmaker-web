@@ -10,4 +10,8 @@ export class User {
     invites: Team[];
     selectedMatches: number;
     selectedTournaments: number;
+
+    equals(user: User): boolean {
+        return this._id === user._id;
+    }
 }

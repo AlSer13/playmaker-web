@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class AppComponent {
     title = 'Playmaker';
-    username = this.authService.username;
+    username = this.authService.user.username;
 
     nav_components = [
         {

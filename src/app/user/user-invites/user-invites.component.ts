@@ -38,11 +38,11 @@ export class UserInvitesComponent implements OnInit {
     async acceptInvite(event, team: Team) {
         event.stopPropagation();
         await this.teamService.joinTeam(team);
-        this.invites= await this.userService.getInvites();
+        this.invites = await this.userService.getInvites();
     }
 
     declineInvite(event, team: Team) {
         event.stopPropagation();
-        console.log("Очень жаль, но нельзя отклонять dada приглашения")
+        console.log('Очень жаль, но нельзя отклонять dada приглашения');
     }
 }
