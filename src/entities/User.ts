@@ -12,6 +12,6 @@ export class User {
     selectedTournaments: number;
 
     equals(user: User): boolean {
-        return this._id === user._id;
+        return (user != null) && (this._id === user._id);
     }
 }
