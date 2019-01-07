@@ -20,18 +20,16 @@ export class UserComponent implements OnInit {
                 private authService: AuthService,
                 private userService: UserService,
                 private router: Router) {
+
+        // subscribe on route change
+        route.params.forEach(params => {
+            this.initData(params['username']);
+        }).then();
     }
 
-    async ngOnInit() {
+    ngOnInit() {
         const username = this.route.snapshot.paramMap.get('username');
-        try {
-            this.user = new User(await this.userService.getUserInfo(username));
-            this.teams = await this.userService.getTeams(this.user._id);
-            console.log(this.teams);
-            this.you = this.user.equals(this.authService.user);
-        } catch (error) {
-            this.handleError(error);
-        }
+        this.initData(username).then();
     }
 
     handleError(error) {
@@ -41,6 +39,16 @@ export class UserComponent implements OnInit {
                 break;
             default:
                 throw error;
+        }
+    }
+
+    async initData(username: string) {
+        try {
+            this.user = new User(await this.userService.getUserInfo(username));
+            this.teams = await this.userService.getTeams(this.user._id);
+            this.you = this.user.equals(this.authService.user);
+        } catch (error) {
+            this.handleError(error);
         }
     }
 
