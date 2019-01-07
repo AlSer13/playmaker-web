@@ -3,7 +3,7 @@
 main {
     margin: 25px auto auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 40px;
     min-width: 600px;
     max-width: 1200px;
@@ -37,15 +37,15 @@ main {
 }
 
 #favorites {
-    grid-row: 1;
-    grid-column-start: 2;
-    grid-column-end: 5;
+    grid-row: 2;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    min-height: 200px; /* placeholder */
 }
 
 #teams {
-    grid-row: 2;
-    grid-column-start: 1;
-    grid-column-end: 3;
+    grid-row: 1;
+    grid-column: 2;
 
     app-add-team-wizard {
         align-self: end;
@@ -54,9 +54,8 @@ main {
 }
 
 #tours {
-    grid-row: 2;
-    grid-column-start: 3;
-    grid-column-end: 5;
+    grid-row: 1;
+    grid-column: 3;
 }
 
 .no-found {
