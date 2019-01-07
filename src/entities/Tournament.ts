@@ -1,10 +1,11 @@
 import {Team} from './Team';
+import {environment} from '../environments/environment';
 
 export class Tournament {
     _id: string;
     name: string;
-    team_count: number;
-    prize_pool: number;
+    teamCount: number;
+    prizePool: number;
     description: string;
     owner: string;
     teams: Team[];
