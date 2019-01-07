@@ -3,8 +3,7 @@
     справа от скролла не отображается-->
     <clr-header class="header-6">
         <div class="branding">
-            <clr-icon shape="flame"></clr-icon>
-            <span class="title">{{title}}</span>
+            <span class="title"><clr-icon shape="flame"></clr-icon>{{title}}</span>
         </div>
         <div class="header-nav" [clr-nav-level]="1">
             <a *ngFor="let component of nav_components"
