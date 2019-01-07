@@ -1,40 +1,44 @@
-<div class="card">
-  <div class="card-header">
-    <span style="align-self: center">{{tournament.name}}</span>
-    <div role="tooltip" aria-haspopup="true"
-         class="tooltip tooltip-bottom-right tooltip-sm subscribe_btn">
+<div class="clr-row clr-justify-content-center">
+    <div class="clr-col-lg-6 clr-col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <span style="align-self: center">{{tournament.name}}</span>
+                <div role="tooltip" aria-haspopup="true"
+                     class="tooltip tooltip-bottom-right tooltip-sm subscribe_btn">
             <span [appHideForbidden]="'VISITOR'"
                   class="tooltip-content">Log in to subscribe</span>
-      <button class="btn btn-sm btn-outline" [appDisableForbidden]="'USER'">
-        Subscribe
-      </button>
-    </div>
-  </div>
-  <div class="card-block">
-    <div class="card-media-block">
-      <img src="../../../assets/dlc.jpeg" class="card-media-image">
-      <div class="card-media-description">
-        <!--<span class="card-media-text">-->
-        <!--Id: {{tour._id}}-->
-        <!--</span>-->
-        <span class="card-media-text">
+                    <button class="btn btn-sm btn-outline" [appDisableForbidden]="'USER'">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="card-media-block">
+                    <img src="../../../assets/dlc.jpeg" class="card-media-image">
+                    <div class="card-media-description">
+                        <!--<span class="card-media-text">-->
+                        <!--Id: {{tour._id}}-->
+                        <!--</span>-->
+                        <span class="card-media-text">
                     Owner: <a>{{tournament.owner}}</a>
                 </span>
-        <span class="card-media-text">
+                        <span class="card-media-text">
                     Teams: {{tournament.teamCount}}
                 </span>
-        <span class="card-media-text">
+                        <span class="card-media-text">
                     Prize pool: {{tournament.prizePool}}
                 </span>
-      </div>
+                    </div>
+                </div>
+                <div class="card-text">
+                    {{tournament.description}}
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua.
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-link" routerLink="/tournaments/{{tournament._id}}">view page</button>
+            </div>
+        </div>
     </div>
-    <div class="card-text">
-      {{tournament.description}}
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-      incididunt ut labore et dolore magna aliqua.
-    </div>
-  </div>
-  <div class="card-footer">
-    <button class="btn btn-link" routerLink="/tournaments/{{tournament._id}}">view page</button>
-  </div>
 </div>

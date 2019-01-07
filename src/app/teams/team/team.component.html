@@ -4,7 +4,7 @@
     </div>
     <div class="clr-row clr-justify-content-center">
 
-        <div class="clr-col-lg-4 clr-col-md-6">
+        <div class="clr-col-lg-4 clr-col-md-4">
             <section>
                 <div class="caption">Players</div>
                 <span class="spinner spinner-md loading-spinner" *ngIf="!team">Loading...</span>
@@ -22,7 +22,7 @@
             </section>
         </div>
 
-        <div class="clr-col-lg-4 clr-col-md-6">
+        <div class="clr-col-lg-4 clr-col-md-4">
             <section>
                 <div class="caption">Tournaments</div>
                 <span class="spinner spinner-md loading-spinner" *ngIf="!tournaments">Loading...</span>
@@ -37,14 +37,14 @@
 
 
     <div class="clr-row clr-justify-content-center">
-        <div class="clr-col-lg-8">
+        <div class="clr-col-lg-8 clr-col-md-8">
             <section>
                 <div class="caption">Matches</div>
                 <span class="spinner spinner-md loading-spinner" *ngIf="!matches">Loading...</span>
                 <div *ngFor="let match of matches">
                     <h3> {{match._id}}</h3>
                     <div *ngFor="let player of match.players; let i = index" style="display: inline">
-                        <img [src]="heroIconURL + player.hero_name + '_sb.png'" alt="">
+                        <img [src]="heroIconURL + player.hero_name + '_sb.png'" class="hero_icon" alt="">
                         <span *ngIf="i===4">VS</span>
                     </div>
 
