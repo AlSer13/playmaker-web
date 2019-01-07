@@ -5,14 +5,16 @@ import {TeamService} from '../../../services/entity/team.service';
 import {environment} from '../../../environments/environment';
 import {ClrLoadingState} from '@clr/angular';
 import {AuthService} from '../../../services/auth.service';
+import {Tournament} from '../../../entities/Tournament';
 
 @Component({
     selector: 'app-team',
     templateUrl: './team.component.html',
-    styleUrls: ['./team.component.css']
+    styleUrls: ['./team.component.scss']
 })
 export class TeamComponent implements OnInit {
     team: Team;
+    tournaments: Tournament[];
     _404 = false;
     avatarURL = environment.avatarURL;
     inviteOpen = false;
@@ -31,6 +33,7 @@ export class TeamComponent implements OnInit {
         try {
             this.team = await this.teamService.getTeam(id);
             this.isCaptain = this.authService.user.equals(this.team.captain);
+            this.tournaments = await this.teamService.getTournaments(this.team);
         } catch (error) {
             this.handleError(error);
         }

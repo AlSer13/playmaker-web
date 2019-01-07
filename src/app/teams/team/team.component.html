@@ -1,48 +1,62 @@
 <div *ngIf="team && !_404">
-    <h1>
-        id: {{team._id}}
-    </h1>
-    <h1>
-        name: {{team.name}}
-    </h1>
-    <div class="clr-row" *ngFor="let player of team.players">
-        <div class="clr-col-lg-4 clr-col-md-6 clr-col-sm-12 clr-col-xs-12">
-            <div class="card" routerLink="/user/{{player.username}}">
-                <div class="card-block">
-                    <div class="card-media-block clr-align-items-center">
-                        <img [src]="avatarURL + player.username" class="card-media-image avatar_image">
-                        <div class="card-media-description">
-                        <span class="card-media-text">
-                           {{player.username}}
-                        </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="clr-row">
+        <h1> name: {{team.name}}</h1>
     </div>
-    <div class="clr-row" *ngIf="team.players.length < 5 && isCaptain">
-        <div class="clr-col-lg-4 clr-col-md-6 clr-col-sm-12 clr-col-xs-12">
-            <div class="card">
-                <div class="card-block">
-                    <div class="card-media-block clr-align-items-center">
-                        <clr-icon shape="plus-circle"
-                                  size="32"
-                                  class="btn btn-link add_player_btn"
-                                  (click)="inviteOpen = true"></clr-icon>
-                    </div>
-                </div>
-            </div>
+    <div class="clr-row">
+
+        <div class="clr-col-lg-4 clr-col-md-6">
+            <section>
+                <div class="caption">Players</div>
+                <span class="spinner spinner-md loading-spinner" *ngIf="!team">Loading...</span>
+                <ul class="list" *ngIf="team.players && team.players.length != 0">
+                    <li *ngFor="let player of team.players" routerLink="/user/{{player.username}}">
+                        <img [src]="avatarURL + player.username" class="avatar_image">
+                        {{player.username}}
+                    </li>
+                </ul>
+                <button type="button" class="btn btn-link add_player_btn"
+                        *ngIf="team.players.length < 5 && isCaptain"
+                        (click)="inviteOpen = true">
+                    Invite player
+                </button>
+            </section>
         </div>
+
+        <div class="clr-col-lg-4 clr-col-md-6" >
+            <section>
+                <div class="caption">Tournaments</div>
+                <span class="spinner spinner-md loading-spinner" *ngIf="!tournaments">Loading...</span>
+                <ul *ngIf="tournaments && tournaments.length != 0">
+                    <li *ngFor="let tournament of tournaments">
+                        {{tournament.name}}
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="clr-col-lg-4" >
+            <section>
+                <div class="caption">Matches</div>
+                <span class="spinner spinner-md loading-spinner" *ngIf="!tournaments">Loading...</span>
+                <ul *ngIf="tournaments && tournaments.length != 0">
+                    <li *ngFor="let tournament of tournaments">
+
+                        {{tournament.name}}
+                    </li>
+                </ul>
+            </section>
+        </div>
+
     </div>
+
 
     <clr-modal [(clrModalOpen)]="inviteOpen" [clrModalSize]="'sm'">
         <h3 class="modal-title">Player invitation</h3>
         <div class="modal-body">
-                <label for="username" class="clr-control-label">Username</label>
-                <input id="username" type="text" name="username"
-                       placeholder="" [(ngModel)]="username" autocomplete="off"/>
-                <clr-control-error class="error" *ngIf="userNotFound">User not found</clr-control-error>
+            <label for="username" class="clr-control-label">Username</label>
+            <input id="username" type="text" name="username"
+                   placeholder="" [(ngModel)]="username" autocomplete="off"/>
+            <clr-control-error class="error" *ngIf="userNotFound">User not found</clr-control-error>
         </div>
         <div class="modal-footer">
             <button [clrLoading]="inviteBtnState" type="button" class="btn btn-primary" (click)="invitePlayer()">

@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Team} from '../../entities/Team';
+import {Tournament} from '../../entities/Tournament';
 
 @Injectable({
     providedIn: 'root'
@@ -33,7 +34,7 @@ export class TeamService {
         }
     }
 
-    async invitePlayer(team: Team, playerUsername: string): Promise <any> {
+    async invitePlayer(team: Team, playerUsername: string): Promise<any> {
         const body = {username: playerUsername};
         const url = this.teamURL + '/' + team._id + '/players';
         return await this.http.post<Team>(url, body).toPromise();
@@ -42,5 +43,11 @@ export class TeamService {
     async joinTeam(team: Team): Promise<any> {
         const url = this.teamURL + '/' + team._id + '/join';
         return await this.http.post<Team>(url, {}).toPromise();
+    }
+
+    async getTournaments(team: Team): Promise<Tournament[]> {
+        const options = {params: new HttpParams().set('finished', 'true')};
+        return this.http.get<Team>(this.teamURL + '/' + team._id + '/tournaments', options)
+            .pipe(map(data => data['tournaments'])).toPromise();
     }
 }

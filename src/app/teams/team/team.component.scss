@@ -1,0 +1,42 @@
+@import "../../../scss-partials/section";
+
+section {
+    @extend %section-with-caption;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.avatar_image {
+    object-fit: cover;
+    width: 30px;
+    height: 30px;
+}
+
+.card-media-text {
+    font-size: 3em;
+}
+
+.add_player_btn {
+    margin: auto !important;
+}
+
+.modal-body {
+    overflow: hidden;
+}
+
+.error {
+    color: #D20808;
+}
+
+.loading-spinner {
+    margin: auto;
+}
+
+li:hover{
+    cursor: pointer;
+}
+
+li {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
