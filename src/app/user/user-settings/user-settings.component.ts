@@ -23,7 +23,7 @@ export class UserSettingsComponent implements OnInit {
 
     async ngOnInit() {
         try {
-            this.user = await this.userService.getUserInfo(this.authService.user.username);
+            this.user = new User(await this.userService.getUserInfo(this.authService.user.username));
         } catch (error) {
             this.handleError(error);
         }
