@@ -1,8 +1,8 @@
 <div *ngIf="team && !_404">
-    <div class="clr-row">
+    <div class="clr-row clr-justify-content-center">
         <h1> name: {{team.name}}</h1>
     </div>
-    <div class="clr-row">
+    <div class="clr-row clr-justify-content-center">
 
         <div class="clr-col-lg-4 clr-col-md-6">
             <section>
@@ -22,7 +22,7 @@
             </section>
         </div>
 
-        <div class="clr-col-lg-4 clr-col-md-6" >
+        <div class="clr-col-lg-4 clr-col-md-6">
             <section>
                 <div class="caption">Tournaments</div>
                 <span class="spinner spinner-md loading-spinner" *ngIf="!tournaments">Loading...</span>
@@ -33,22 +33,25 @@
                 </ul>
             </section>
         </div>
-
-        <div class="clr-col-lg-4" >
-            <section>
-                <div class="caption">Matches</div>
-                <span class="spinner spinner-md loading-spinner" *ngIf="!tournaments">Loading...</span>
-                <ul *ngIf="tournaments && tournaments.length != 0">
-                    <li *ngFor="let tournament of tournaments">
-
-                        {{tournament.name}}
-                    </li>
-                </ul>
-            </section>
-        </div>
-
     </div>
 
+
+    <div class="clr-row clr-justify-content-center">
+        <div class="clr-col-lg-8">
+            <section>
+                <div class="caption">Matches</div>
+                <span class="spinner spinner-md loading-spinner" *ngIf="!matches">Loading...</span>
+                <div *ngFor="let match of matches">
+                    <h3> {{match._id}}</h3>
+                    <div *ngFor="let player of match.players; let i = index" style="display: inline">
+                        <img [src]="heroIconURL + player.hero_name + '_sb.png'" alt="">
+                        <span *ngIf="i===4">VS</span>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </div>
 
     <clr-modal [(clrModalOpen)]="inviteOpen" [clrModalSize]="'sm'">
         <h3 class="modal-title">Player invitation</h3>

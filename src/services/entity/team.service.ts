@@ -4,12 +4,14 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Team} from '../../entities/Team';
 import {Tournament} from '../../entities/Tournament';
+import {Match} from '../../entities/Match';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TeamService {
     private teamURL = environment.localURL + '/teams';
+    private matchURL = environment.localURL + '/matches';
 
     constructor(private http: HttpClient) {
     }
@@ -47,7 +49,13 @@ export class TeamService {
 
     async getTournaments(team: Team): Promise<Tournament[]> {
         const options = {params: new HttpParams().set('finished', 'true')};
-        return this.http.get<Team>(this.teamURL + '/' + team._id + '/tournaments', options)
+        return this.http.get<Tournament>(this.teamURL + '/' + team._id + '/tournaments', options)
             .pipe(map(data => data['tournaments'])).toPromise();
+    }
+
+    async getMatches(): Promise<Match[]> {
+        const options = {params: new HttpParams().set('limit', '5')};
+        return this.http.get<Match>(this.matchURL, options)
+            .pipe(map(data => data['matches'])).toPromise();
     }
 }

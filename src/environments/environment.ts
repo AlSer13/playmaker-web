@@ -5,7 +5,8 @@
 export const environment = {
     production: false,
     localURL: 'http://localhost:3000/api',
-    avatarURL: 'http://localhost:3000/api/user/avatar/'
+    avatarURL: 'http://localhost:3000/api/user/avatar/',
+    heroIconURL: 'http://media.steampowered.com/apps/dota2/images/heroes/'
 };
 
 /*
