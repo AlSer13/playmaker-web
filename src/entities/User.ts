@@ -1,4 +1,5 @@
 import {Team} from './Team';
+import {environment} from '../environments/environment';
 
 export class User {
     _id: string;
@@ -17,7 +18,7 @@ export class User {
 
     constructor(json: any) {
         this._id = json._id;
-        this.avatar = json.avatar;
+        this.avatar = environment.avatarURL + json.username;
         this.email = json.email;
         this.jid = json.jid;
         this.accountId = json.accountId;

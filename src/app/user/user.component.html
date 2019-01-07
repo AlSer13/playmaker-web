@@ -21,9 +21,10 @@
 
     <section id="teams">
         <div class="caption">Teams</div>
+        <span class="spinner spinner-md loading-spinner" *ngIf="!teams">Loading...</span>
 
         <ul *ngIf="teams && teams.length != 0">
-            <li *ngFor="let team of teams">
+            <li *ngFor="let team of teams" routerLink="/teams/{{team._id}}">
                 {{team.name}}
             </li>
         </ul>

@@ -18,10 +18,7 @@ export class UserService {
         // ./cookie-interceptor.ts встраивает опции всем запросам
 
         return this.http.get(this.userURL + '/info/' + username)
-            .pipe(map(data => {
-                data['user_info'].avatar = environment.avatarURL + data['user_info'].username;
-                return data['user_info'];
-            })).toPromise();
+            .pipe(map(data => data['user_info'])).toPromise();
     }
 
     updateUser(user: User, avatar: File): Promise<User> {
@@ -46,7 +43,7 @@ export class UserService {
     }
 
     getTeams(userId: string) {
-        return this.http.get(this.userURL + '/teams')
+        return this.http.get(this.userURL + '/teams/' + userId)
             .pipe(map(data => data['teams'])).toPromise();
     }
 }
