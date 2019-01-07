@@ -3,19 +3,22 @@
 main {
     margin: 25px auto auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "bc feed" "team feed" "tour feed";
+    grid-template-columns: 1fr 4fr;
+
     grid-gap: 40px;
-    min-width: 600px;
-    max-width: 1200px;
+    justify-items: start;
+    align-items: start;
+    max-width: 1000px;
 
     > section:not(.business-card) {
         @extend %section-with-caption;
-        grid-template-rows: 0;
+        width: 100%;
+        min-height: 200px;
     }
 }
 
 .business-card {
-    margin: -12px 40px 40px 25px;
 
     figure {
         margin: 0;
@@ -32,49 +35,64 @@ main {
         }
     }
 
-    grid-row: 1;
-    grid-column: 1;
 }
 
-#favorites {
-    grid-row: 2;
-    grid-column-start: 1;
-    grid-column-end: 4;
-    min-height: 200px; /* placeholder */
+.business-card {
+    grid-area: bc;
 }
 
 #teams {
-    grid-row: 1;
-    grid-column: 2;
-
-    app-add-team-wizard {
-        align-self: end;
-        justify-self: center;
-    }
+    grid-area: team;
 }
 
 #tours {
-    grid-row: 1;
-    grid-column: 3;
+    grid-area: tour;
 }
+
+#history {
+    grid-area: feed;
+}
+
+app-add-team-wizard {
+    align-self: end;
+    justify-self: center;
+}
+
+@media screen and (min-width: 680px) and (max-width: 1237px) {
+    main {
+        grid-template-areas: "bc team" "bc tour" "feed feed"
+    }
+
+}
+
+@media screen and (max-width: 679px) {
+    main {
+        grid-template-areas: "bc" "team" "tour" "feed";
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+}
+
 
 .no-found {
     display: grid;
     align-items: center;
     justify-items: center;
+
     div, hr {
         grid-column: 1;
         grid-row: 1;
     }
+
     div {
         padding: 5px;
         background: #1a2a32;
     }
+
     hr {
         width: 100%;
     }
 }
-
 
 .loading-spinner {
     margin: auto;
@@ -83,4 +101,3 @@ main {
 li:hover {
     cursor: pointer;
 }
-

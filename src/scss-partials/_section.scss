@@ -1,12 +1,17 @@
 %section-with-caption {
     $sec-caption-bg: #1a2a32;
     $sec-caption-height: 20px;
-    $sec-padding: 20px;
+    $sec-padding: 18px;
 
-    border: 1px solid #adbbc4;
-    border-radius: 5px;
-    padding: 20px;
+    border: 1px solid #64737B;
+    border-top: 1px solid #adbbc4;
+    border-radius: 4px;
+
+    padding: $sec-padding*1.5;
+    padding-top: $sec-padding;
+    padding-bottom: $sec-padding/1.5;
     display: grid;
+    grid-template-rows: 0;
 
     .caption {
         line-height: $sec-caption-height - 2.5px;
@@ -18,5 +23,5 @@
         position: relative;
         top: -($sec-caption-height)/2 - $sec-padding;
         left: 20px - $sec-padding;
-}
+    }
 }
