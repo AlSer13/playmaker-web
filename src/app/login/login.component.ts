@@ -1,7 +1,7 @@
 import {Component, HostListener} from '@angular/core';
-import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
+import {UserService} from '../../services/entity/user.service';
 
 @Component({
     selector: 'app-login',
@@ -47,7 +47,7 @@ export class LoginComponent {
         this.trueCombination = [50, 49, 52, 18, 17];
     }
 
-    constructor(private authenticationService: AuthenticationService, private authService: AuthService,
+    constructor(private authenticationService: AuthenticationService, private userService: UserService,
                 protected router: Router) {
     }
 
@@ -57,8 +57,8 @@ export class LoginComponent {
             const data = await this.authenticationService.logIn(this.asadmin, this.username, this.password, this.rememberMe);
             if (data) {
                 this.error = false;
-                console.log(this.authService.user);
-                await this.router.navigate(['/user/' + this.authService.user.username]);
+                console.log(this.userService.user);
+                await this.router.navigate(['/user/' + this.userService.user.username]);
                 this.loading = false;
                 window.location.reload();
             } else {

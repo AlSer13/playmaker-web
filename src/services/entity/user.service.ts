@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {User} from '../../entities/User';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {Team} from '../../entities/Team';
@@ -9,6 +9,9 @@ import {Team} from '../../entities/Team';
     providedIn: 'root'
 })
 export class UserService {
+
+    public user: User;
+
     private userURL = environment.localURL + '/user';
 
     constructor(private http: HttpClient) {

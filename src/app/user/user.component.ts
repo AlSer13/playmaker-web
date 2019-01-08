@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {User} from '../../entities/User';
 import {UserService} from '../../services/entity/user.service';
 import {AuthService} from '../../services/auth.service';
@@ -18,8 +18,7 @@ export class UserComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private authService: AuthService,
-                private userService: UserService,
-                private router: Router) {
+                private userService: UserService) {
 
         // subscribe on route change
         route.params.forEach(params => {
@@ -46,7 +45,7 @@ export class UserComponent implements OnInit {
         try {
             this.user = new User(await this.userService.getUserInfo(username));
             this.teams = await this.userService.getTeams(this.user._id);
-            this.you = this.user.equals(this.authService.user);
+            this.you = this.user.equals(this.userService.user);
         } catch (error) {
             this.handleError(error);
         }

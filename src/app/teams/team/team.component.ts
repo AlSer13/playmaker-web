@@ -4,9 +4,9 @@ import {Team} from '../../../entities/Team';
 import {TeamService} from '../../../services/entity/team.service';
 import {environment} from '../../../environments/environment';
 import {ClrLoadingState} from '@clr/angular';
-import {AuthService} from '../../../services/auth.service';
 import {Tournament} from '../../../entities/Tournament';
 import {Match} from '../../../entities/Match';
+import {UserService} from '../../../services/entity/user.service';
 
 @Component({
     selector: 'app-team',
@@ -28,14 +28,14 @@ export class TeamComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private teamService: TeamService,
-                private authService: AuthService) {
+                private userService: UserService) {
     }
 
     async ngOnInit() {
         const id = this.route.snapshot.paramMap.get('id');
         try {
             this.team = await this.teamService.getTeam(id);
-            this.isCaptain = this.authService.user.equals(this.team.captain);
+            this.isCaptain = this.userService.user.equals(this.team.captain);
             this.tournaments = await this.teamService.getTournaments(this.team);
             this.matches = await this.teamService.getMatches();
             console.log(this.matches);
