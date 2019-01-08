@@ -28,6 +28,7 @@ import { AddTeamWizardComponent } from './user/add-team-wizard/add-team-wizard.c
 import { UserInvitesComponent } from './user/user-invites/user-invites.component';
 import { MatchComponent } from './match/match.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { HeatmapComponent } from './match/heatmap/heatmap.component';
 
 @NgModule({
     declarations: [
@@ -50,6 +51,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
         UserSettingsComponent,
         UserInvitesComponent,
         MatchComponent,
+        HeatmapComponent,
     ],
     imports: [
         BrowserModule,

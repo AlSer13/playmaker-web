@@ -1,6 +1,8 @@
 export class Player {
     times: Number[];
     gold_t: Number[];
+    xp_t: Number[];
+    pos: any[];
     account_id: Number;
     player_slot: Number;
     hero_id: Number;

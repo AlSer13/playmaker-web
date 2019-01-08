@@ -51,7 +51,7 @@ const routes: Routes = [
         component: UserInvitesComponent
     },
     {
-        path: 'match',
+        path: 'match/:matchId',
         component: MatchComponent
     },
     {path: '**', component: PageNotFoundComponent}

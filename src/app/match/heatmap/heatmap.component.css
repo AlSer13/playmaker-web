@@ -1,0 +1,7 @@
+.heatmap {
+    width: 400px;
+    height: 400px;
+    background-image: url("https://raw.githubusercontent.com/odota/web/master/public/assets/images/dota2/map/detailed_720.jpg");
+    background-size: contain;
+
+}
