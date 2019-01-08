@@ -11,6 +11,7 @@ import {UserService} from '../services/entity/user.service';
 export class AppComponent {
     title = 'Playmaker';
     username = this.userService.getUser().username;
+    tabbing = false;
 
     nav_components = [
         {
@@ -37,8 +38,23 @@ export class AppComponent {
         window.location.reload();
     }
 
-    constructor(private authenticationService: AuthenticationService, private userService: UserService, protected router: Router) {
+    private handleTab(e: KeyboardEvent) {
+        if (e.keyCode === 9 && !this.tabbing) {
+            document.body.classList.add('user-is-tabbing');
+            this.tabbing = true;
+        }
     }
 
+    private handleMouse(e: MouseEvent) {
+        document.body.classList.remove('user-is-tabbing');
+        this.tabbing = false;
+    }
+
+    constructor(private authenticationService: AuthenticationService,
+                private userService: UserService,
+                protected router: Router) {
+        window.addEventListener('keydown', this.handleTab);
+        window.addEventListener('mousedown', this.handleMouse);
+    }
 }
 
