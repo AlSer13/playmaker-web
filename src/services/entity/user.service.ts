@@ -15,41 +15,60 @@ export class UserService {
     }
 
     getUser(): User {
-        if (this.user != null) {
-            return this.user;
-        }
+        return this.user;
     }
 
     async getSelectedTournaments() {
-        if (!this.user.selectedTournaments) {
-            await this.loadSelectedInfo();
+        if (this.user._id) {
+            if (!this.user.selectedTournaments) {
+                await this.loadSelectedInfo();
+            }
+            return this.user.selectedTournaments;
+        } else {
+            return null;
         }
-        return this.user.selectedTournaments;
     }
 
     constructor(private userDataService: UserDataService) {
     }
 
     async getInvites() {
-        if (!this.user.invites) {
-            this.user.invites = await this.userDataService.getInvites();
+        if (this.user._id) {
+            if (!this.user.invites) {
+                this.user.invites = await this.userDataService.getInvites();
+            }
+            return this.user.invites;
+        } else {
+            return null;
         }
-        return this.user.invites;
     }
 
     async loadSelectedInfo() {
-        const data = await this.userDataService.getUserInfo(this.user.username);
-        this.user.selectedTournaments = data.selectedTournaments;
-        this.user.selectedMatches = data.selectedMatches;
+        if (this.user._id) {
+            const data = await this.userDataService.getUserInfo(this.user.username);
+            this.user.selectedTournaments = data.selectedTournaments;
+            this.user.selectedMatches = data.selectedMatches;
+        } else {
+            return null;
+        }
     }
 
     async followTournament(tournament: Tournament) {
-        await this.userDataService.followTournament(tournament._id);
-        await this.loadSelectedInfo();
+        if (this.user._id) {
+            await this.userDataService.followTournament(tournament._id);
+            await this.loadSelectedInfo();
+        } else {
+            return null;
+        }
     }
 
     async unfollowTournament(tournament: Tournament) {
-        await this.userDataService.unfollowTournament(tournament._id);
-        await this.loadSelectedInfo();
+        if (this.user._id) {
+            await this.userDataService.unfollowTournament(tournament._id);
+            await this.loadSelectedInfo();
+        } else {
+            return null;
+        }
+
     }
 }

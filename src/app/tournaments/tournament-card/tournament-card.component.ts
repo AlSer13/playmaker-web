@@ -34,8 +34,10 @@ export class TournamentCardComponent implements OnInit {
     }
 
     async checkSelected() {
-        this.isSelected = (await this.userService.getSelectedTournaments())
-            .map(t => t._id).includes(this.tournament._id);
+        const selectedTours = (await this.userService.getSelectedTournaments());
+        if (selectedTours) {
+            this.isSelected = selectedTours.map(t => t._id).includes(this.tournament._id);
+        }
         this.loadingSubscription = false;
     }
 
