@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../../../entities/User';
-import {UserService} from '../../../services/entity/user.service';
+import {LocalUserService} from '../../../services/local-user.service';
 import {AuthService} from '../../../services/auth.service';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {ClrLoadingState} from '@clr/angular';
-import {UserDataService} from '../../../services/data/user-data.service';
+import {UserDataService} from '../../../services/entity-data/user-data.service';
 
 @Component({
     selector: 'app-user-settings',
@@ -20,7 +20,7 @@ export class UserSettingsComponent implements OnInit {
     avatar: File = null;
 
     constructor(private userDataService: UserDataService,
-                private userService: UserService,
+                private userService: LocalUserService,
                 private authService: AuthService,
                 private authenticationService: AuthenticationService) {
     }

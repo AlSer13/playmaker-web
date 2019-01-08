@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {User} from '../../entities/User';
-import {UserService} from '../../services/entity/user.service';
+import {LocalUserService} from '../../services/local-user.service';
 import {AuthService} from '../../services/auth.service';
 import {Team} from '../../entities/Team';
-import {UserDataService} from '../../services/data/user-data.service';
+import {UserDataService} from '../../services/entity-data/user-data.service';
 
 @Component({
     selector: 'app-user',
@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private authService: AuthService,
                 private userDataService: UserDataService,
-                private userService: UserService) {
+                private userService: LocalUserService) {
 
         // subscribe on route change
         route.params.forEach(params => {

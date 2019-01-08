@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Match} from '../../entities/Match';
-import {MatchService} from '../../services/entity/match.service';
+import {MatchService} from '../../services/entity-data/match.service';
 import * as shape from 'd3-shape';
 
 @Component({

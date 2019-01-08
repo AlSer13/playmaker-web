@@ -2,8 +2,6 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import {Team} from '../../entities/Team';
-import {Tournament} from '../../entities/Tournament';
 import {Match} from '../../entities/Match';
 
 @Injectable({

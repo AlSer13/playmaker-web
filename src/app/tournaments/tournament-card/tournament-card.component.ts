@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tournament} from '../../../entities/Tournament';
-import {UserService} from '../../../services/entity/user.service';
+import {LocalUserService} from '../../../services/local-user.service';
 
 @Component({
     selector: 'app-tournament-card',
@@ -13,7 +13,7 @@ export class TournamentCardComponent implements OnInit {
     isSelected: boolean;
     loadingSubscription: boolean;
 
-    constructor(private userService: UserService) {
+    constructor(private userService: LocalUserService) {
     }
 
     ngOnInit() {

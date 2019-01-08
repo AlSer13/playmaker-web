@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {User} from '../../entities/User';
-import {Tournament} from '../../entities/Tournament';
-import {UserDataService} from '../data/user-data.service';
+import {User} from '../entities/User';
+import {Tournament} from '../entities/Tournament';
+import {UserDataService} from './entity-data/user-data.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserService {
+export class LocalUserService {
 
     private user: User;
 

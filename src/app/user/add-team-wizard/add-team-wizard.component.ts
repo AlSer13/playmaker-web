@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ClrWizard} from '@clr/angular';
-import {TeamService} from '../../../services/entity/team.service';
+import {TeamService} from '../../../services/entity-data/team.service';
 import {User} from '../../../entities/User';
 
 @Component({
