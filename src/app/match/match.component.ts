@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Match} from '../../entities/Match';
 import {MatchService} from '../../services/entity/match.service';
 import * as shape from 'd3-shape';
+import {ActivatedRoute} from '@angular/router';
+import {Player} from '../../entities/Player';
+import {environment} from '../../environments/environment';
 
 @Component({
     selector: 'app-match',
@@ -9,6 +12,9 @@ import * as shape from 'd3-shape';
     styleUrls: ['./match.component.css']
 })
 export class MatchComponent implements OnInit {
+    heroIconURL = environment.heroIconURL;
+    selectedPlayer: Player;
+    matchId;
     shape = shape;
     view: any[] = [800, 400];
     showXAxis = true;
@@ -18,25 +24,27 @@ export class MatchComponent implements OnInit {
     showXAxisLabel = true;
     xAxisLabel = 'Time';
     showYAxisLabel = true;
-    yAxisLabel = 'Gold';
-    data: any[] = [];
+    gold_data: any[] = [];
+    exp_data: any[] = [];
     match: Match;
     colorScheme = {
         name: 'cool',
         selectable: true,
         group: 'Ordinal',
         domain: [
-            '#a8385d', '#7aa3e5', '#a27ea8', '#aae3f5', '#adcded', '#a95963', '#8796c0', '#7ed3ed', '#50abcc', '#ad6886'
+            '#4f36ca', '#00ffbc', '#9e0c98', '#e7ff00', '#f15903', '#ff63c1', '#93c03e', '#45a3c0', '#03871d', '#7e5610'
         ]
     };
 
-    constructor(private matchService: MatchService) {
+    constructor(private matchService: MatchService, private route: ActivatedRoute) {
     }
 
     async ngOnInit() {
-        this.match = await this.matchService.getMatch(4245832190);
-        console.log(this.match);
-        this.data = this.match.players.map((item) => {
+        this.matchId = this.route.snapshot.paramMap.get('matchId');
+        this.match = await this.matchService.getMatch(this.matchId);
+        this.selectedPlayer = this.match.players[0];
+
+        this.gold_data = this.match.players.map((item) => {
             return {
                 name: item.player_slot,
                 series: item.gold_t.map((_item, i) => {
@@ -47,6 +55,22 @@ export class MatchComponent implements OnInit {
                 })
             };
         });
+        this.exp_data = this.match.players.map((item) => {
+            return {
+                name: item.player_slot,
+                series: item.xp_t.map((_item, i) => {
+                    return {
+                        name: i * 60,
+                        value: _item
+                    };
+                })
+            };
+        });
     }
+
+    toUnderscored(string: string): string {
+        return string.split(/(?=[A-Z])/).join('_').toLowerCase();
+    }
+
 
 }

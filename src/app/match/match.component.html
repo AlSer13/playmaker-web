@@ -1,15 +1,59 @@
-<div>
-    <ngx-charts-line-chart [view]="view"
-                           [scheme]="colorScheme"
-                           [results]="data"
-                           [gradient]="gradient"
-                           [xAxis]="showXAxis"
-                           [yAxis]="showYAxis"
-                           [showXAxisLabel]="showXAxisLabel"
-                           [showYAxisLabel]="showYAxisLabel"
-                           [xAxisLabel]="xAxisLabel"
-                           [yAxisLabel]="yAxisLabel"
-                           [curve]="shape.curveBasis"
-                           class="chart">
-    </ngx-charts-line-chart>
-</div>
+<clr-tabs>
+    <clr-tab>
+        <button clrTabLink id="link1">Gold</button>
+        <clr-tab-content id="Gold" *clrIfActive>
+            <ngx-charts-line-chart [view]="view"
+                                   [scheme]="colorScheme"
+                                   [results]="gold_data"
+                                   [gradient]="gradient"
+                                   [xAxis]="showXAxis"
+                                   [yAxis]="showYAxis"
+                                   [showXAxisLabel]="showXAxisLabel"
+                                   [showYAxisLabel]="showYAxisLabel"
+                                   [xAxisLabel]="xAxisLabel"
+                                   yAxisLabel="Gold"
+                                   [curve]="shape.curveBasis"
+                                   class="chart">
+            </ngx-charts-line-chart>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+        <button clrTabLink>Exp</button>
+        <clr-tab-content *clrIfActive>
+            <clr-tab-content id="Exp" *clrIfActive>
+                <ngx-charts-line-chart [view]="view"
+                                       [scheme]="colorScheme"
+                                       [results]="exp_data"
+                                       [gradient]="gradient"
+                                       [xAxis]="showXAxis"
+                                       [yAxis]="showYAxis"
+                                       [showXAxisLabel]="showXAxisLabel"
+                                       [showYAxisLabel]="showYAxisLabel"
+                                       [xAxisLabel]="xAxisLabel"
+                                       yAxisLabel="Gold"
+                                       [curve]="shape.curveBasis"
+                                       class="chart">
+                </ngx-charts-line-chart>
+            </clr-tab-content>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+        <button clrTabLink>Laning</button>
+        <clr-tab-content *clrIfActive>
+            <clr-tab-content id="Laning" *clrIfActive>
+                <div class="clr-row">
+                    <heatmap class="clr-col-auto" [heatPoints]="selectedPlayer.pos"></heatmap>
+                    <clr-datagrid class="clr-col-auto" [(clrDgSingleSelected)]="selectedPlayer">
+                        <clr-dg-column>Hero</clr-dg-column>
+                        <clr-dg-row *clrDgItems="let player of match.players" [clrDgItem]="player">
+                            <clr-dg-cell>
+                                <img  class="hero_icon" [src]="heroIconURL + toUnderscored(player.hero_name) + '_sb.png'" alt="">{{player.hero_name}}
+                            </clr-dg-cell>
+                        </clr-dg-row>
+                    </clr-datagrid>
+                </div>
+            </clr-tab-content>
+        </clr-tab-content>
+    </clr-tab>
+</clr-tabs>
+
