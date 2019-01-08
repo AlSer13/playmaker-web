@@ -26,6 +26,8 @@ import {CookieInterceptor} from '../services/cookie-interceptor';
 import { UserSettingsComponent } from './user/user-settings/user-settings.component';
 import { AddTeamWizardComponent } from './user/add-team-wizard/add-team-wizard.component';
 import { UserInvitesComponent } from './user/user-invites/user-invites.component';
+import { MatchComponent } from './match/match.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
     declarations: [
@@ -47,6 +49,7 @@ import { UserInvitesComponent } from './user/user-invites/user-invites.component
         AddTeamWizardComponent,
         UserSettingsComponent,
         UserInvitesComponent,
+        MatchComponent,
     ],
     imports: [
         BrowserModule,
@@ -55,7 +58,8 @@ import { UserInvitesComponent } from './user/user-invites/user-invites.component
         BrowserAnimationsModule,
         ClarityModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxChartsModule
     ],
     providers: [
         AuthorizationDataService,
