@@ -1,5 +1,6 @@
 import {Team} from './Team';
 import {environment} from '../environments/environment';
+import {User} from './User';
 
 export class Tournament {
     _id: string;
@@ -7,10 +8,21 @@ export class Tournament {
     teamCount: number;
     prizePool: number;
     description: string;
-    owner: string;
+    owner: User;
     teams: Team[];
-    // description: string;
-    //
+
+    constructor(json: any) {
+        if (json != null) {
+            this._id = json._id;
+            this.name = json.name;
+            this.teamCount = json.teamCount;
+            this.prizePool = json.prizePool;
+            this.description = json.description;
+            this.owner = new User(json.owner);
+            this.teams = json.teams;
+        }
+    }
+
     // constructor() {
     //     this.description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,' +
     //         ' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,' +

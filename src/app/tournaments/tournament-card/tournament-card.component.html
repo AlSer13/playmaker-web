@@ -19,13 +19,14 @@
                         <!--<span class="card-media-text">-->
                         <!--Id: {{tour._id}}-->
                         <!--</span>-->
-                        <span class="card-media-text">
-                    Owner: <a>{{tournament.owner}}</a>
+                        <span class="card-media-text" *ngIf="tournament.owner &&
+                        tournament.owner.username">
+                    Owner: <a>{{tournament.owner.username}}</a>
                 </span>
-                        <span class="card-media-text">
+                        <span class="card-media-text" *ngIf="tournament.teamCount">
                     Teams: {{tournament.teamCount}}
                 </span>
-                        <span class="card-media-text">
+                        <span class="card-media-text" *ngIf="tournament.prizePool">
                     Prize pool: {{tournament.prizePool}}
                 </span>
                     </div>

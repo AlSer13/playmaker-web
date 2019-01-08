@@ -36,16 +36,16 @@ export class MatchComponent implements OnInit {
     async ngOnInit() {
         this.match = await this.matchService.getMatch(4245832190);
         console.log(this.match);
-        this.data = this.match.players.map((item, i) => {
+        this.data = this.match.players.map((item) => {
             return {
                 name: item.player_slot,
-                series: item.gold_t.map((item, i) => {
+                series: item.gold_t.map((_item, i) => {
                     return {
                         name: i * 60,
-                        value: item
+                        value: _item
                     };
                 })
-            }
+            };
         });
     }
 

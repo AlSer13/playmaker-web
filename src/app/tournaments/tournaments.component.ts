@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Tournament} from '../../entities/Tournament';
 import {TournamentService} from '../../services/entity/tournament.service';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-tournaments',
@@ -13,15 +15,17 @@ export class TournamentsComponent implements OnInit {
     constructor(private tourService: TournamentService) {
     }
 
-    getTours(): void {
-        this.tourService.getTours()
-            .subscribe(tours => {
-              this.tours = tours;
-            });
+    getTours(): Observable<any> {
+        return this.tourService.getTours()
+            .pipe(tap(tours => {
+                    tours = tours.map(t => new Tournament(t));
+                    this.tours = tours;
+                }
+            ));
     }
 
     ngOnInit() {
-        this.getTours();
+        this.getTours().subscribe(() => console.log(this.tours));
     }
 
     search() {
