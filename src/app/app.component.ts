@@ -10,7 +10,7 @@ import {UserService} from '../services/entity/user.service';
 })
 export class AppComponent {
     title = 'Playmaker';
-    username = this.userService.user.username;
+    username = this.userService.getUser().username;
 
     nav_components = [
         {

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AuthGroup} from '../models/authorization.types';
-import {AuthorizationDataService} from './authorization-data.service';
-import {User} from '../entities/User';
+import {AuthorizationDataService} from './data/authorization-data.service';
 import {UserService} from './entity/user.service';
 
 @Injectable()
@@ -21,11 +20,11 @@ export class AuthService {
 
     async initializePermissions() {
         const data = await this.authorizationDataService.getPermissions();
-        this.userService.user = new User({
+        this.userService.initUser({
             username: data['username'],
             _id: data['userId']
         });
         this.permissions = data['authGroup'];
-        console.log('Received permissions from server: ' + this.permissions + '\nFor user: ' + this.userService.user.username);
+        console.log('Received permissions from server: ' + this.permissions + '\nFor user: ' + this.userService.getUser().username);
     }
 }

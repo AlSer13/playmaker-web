@@ -57,8 +57,8 @@ export class LoginComponent {
             const data = await this.authenticationService.logIn(this.asadmin, this.username, this.password, this.rememberMe);
             if (data) {
                 this.error = false;
-                console.log(this.userService.user);
-                await this.router.navigate(['/user/' + this.userService.user.username]);
+                console.log(this.userService.getUser());
+                await this.router.navigate(['/user/' + this.userService.getUser().username]);
                 this.loading = false;
                 window.location.reload();
             } else {

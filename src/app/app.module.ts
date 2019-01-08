@@ -15,7 +15,7 @@ import {TournamentComponent} from './tournaments/tournament/tournament.component
 import {LoginComponent} from './login/login.component';
 import {HideForbiddenDirective} from '../directives/hide-forbidden.directive';
 import {DisableForbiddenDirective} from '../directives/disable-forbidden.directive';
-import {AuthorizationDataService} from '../services/authorization-data.service';
+import {AuthorizationDataService} from '../services/data/authorization-data.service';
 import {SignupComponent} from './signup/signup.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';

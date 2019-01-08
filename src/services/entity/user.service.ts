@@ -1,52 +1,53 @@
 import {Injectable} from '@angular/core';
 import {User} from '../../entities/User';
-import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
-import {environment} from '../../environments/environment';
-import {Team} from '../../entities/Team';
+import {Tournament} from '../../entities/Tournament';
+import {UserDataService} from '../data/user-data.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    public user: User;
+    private user: User;
 
-    private userURL = environment.localURL + '/user';
-
-    constructor(private http: HttpClient) {
+    initUser(json: { _id: any; username: any }) {
+        this.user = new User(json);
     }
 
-    getUserInfo(username: string): Promise<User> {
-        // ./cookie-interceptor.ts встраивает опции всем запросам
-
-        return this.http.get(this.userURL + '/info/' + username)
-            .pipe(map(data => data['user_info'])).toPromise();
+    getUser(): User {
+        if (this.user != null) {
+            return this.user;
+        }
     }
 
-    updateUser(user: User, avatar: File): Promise<User> {
-        // ./cookie-interceptor.ts встраивает опции всем запросам
-
-        const body = new FormData();
-        body.set('jid', user.jid);
-        body.set('avatar', avatar);
-
-        return this.http.patch(this.userURL, body)
-            .pipe(map(data => {
-                data['user'].avatar = environment.localURL + '/user/avatar/' + data['user'].username;
-                return data['user'];
-            })).toPromise();
+    async getSelectedTournaments() {
+        if (!this.user.selectedTournaments) {
+            await this.loadSelectedInfo();
+        }
+        return this.user.selectedTournaments;
     }
 
-    getInvites(): Promise<Team[]> {
-        // ./cookie-interceptor.ts встраивает опции всем запросам
-
-        return this.http.get(this.userURL + '/invites')
-            .pipe(map(data => data['invites'])).toPromise();
+    constructor(private userDataService: UserDataService) {
     }
 
-    getTeams(userId: string) {
-        return this.http.get(this.userURL + '/teams/' + userId)
-            .pipe(map(data => data['teams'])).toPromise();
+    async getInvites() {
+        if (!this.user.invites) {
+            this.user.invites = await this.userDataService.getInvites();
+        }
+        return this.user.invites;
+    }
+
+    async loadSelectedInfo() {
+        const data = await this.userDataService.getUserInfo(this.user.username);
+        this.user.selectedTournaments = data.selectedTournaments;
+        this.user.selectedMatches = data.selectedMatches;
+    }
+
+    async followTournament(tournament: Tournament) {
+        await this.userDataService.followTournament(tournament._id);
+    }
+
+    unfollowTournament(tournament: Tournament) {
+
     }
 }

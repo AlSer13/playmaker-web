@@ -35,7 +35,7 @@ export class TeamComponent implements OnInit {
         const id = this.route.snapshot.paramMap.get('id');
         try {
             this.team = await this.teamService.getTeam(id);
-            this.isCaptain = this.userService.user.equals(this.team.captain);
+            this.isCaptain = this.userService.getUser().equals(this.team.captain);
             this.tournaments = await this.teamService.getTournaments(this.team);
             this.matches = await this.teamService.getMatches();
             console.log(this.matches);

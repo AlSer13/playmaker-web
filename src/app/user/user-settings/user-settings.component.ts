@@ -4,6 +4,7 @@ import {UserService} from '../../../services/entity/user.service';
 import {AuthService} from '../../../services/auth.service';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {ClrLoadingState} from '@clr/angular';
+import {UserDataService} from '../../../services/data/user-data.service';
 
 @Component({
     selector: 'app-user-settings',
@@ -18,12 +19,15 @@ export class UserSettingsComponent implements OnInit {
     updateBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
     avatar: File = null;
 
-    constructor(private userService: UserService, private authService: AuthService, private authenticationService: AuthenticationService) {
+    constructor(private userDataService: UserDataService,
+                private userService: UserService,
+                private authService: AuthService,
+                private authenticationService: AuthenticationService) {
     }
 
     async ngOnInit() {
         try {
-            this.user = new User(await this.userService.getUserInfo(this.userService.user.username));
+            this.user = new User(await this.userDataService.getUserInfo(this.userService.getUser().username));
         } catch (error) {
             this.handleError(error);
         }
@@ -50,7 +54,7 @@ export class UserSettingsComponent implements OnInit {
     async updateUserInfo() {
         this.updateBtnState = ClrLoadingState.LOADING;
         console.log(this.avatar);
-        this.user = await this.userService.updateUser(this.user, this.avatar);
+        this.user = await this.userDataService.updateUser(this.user, this.avatar);
         this.updateBtnState = ClrLoadingState.SUCCESS;
     }
 

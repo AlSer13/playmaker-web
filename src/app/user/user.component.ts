@@ -4,6 +4,7 @@ import {User} from '../../entities/User';
 import {UserService} from '../../services/entity/user.service';
 import {AuthService} from '../../services/auth.service';
 import {Team} from '../../entities/Team';
+import {UserDataService} from '../../services/data/user-data.service';
 
 @Component({
     selector: 'app-user',
@@ -18,6 +19,7 @@ export class UserComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private authService: AuthService,
+                private userDataService: UserDataService,
                 private userService: UserService) {
 
         // subscribe on route change
@@ -43,9 +45,9 @@ export class UserComponent implements OnInit {
 
     async initData(username: string) {
         try {
-            this.user = new User(await this.userService.getUserInfo(username));
-            this.teams = await this.userService.getTeams(this.user._id);
-            this.you = this.user.equals(this.userService.user);
+            this.user = new User(await this.userDataService.getUserInfo(username));
+            this.teams = await this.userDataService.getTeams(this.user._id);
+            this.you = this.user.equals(this.userService.getUser());
         } catch (error) {
             this.handleError(error);
         }
