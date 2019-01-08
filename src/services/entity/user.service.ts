@@ -45,9 +45,11 @@ export class UserService {
 
     async followTournament(tournament: Tournament) {
         await this.userDataService.followTournament(tournament._id);
+        await this.loadSelectedInfo();
     }
 
-    unfollowTournament(tournament: Tournament) {
-
+    async unfollowTournament(tournament: Tournament) {
+        await this.userDataService.unfollowTournament(tournament._id);
+        await this.loadSelectedInfo();
     }
 }

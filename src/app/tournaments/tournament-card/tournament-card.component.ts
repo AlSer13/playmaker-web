@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tournament} from '../../../entities/Tournament';
+import {UserService} from '../../../services/entity/user.service';
 
 @Component({
     selector: 'app-tournament-card',
@@ -9,11 +10,33 @@ import {Tournament} from '../../../entities/Tournament';
 export class TournamentCardComponent implements OnInit {
 
     @Input() tournament: Tournament;
+    isSelected: boolean;
+    loadingSubscription: boolean;
 
-    constructor() {
+    constructor(private userService: UserService) {
     }
 
     ngOnInit() {
+        this.checkSelected();
+    }
+
+    followBtnClicked() {
+        this.loadingSubscription = true;
+        if (!this.isSelected) {
+            this.userService.followTournament(this.tournament).then(
+                () => this.checkSelected()
+            );
+        } else {
+            this.userService.unfollowTournament(this.tournament).then(
+                () => this.checkSelected()
+            );
+        }
+    }
+
+    async checkSelected() {
+        this.isSelected = (await this.userService.getSelectedTournaments())
+            .map(t => t._id).includes(this.tournament._id);
+        this.loadingSubscription = false;
     }
 
 }

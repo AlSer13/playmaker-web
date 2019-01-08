@@ -49,7 +49,13 @@ export class UserDataService {
 
     followTournament(tournamentId: string) {
         const body = {};
-        return this.http.post(this.userURL + '/fav/' + tournamentId, body)
+        return this.http.post(this.userURL + '/fav/follow/' + tournamentId, body)
             .pipe(map(data => data['addedTournament'])).toPromise();
+    }
+
+    unfollowTournament(tournamentId: string) {
+        const body = {};
+        return this.http.post(this.userURL + '/fav/unfollow/' + tournamentId, body)
+            .pipe(map(data => data['removedTournament'])).toPromise();
     }
 }

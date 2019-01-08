@@ -3,8 +3,12 @@
     margin: 0 0 20px 0;
 }
 
-.subscribe_btn {
+.subscribe-btn-wrap {
     margin-left: auto;
+}
+
+.subscribe-btn {
+    min-width: 100px;
 }
 
 .tooltip-content {

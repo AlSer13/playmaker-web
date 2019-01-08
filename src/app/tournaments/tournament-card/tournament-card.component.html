@@ -4,11 +4,16 @@
             <div class="card-header">
                 <span style="align-self: center">{{tournament.name}}</span>
                 <div role="tooltip" aria-haspopup="true"
-                     class="tooltip tooltip-bottom-right tooltip-sm subscribe_btn">
+                     class="tooltip tooltip-bottom-right tooltip-sm subscribe-btn-wrap">
             <span [appHideForbidden]="'VISITOR'"
                   class="tooltip-content">Log in to subscribe</span>
-                    <button class="btn btn-sm btn-outline" [appDisableForbidden]="'USER'">
-                        Subscribe
+                    <button class="subscribe-btn btn btn-sm btn-outline"
+                            [appDisableForbidden]="'USER'"
+                            (click)="followBtnClicked()"
+                            [class.btn-warning-outline]="isSelected">
+                        <span *ngIf="!isSelected && !loadingSubscription">Follow</span>
+                        <span *ngIf="isSelected && !loadingSubscription">Unfollow</span>
+                        <span *ngIf="loadingSubscription" class="spinner spinner-inline"></span>
                     </button>
                 </div>
             </div>

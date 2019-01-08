@@ -3,6 +3,7 @@ import {Tournament} from '../../entities/Tournament';
 import {TournamentService} from '../../services/entity/tournament.service';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
+import {UserService} from '../../services/entity/user.service';
 
 @Component({
     selector: 'app-tournaments',
@@ -12,7 +13,8 @@ import {tap} from 'rxjs/operators';
 export class TournamentsComponent implements OnInit {
     tours: Tournament[];
 
-    constructor(private tourService: TournamentService) {
+    constructor(private tourService: TournamentService,
+                private userService: UserService) {
     }
 
     getTours(): Observable<any> {
@@ -24,8 +26,9 @@ export class TournamentsComponent implements OnInit {
             ));
     }
 
-    ngOnInit() {
-        this.getTours().subscribe(() => console.log(this.tours));
+    async ngOnInit() {
+        this.getTours().subscribe();
+        await this.userService.getSelectedTournaments();
     }
 
     search() {
