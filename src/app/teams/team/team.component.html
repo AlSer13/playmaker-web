@@ -44,7 +44,7 @@
                 <div *ngFor="let match of matches">
                     <h3> {{match._id}}</h3>
                     <div *ngFor="let player of match.players; let i = index" style="display: inline">
-                        <img [src]="heroIconURL + player.hero_name + '_sb.png'" class="hero_icon" alt="">
+                        <img [src]="heroIconURL + player.hero_name + '_sb.png'" class="hero-icon" alt="">
                         <span *ngIf="i===4">VS</span>
                     </div>
 

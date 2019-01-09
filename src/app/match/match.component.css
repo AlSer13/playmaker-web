@@ -1,9 +1,37 @@
-.chart{
+.chart {
     fill: #a5a5a5;
     background-color: inherit;
 }
 
-.hero_icon{
+.hero-icon {
     width: 45px;
+    margin-right: 3px;
+}
 
+.cell {
+    padding: 5px 0 5px 0;
+}
+
+svg {
+    display: block;
+    margin: auto;
+}
+
+span {
+    margin: 5px;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.hero-list li {
+    display: inline-block;
+    margin: 0 3px;
+}
+
+.hero-list {
+    text-align: center;
+}
+
+.line-icon {
+    height: 20px;
 }

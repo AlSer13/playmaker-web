@@ -32,7 +32,7 @@ export class MatchComponent implements OnInit {
         selectable: true,
         group: 'Ordinal',
         domain: [
-            '#4f36ca', '#00ffbc', '#9e0c98', '#e7ff00', '#f15903', '#ff63c1', '#93c03e', '#45a3c0', '#03871d', '#7e5610'
+            '#392aca', '#00ffbc', '#9e0c98', '#e7ff00', '#f15903', '#ff63c1', '#93c03e', '#45a3c0', '#03871d', '#7e5610'
         ]
     };
 
@@ -43,10 +43,9 @@ export class MatchComponent implements OnInit {
         this.matchId = this.route.snapshot.paramMap.get('matchId');
         this.match = await this.matchService.getMatch(this.matchId);
         this.selectedPlayer = this.match.players[0];
-
         this.gold_data = this.match.players.map((item) => {
             return {
-                name: item.player_slot,
+                name: item.hero_name,
                 series: item.gold_t.map((_item, i) => {
                     return {
                         name: i * 60,
@@ -57,7 +56,7 @@ export class MatchComponent implements OnInit {
         });
         this.exp_data = this.match.players.map((item) => {
             return {
-                name: item.player_slot,
+                name: item.hero_name,
                 series: item.xp_t.map((_item, i) => {
                     return {
                         name: i * 60,
@@ -70,6 +69,11 @@ export class MatchComponent implements OnInit {
 
     toUnderscored(string: string): string {
         return string.split(/(?=[A-Z])/).join('_').toLowerCase();
+    }
+
+    sample(tick: any) {
+        let time = +tick;
+        return `${Math.floor(time / 60)}:${time % 60}`;
     }
 
 

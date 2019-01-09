@@ -2,38 +2,62 @@
     <clr-tab>
         <button clrTabLink id="link1">Gold</button>
         <clr-tab-content id="Gold" *clrIfActive>
-            <ngx-charts-line-chart [view]="view"
-                                   [scheme]="colorScheme"
-                                   [results]="gold_data"
-                                   [gradient]="gradient"
-                                   [xAxis]="showXAxis"
-                                   [yAxis]="showYAxis"
-                                   [showXAxisLabel]="showXAxisLabel"
-                                   [showYAxisLabel]="showYAxisLabel"
-                                   [xAxisLabel]="xAxisLabel"
-                                   yAxisLabel="Gold"
-                                   [curve]="shape.curveBasis"
-                                   class="chart">
-            </ngx-charts-line-chart>
+            <div class="clr-row clr-justify-content-center">
+                <div class="clr-col-lg-8 clr-col-md-8" style="height: 400px">
+                    <ngx-charts-line-chart
+                        [scheme]="colorScheme"
+                        [results]="gold_data"
+                        [gradient]="gradient"
+                        [xAxis]="showXAxis"
+                        [yAxis]="showYAxis"
+                        [xAxisTickFormatting]="sample"
+                        [curve]="shape.curveBasis"
+                        class="chart">
+                    </ngx-charts-line-chart>
+                </div>
+            </div>
+            <div class="clr-row clr-justify-content-center">
+                <div class="clr-col-lg-10 clr-col-md-10 clr-justify-content-center">
+                    <ul class="hero-list">
+                        <li *ngFor="let player of match.players">
+                            <img [src]="'../../assets/pulse-line-' + player.player_slot + '.svg'" alt=""
+                                 class="line-icon">
+                            {{player.hero_name}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </clr-tab-content>
     </clr-tab>
     <clr-tab>
         <button clrTabLink>Exp</button>
         <clr-tab-content *clrIfActive>
             <clr-tab-content id="Exp" *clrIfActive>
-                <ngx-charts-line-chart [view]="view"
-                                       [scheme]="colorScheme"
-                                       [results]="exp_data"
-                                       [gradient]="gradient"
-                                       [xAxis]="showXAxis"
-                                       [yAxis]="showYAxis"
-                                       [showXAxisLabel]="showXAxisLabel"
-                                       [showYAxisLabel]="showYAxisLabel"
-                                       [xAxisLabel]="xAxisLabel"
-                                       yAxisLabel="Gold"
-                                       [curve]="shape.curveBasis"
-                                       class="chart">
-                </ngx-charts-line-chart>
+                <div class="clr-row clr-justify-content-center">
+                    <div class="clr-col-lg-8 clr-col-md-8" style="height: 400px">
+                        <ngx-charts-line-chart
+                            [scheme]="colorScheme"
+                            [results]="exp_data"
+                            [gradient]="gradient"
+                            [xAxis]="showXAxis"
+                            [yAxis]="showYAxis"
+                            [xAxisTickFormatting]="sample"
+                            [curve]="shape.curveBasis"
+                            class="chart">
+                        </ngx-charts-line-chart>
+                    </div>
+                </div>
+                <div class="clr-row clr-justify-content-center">
+                    <div class="clr-col-lg-10 clr-col-md-10 clr-justify-content-center">
+                        <ul class="hero-list">
+                            <li *ngFor="let player of match.players">
+                                <img [src]="'../../assets/pulse-line-' + player.player_slot + '.svg'" alt=""
+                                     class="line-icon">
+                                {{player.hero_name}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </clr-tab-content>
         </clr-tab-content>
     </clr-tab>
@@ -41,13 +65,14 @@
         <button clrTabLink>Laning</button>
         <clr-tab-content *clrIfActive>
             <clr-tab-content id="Laning" *clrIfActive>
-                <div class="clr-row">
+                <div class="clr-row clr-justify-content-center">
                     <heatmap class="clr-col-auto" [heatPoints]="selectedPlayer.pos"></heatmap>
                     <clr-datagrid class="clr-col-auto" [(clrDgSingleSelected)]="selectedPlayer">
                         <clr-dg-column>Hero</clr-dg-column>
                         <clr-dg-row *clrDgItems="let player of match.players" [clrDgItem]="player">
-                            <clr-dg-cell>
-                                <img  class="hero_icon" [src]="heroIconURL + toUnderscored(player.hero_name) + '_sb.png'" alt="">{{player.hero_name}}
+                            <clr-dg-cell class="cell">
+                                <img class="hero-icon"
+                                     [src]="heroIconURL + toUnderscored(player.hero_name) + '_sb.png'" alt="">{{player.hero_name}}
                             </clr-dg-cell>
                         </clr-dg-row>
                     </clr-datagrid>
