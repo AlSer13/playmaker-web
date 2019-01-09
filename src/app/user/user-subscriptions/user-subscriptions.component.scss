@@ -1,0 +1,17 @@
+@import "../../../scss-partials/section";
+
+
+main {
+    display: grid;
+}
+
+section {
+    display: inline-block;
+    @extend %section-with-caption;
+    margin: 20px;
+    width: 300px;
+}
+
+li:hover {
+    cursor: pointer;
+}

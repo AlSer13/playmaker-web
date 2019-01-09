@@ -17,18 +17,32 @@ export class LocalUserService {
     getUser(): User {
         if (this.user) {
             return this.user;
-        } else { return null; }
+        } else {
+            return null;
+        }
     }
 
     async getSelectedTournaments() {
         if (this.user._id) {
             if (!this.user.selectedTournaments) {
-                await this.loadSelectedInfo();
+                await this.loadExtraInfo();
             }
             return this.user.selectedTournaments;
         } else {
             return null;
         }
+    }
+
+    async getSelectedMatches() {
+        if (this.user._id) {
+            if (!this.user.selectedMatches) {
+                await this.loadExtraInfo();
+            }
+            return this.user.selectedMatches;
+        } else {
+            return null;
+        }
+
     }
 
     constructor(private userDataService: UserDataService) {
@@ -45,20 +59,10 @@ export class LocalUserService {
         }
     }
 
-    async loadSelectedInfo() {
-        if (this.user._id) {
-            const data = await this.userDataService.getUserInfo(this.user.username);
-            this.user.selectedTournaments = data.selectedTournaments;
-            this.user.selectedMatches = data.selectedMatches;
-        } else {
-            return null;
-        }
-    }
-
     async followTournament(tournament: Tournament) {
         if (this.user._id) {
             await this.userDataService.followTournament(tournament._id);
-            await this.loadSelectedInfo();
+            await this.loadExtraInfo();
         } else {
             return null;
         }
@@ -67,7 +71,7 @@ export class LocalUserService {
     async unfollowTournament(tournament: Tournament) {
         if (this.user._id) {
             await this.userDataService.unfollowTournament(tournament._id);
-            await this.loadSelectedInfo();
+            await this.loadExtraInfo();
         } else {
             return null;
         }
@@ -80,6 +84,16 @@ export class LocalUserService {
                 this.user.teams = await this.userDataService.getTeams(this.user._id);
             }
             return this.user.teams;
+        } else {
+            return null;
+        }
+    }
+
+    async loadExtraInfo() {
+        if (this.user._id) {
+            const data = await this.userDataService.getUserInfo(this.user.username);
+            this.user.selectedTournaments = data.selectedTournaments;
+            this.user.selectedMatches = data.selectedMatches;
         } else {
             return null;
         }

@@ -14,6 +14,7 @@ import {TeamComponent} from './teams/team/team.component';
 import {UserSettingsComponent} from './user/user-settings/user-settings.component';
 import {UserInvitesComponent} from './user/user-invites/user-invites.component';
 import {MatchComponent} from './match/match.component';
+import {UserSubscriptionsComponent} from './user/user-subscriptions/user-subscriptions.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -45,6 +46,10 @@ const routes: Routes = [
     {
         path: 'settings',
         component: UserSettingsComponent
+    },
+    {
+        path: 'subscriptions',
+        component: UserSubscriptionsComponent
     },
     {
         path: 'invites',

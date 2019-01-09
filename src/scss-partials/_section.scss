@@ -10,8 +10,6 @@
     padding: $sec-padding*1.5;
     padding-top: $sec-padding;
     padding-bottom: $sec-padding/1.5;
-    display: grid;
-    grid-template-rows: 0;
 
     .caption {
         line-height: $sec-caption-height - 2.5px;
@@ -23,5 +21,6 @@
         position: relative;
         top: -($sec-caption-height)/2 - $sec-padding;
         left: 20px - $sec-padding;
+        margin-bottom: -$sec-caption-height;
     }
 }

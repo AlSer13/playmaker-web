@@ -29,6 +29,7 @@ import { UserInvitesComponent } from './user/user-invites/user-invites.component
 import { MatchComponent } from './match/match.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { HeatmapComponent } from './match/heatmap/heatmap.component';
+import { UserSubscriptionsComponent } from './user/user-subscriptions/user-subscriptions.component';
 
 @NgModule({
     declarations: [
@@ -51,6 +52,7 @@ import { HeatmapComponent } from './match/heatmap/heatmap.component';
         UserSettingsComponent,
         UserInvitesComponent,
         MatchComponent,
+        UserSubscriptionsComponent,
         HeatmapComponent,
     ],
     imports: [

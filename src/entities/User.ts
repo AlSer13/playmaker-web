@@ -1,6 +1,7 @@
 import {Team} from './Team';
 import {environment} from '../environments/environment';
 import {Tournament} from './Tournament';
+import {Match} from './Match';
 
 export class User {
     _id: string;
@@ -10,7 +11,7 @@ export class User {
     accountId: number;
     username: string;
     invites: Team[];
-    selectedMatches: number;
+    selectedMatches: Match[];
     selectedTournaments: Tournament[];
 
     teams: Team[];

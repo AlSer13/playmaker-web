@@ -1,0 +1,27 @@
+<main *ngIf="!error">
+    <h2>Your subscriptions</h2>
+    <div class="clr-row">
+        <section>
+            <div class="caption">
+                Followed tournaments
+            </div>
+            <ul>
+                <li *ngFor="let tour of selectedTournaments" routerLink="/tournaments/{{tour._id}}">
+                    {{tour.name}}
+                </li>
+            </ul>
+        </section>
+        <section>
+            <div class="caption">
+                Followed matches
+            </div>
+            <ul>
+                <li *ngFor="let match of selectedMatches" routerLink="/matches/{{match._id}}">
+                    {{match._id}}
+                </li>
+            </ul>
+        </section>
+    </div>
+
+</main>
+<app-error-page *ngIf="error" [error]="error"></app-error-page>
