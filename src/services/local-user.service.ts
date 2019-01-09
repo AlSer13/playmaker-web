@@ -15,7 +15,9 @@ export class LocalUserService {
     }
 
     getUser(): User {
-        return this.user;
+        if (this.user) {
+            return this.user;
+        } else { return null; }
     }
 
     async getSelectedTournaments() {
@@ -70,5 +72,16 @@ export class LocalUserService {
             return null;
         }
 
+    }
+
+    async getTeams() {
+        if (this.user._id) {
+            if (!this.user.teams) {
+                this.user.teams = await this.userDataService.getTeams(this.user._id);
+            }
+            return this.user.teams;
+        } else {
+            return null;
+        }
     }
 }

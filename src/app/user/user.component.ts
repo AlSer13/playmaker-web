@@ -28,10 +28,7 @@ export class UserComponent implements OnInit {
         }).then();
     }
 
-    ngOnInit() {
-        const username = this.route.snapshot.paramMap.get('username');
-        this.initData(username).then();
-    }
+    ngOnInit() {}
 
     handleError(error) {
         this.error = error;
@@ -46,9 +43,14 @@ export class UserComponent implements OnInit {
 
     async initData(username: string) {
         try {
-            this.user = new User(await this.userDataService.getUserInfo(username));
-            this.teams = await this.userDataService.getTeams(this.user._id);
-            this.you = this.user.equals(this.userService.getUser());
+            this.you = this.userService.getUser().username === username;
+            if (this.you) {
+                this.user = this.userService.getUser();
+                this.teams = await this.userService.getTeams();
+            } else {
+                this.user = new User(await this.userDataService.getUserInfo(username));
+                this.teams = await this.userDataService.getTeams(this.user._id);
+            }
         } catch (error) {
             this.handleError(error);
         }

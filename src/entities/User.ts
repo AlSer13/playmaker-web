@@ -13,6 +13,8 @@ export class User {
     selectedMatches: number;
     selectedTournaments: Tournament[];
 
+    teams: Team[];
+
     public equals(user: User): boolean {
         return (user != null) && (this._id === user._id);
     }
