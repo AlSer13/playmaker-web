@@ -14,7 +14,7 @@ import {UserDataService} from '../../services/entity-data/user-data.service';
 export class UserComponent implements OnInit {
     user: User;
     teams: Team[];
-    _404 = false;
+    error: any;
     you: boolean; // is it current users page?
 
     constructor(private route: ActivatedRoute,
@@ -34,13 +34,14 @@ export class UserComponent implements OnInit {
     }
 
     handleError(error) {
-        switch (error.status) {
-            case 404:
-                this._404 = true;
-                break;
-            default:
-                throw error;
-        }
+        this.error = error;
+        // switch (error.status) {
+        //     case 404:
+        //         this.error = error;
+        //         break;
+        //     default:
+        //         throw error;
+        // }
     }
 
     async initData(username: string) {

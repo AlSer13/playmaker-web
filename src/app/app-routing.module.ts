@@ -9,7 +9,7 @@ import {TournamentComponent} from './tournaments/tournament/tournament.component
 import {AuthGuardService} from '../services/auth-guard.service';
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {ErrorPageComponent} from './error-page/error-page.component';
 import {TeamComponent} from './teams/team/team.component';
 import {UserSettingsComponent} from './user/user-settings/user-settings.component';
 import {UserInvitesComponent} from './user/user-invites/user-invites.component';
@@ -54,7 +54,7 @@ const routes: Routes = [
         path: 'match/:matchId',
         component: MatchComponent
     },
-    {path: '**', component: PageNotFoundComponent}
+    {path: '**', component: ErrorPageComponent}
 ];
 
 @NgModule({

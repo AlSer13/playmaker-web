@@ -1,4 +1,4 @@
-<main *ngIf="!_404 && user">
+<main *ngIf="!error && user">
     <section class="business-card">
 
         <figure class="avatar">
@@ -46,4 +46,4 @@
         <div class="caption">History</div>
     </section>
 </main>
-<app-page-not-found *ngIf="_404"></app-page-not-found>
+<app-error-page *ngIf="error" [error]="error"></app-error-page>

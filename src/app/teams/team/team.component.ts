@@ -17,7 +17,7 @@ export class TeamComponent implements OnInit {
     team: Team;
     tournaments: Tournament[];
     matches: Match[];
-    _404 = false;
+    error: any;
     avatarURL = environment.avatarURL;
     heroIconURL = environment.heroIconURL;
     inviteOpen = false;
@@ -45,13 +45,14 @@ export class TeamComponent implements OnInit {
     }
 
     handleError(error) {
-        switch (error.status) {
-            case 404:
-                this._404 = true;
-                break;
-            default:
-                throw error;
-        }
+        this.error = error;
+        // switch (error.status) {
+        //     case 404:
+        //         this._404 = true;
+        //         break;
+        //     default:
+        //         throw error;
+        // }
     }
 
     async invitePlayer() {

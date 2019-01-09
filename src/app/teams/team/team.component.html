@@ -1,4 +1,4 @@
-<div *ngIf="team && !_404">
+<div *ngIf="team && !error">
     <div class="clr-row clr-justify-content-center">
         <h1> name: {{team.name}}</h1>
     </div>
@@ -68,4 +68,4 @@
         </div>
     </clr-modal>
 </div>
-<app-page-not-found *ngIf="_404"></app-page-not-found>
+<app-error-page *ngIf="error" [error]="error" ]></app-error-page>

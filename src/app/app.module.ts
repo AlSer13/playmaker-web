@@ -18,7 +18,7 @@ import {DisableForbiddenDirective} from '../directives/disable-forbidden.directi
 import {AuthorizationDataService} from '../services/authorization-data.service';
 import {SignupComponent} from './signup/signup.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {ErrorPageComponent} from './error-page/error-page.component';
 import {TeamComponent} from './teams/team/team.component';
 import {TournamentCardComponent} from './tournaments/tournament-card/tournament-card.component';
 import {TeamCardComponent} from './teams/team-card/team-card.component';
@@ -43,7 +43,7 @@ import { HeatmapComponent } from './match/heatmap/heatmap.component';
         HideForbiddenDirective,
         DisableForbiddenDirective,
         SignupComponent,
-        PageNotFoundComponent,
+        ErrorPageComponent,
         TeamComponent,
         TournamentCardComponent,
         TeamCardComponent,

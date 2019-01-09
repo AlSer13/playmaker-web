@@ -1,4 +1,4 @@
-<div *ngIf="!_404 && user">
+<div *ngIf="!error && user">
     <form clrForm clrLayout="vertical" (submit)="updateUserInfo()">
         <img class='avatar_image' [src]="user.avatar" alt="none" width="250" height="250">
 
@@ -30,4 +30,4 @@
         </button>
     </form>
 </div>
-<app-page-not-found *ngIf="_404"></app-page-not-found>
+<app-error-page *ngIf="error" [error]="error"></app-error-page>

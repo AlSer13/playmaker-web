@@ -11,7 +11,7 @@ import {TeamService} from '../../../services/entity-data/team.service';
 export class UserInvitesComponent implements OnInit {
 
     invites: Team[];
-    _404 = false;
+    error: any;
 
     constructor(private userService: LocalUserService, private teamService: TeamService) {
 
@@ -26,13 +26,14 @@ export class UserInvitesComponent implements OnInit {
     }
 
     handleError(error) {
-        switch (error.status) {
-            case 404:
-                this._404 = true;
-                break;
-            default:
-                throw error;
-        }
+        this.error = error;
+        // switch (error.status) {
+        //     case 404:
+        //         this._404 = true;
+        //         break;
+        //     default:
+        //         throw error;
+        // }
     }
 
     async acceptInvite(event, team: Team) {

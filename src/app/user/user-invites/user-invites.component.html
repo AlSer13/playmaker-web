@@ -1,4 +1,4 @@
-<div *ngIf="!_404 && invites">
+<div *ngIf="!error && invites">
     <div class="clr-row" *ngFor="let invite of invites">
         <div class="clr-col-lg-4 clr-col-md-6 clr-col-sm-12 clr-col-xs-12">
             <div class="card" routerLink="/teams/{{invite._id}}">
@@ -30,4 +30,4 @@
 <div *ngIf="invites == false">
     <p class="p1"> You have no invites</p>
 </div>
-<app-page-not-found *ngIf="_404"></app-page-not-found>
+<app-error-page *ngIf="error" [error]="error"></app-error-page>

@@ -12,9 +12,10 @@ import {UserDataService} from '../../../services/entity-data/user-data.service';
     styleUrls: ['./user-settings.component.css']
 })
 export class UserSettingsComponent implements OnInit {
+    // TODO: use user from LocalUserService
 
     user: User;
-    _404 = false;
+    error: any;
     loading = false;
     updateBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
     avatar: File = null;
@@ -34,13 +35,14 @@ export class UserSettingsComponent implements OnInit {
     }
 
     handleError(error) {
-        switch (error.status) {
-            case 404:
-                this._404 = true;
-                break;
-            default:
-                throw error;
-        }
+        this.error = error;
+        // switch (error.status) {
+        //     case 404:
+        //         this._404 = true;
+        //         break;
+        //     default:
+        //         throw error;
+        // }
     }
 
     connectSteam() {
