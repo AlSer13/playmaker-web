@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Team} from '../../../entities/Team';
-import {UserService} from '../../../services/entity/user.service';
-import {TeamService} from '../../../services/entity/team.service';
+import {LocalUserService} from '../../../services/local-user.service';
+import {TeamService} from '../../../services/entity-data/team.service';
 
 @Component({
     selector: 'app-user-invites',
@@ -13,7 +13,7 @@ export class UserInvitesComponent implements OnInit {
     invites: Team[];
     _404 = false;
 
-    constructor(private userService: UserService, private teamService: TeamService) {
+    constructor(private userService: LocalUserService, private teamService: TeamService) {
 
     }
 

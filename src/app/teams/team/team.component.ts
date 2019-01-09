@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Team} from '../../../entities/Team';
-import {TeamService} from '../../../services/entity/team.service';
+import {TeamService} from '../../../services/entity-data/team.service';
 import {environment} from '../../../environments/environment';
 import {ClrLoadingState} from '@clr/angular';
 import {Tournament} from '../../../entities/Tournament';
 import {Match} from '../../../entities/Match';
-import {UserService} from '../../../services/entity/user.service';
+import {LocalUserService} from '../../../services/local-user.service';
 
 @Component({
     selector: 'app-team',
@@ -28,7 +28,7 @@ export class TeamComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private teamService: TeamService,
-                private userService: UserService) {
+                private userService: LocalUserService) {
     }
 
     async ngOnInit() {

@@ -1,7 +1,7 @@
 import {Component, HostListener} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
-import {UserService} from '../../services/entity/user.service';
+import {LocalUserService} from '../../services/local-user.service';
 
 @Component({
     selector: 'app-login',
@@ -47,7 +47,7 @@ export class LoginComponent {
         this.trueCombination = [50, 49, 52, 18, 17];
     }
 
-    constructor(private authenticationService: AuthenticationService, private userService: UserService,
+    constructor(private authenticationService: AuthenticationService, private userService: LocalUserService,
                 protected router: Router) {
     }
 

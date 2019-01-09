@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {AuthGroup} from '../models/authorization.types';
-import {AuthorizationDataService} from './data/authorization-data.service';
-import {UserService} from './entity/user.service';
+import {AuthorizationDataService} from './authorization-data.service';
+import {LocalUserService} from './local-user.service';
 
 @Injectable()
 export class AuthService {
     permissions: Array<AuthGroup>; // Store the actions for which this user has appHideForbidden
 
 
-    constructor(private authorizationDataService: AuthorizationDataService, private userService: UserService) {
+    constructor(private authorizationDataService: AuthorizationDataService, private userService: LocalUserService) {
     }
 
     hasPermission(authGroup: AuthGroup): boolean {

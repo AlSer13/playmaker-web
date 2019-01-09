@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Tournament} from '../../entities/Tournament';
-import {TournamentService} from '../../services/entity/tournament.service';
+import {TournamentService} from '../../services/entity-data/tournament.service';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {UserService} from '../../services/entity/user.service';
+import {LocalUserService} from '../../services/local-user.service';
 
 @Component({
     selector: 'app-tournaments',
@@ -14,7 +14,7 @@ export class TournamentsComponent implements OnInit {
     tours: Tournament[];
 
     constructor(private tourService: TournamentService,
-                private userService: UserService) {
+                private userService: LocalUserService) {
     }
 
     getTours(): Observable<any> {

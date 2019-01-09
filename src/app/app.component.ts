@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
 import {Router} from '@angular/router';
-import {UserService} from '../services/entity/user.service';
+import {LocalUserService} from '../services/local-user.service';
 
 @Component({
     selector: 'app-root',
@@ -45,13 +45,13 @@ export class AppComponent {
         }
     }
 
-    private handleMouse(e: MouseEvent) {
+    private handleMouse() {
         document.body.classList.remove('user-is-tabbing');
         this.tabbing = false;
     }
 
     constructor(private authenticationService: AuthenticationService,
-                private userService: UserService,
+                private userService: LocalUserService,
                 protected router: Router) {
         window.addEventListener('keydown', this.handleTab);
         window.addEventListener('mousedown', this.handleMouse);
