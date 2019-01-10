@@ -30,6 +30,7 @@ import { MatchComponent } from './match/match.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { HeatmapComponent } from './match/heatmap/heatmap.component';
 import { UserSubscriptionsComponent } from './user/user-subscriptions/user-subscriptions.component';
+import { OverviewComponent } from './match/overview/overview.component';
 
 @NgModule({
     declarations: [
@@ -54,6 +55,7 @@ import { UserSubscriptionsComponent } from './user/user-subscriptions/user-subsc
         MatchComponent,
         UserSubscriptionsComponent,
         HeatmapComponent,
+        OverviewComponent,
     ],
     imports: [
         BrowserModule,

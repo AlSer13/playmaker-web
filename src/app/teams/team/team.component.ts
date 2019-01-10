@@ -19,7 +19,7 @@ export class TeamComponent implements OnInit {
     matches: Match[];
     error: any;
     avatarURL = environment.avatarURL;
-    heroIconURL = environment.heroIconURL;
+    heroIconURL = environment.steamMediaURL + '/heroes/';
     inviteOpen = false;
     username: string;
     inviteBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;

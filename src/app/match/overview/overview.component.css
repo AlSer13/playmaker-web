@@ -1,0 +1,31 @@
+
+.loading-spinner {
+    margin: 20px auto auto;
+    display: block;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+    overflow-x: auto;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
+}
+
+.item {
+    display: inline;
+}
+
+.item-set {
+    white-space: nowrap
+}
+
+.item-icon {
+    height: 27px;
+}
+
+.ability-icon {
+    height: 27px;
+}
