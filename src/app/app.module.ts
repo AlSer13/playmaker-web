@@ -31,6 +31,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { HeatmapComponent } from './match/heatmap/heatmap.component';
 import { UserSubscriptionsComponent } from './user/user-subscriptions/user-subscriptions.component';
 import { OverviewComponent } from './match/overview/overview.component';
+import { ScoreboardComponent } from './match/overview/scoreboard/scoreboard.component';
+import { AbilityUpgradesComponent } from './match/overview/ability-upgrades/ability-upgrades.component';
 
 @NgModule({
     declarations: [
@@ -56,6 +58,8 @@ import { OverviewComponent } from './match/overview/overview.component';
         UserSubscriptionsComponent,
         HeatmapComponent,
         OverviewComponent,
+        ScoreboardComponent,
+        AbilityUpgradesComponent,
     ],
     imports: [
         BrowserModule,

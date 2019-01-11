@@ -18,14 +18,9 @@ export class MatchComponent implements OnInit {
     selectedPlayer: ParsedPlayer;
     matchId;
     shape = shape;
-    view: any[] = [800, 400];
     showXAxis = true;
     showYAxis = true;
     gradient = false;
-    showLegend = true;
-    showXAxisLabel = true;
-    xAxisLabel = 'Time';
-    showYAxisLabel = true;
     gold_data: any[] = [];
     exp_data: any[] = [];
     team_adv: any[] = [];
@@ -44,6 +39,7 @@ export class MatchComponent implements OnInit {
             '#392aca', '#00ffbc', '#9e0c98', '#e7ff00', '#f15903', '#ff63c1', '#93c03e', '#45a3c0', '#03871d', '#7e5610'
         ]
     };
+
     teamGraphScheme = {
         name: 'cool',
         selectable: true,
@@ -103,10 +99,10 @@ export class MatchComponent implements OnInit {
     }
 
     toUnderscored(string: string): string {
-        return string.split(/(?=[A-Z])/).join('_').toLowerCase();
+        return string.split(/(?=[A-Z])/).join('_').replace('__', '_').toLowerCase();
     }
 
-    sample(tick: any) {
+    tickFormating(tick: any) {
         let time = +tick;
         return `${Math.floor(time / 60)}:${time % 60}`;
     }

@@ -1,0 +1,88 @@
+<div>
+    <h2>Scoreboard</h2>
+    <h4>Radiant</h4>
+    <table class="table table-noborder scrollable-table">
+        <thead>
+        <tr>
+            <th class="left">Player</th>
+            <th>Lvl</th>
+            <th>K</th>
+            <th>D</th>
+            <th>A</th>
+            <th>LH/D</th>
+            <th>GPM/XMP</th>
+            <th>Hero dmg</th>
+            <th>Tower dmg</th>
+            <th>Hero healing</th>
+            <th>Gold earned</th>
+            <th>Items</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let player of match.players | slice:0:5">
+            <td class="left">
+                <img [src]="heroIconURL + player.hero_name + '_sb.png'" alt="">
+                {{player.hero_name.replace('_', ' ') | titlecase }}
+            </td>
+            <td>{{player.level}}</td>
+            <td>{{player.kills}}</td>
+            <td>{{player.deaths}}</td>
+            <td>{{player.assists}}</td>
+            <td>{{player.last_hits}}/{{player.denies}}</td>
+            <td>{{player.gold_per_min}}/{{player.xp_per_min}}</td>
+            <td>{{player.hero_damage}}</td>
+            <td>{{player.tower_damage}}</td>
+            <td>{{player.hero_healing}}</td>
+            <td>{{(player.gold_per_min * match.duration / 60000 ) | number:'1.0-1'}}k</td>
+            <td class="item-set left">
+                <div *ngFor="let item of player.items" class="item">
+                    <img [src]="itemIconURL + item.name + '_lg.png'" alt="" class="item-icon">
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h4>Dire</h4>
+    <table class="table table-noborder scrollable-table">
+        <thead>
+        <tr>
+            <th class="left">Player</th>
+            <th>Lvl</th>
+            <th>K</th>
+            <th>D</th>
+            <th>A</th>
+            <th>LH/D</th>
+            <th>GPM/XMP</th>
+            <th>Hero dmg</th>
+            <th>Tower dmg</th>
+            <th>Hero healing</th>
+            <th>Gold earned</th>
+            <th>Items</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let player of match.players | slice:5:10">
+            <td class="left">
+                <img [src]="heroIconURL + player.hero_name + '_sb.png'" alt="">
+                {{player.hero_name.replace('_', ' ') | titlecase }}
+            </td>
+            <td>{{player.level}}</td>
+            <td>{{player.kills}}</td>
+            <td>{{player.deaths}}</td>
+            <td>{{player.assists}}</td>
+            <td>{{player.last_hits}}/{{player.denies}}</td>
+            <td>{{player.gold_per_min}}/{{player.xp_per_min}}</td>
+            <td>{{player.hero_damage}}</td>
+            <td>{{player.tower_damage}}</td>
+            <td>{{player.hero_healing}}</td>
+            <td>{{(player.gold_per_min * match.duration / 60000 ) | number:'1.0-1'}}k</td>
+            <td class="item-set left">
+                <div *ngFor="let item of player.items" class="item">
+                    <img [src]="itemIconURL + item.name + '_lg.png'" alt="" class="item-icon">
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

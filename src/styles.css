@@ -9,3 +9,9 @@ body:not(.user-is-tabbing) select:focus,
 body:not(.user-is-tabbing) textarea:focus {
     outline: none;
 }
+
+ul[class="nav"] {
+    white-space: normal;
+    height: auto;
+    display: block;
+}

@@ -1,7 +1,5 @@
-
-.loading-spinner {
-    margin: 20px auto auto;
-    display: block;
+.ability-icon {
+    height: 27px;
 }
 
 .scrollable-table {
@@ -14,14 +12,13 @@
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
 }
 
-.item {
-    display: inline;
+.abilities-table th {
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
-.item-set {
-    white-space: nowrap
-}
-
-.item-icon {
-    height: 27px;
+.abilities-table td {
+    padding-left: 4px;
+    padding-right: 4px;
+    min-width: 35px;
 }
