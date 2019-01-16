@@ -4,7 +4,6 @@ import {LocalUserService} from '../../../services/local-user.service';
 import {AuthService} from '../../../services/auth.service';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {ClrLoadingState} from '@clr/angular';
-import {UserDataService} from '../../../services/entity-data/user-data.service';
 
 @Component({
     selector: 'app-user-settings',
@@ -12,37 +11,26 @@ import {UserDataService} from '../../../services/entity-data/user-data.service';
     styleUrls: ['./user-settings.component.css']
 })
 export class UserSettingsComponent implements OnInit {
-    // TODO: use user from LocalUserService
-
     user: User;
     error: any;
     loading = false;
     updateBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
     avatar: File = null;
 
-    constructor(private userDataService: UserDataService,
-                private userService: LocalUserService,
+    constructor(private userService: LocalUserService,
                 private authService: AuthService,
                 private authenticationService: AuthenticationService) {
     }
 
     async ngOnInit() {
-        try {
-            this.user = new User(await this.userDataService.getUserInfo(this.userService.getUser().username));
-        } catch (error) {
-            this.handleError(error);
+        if (this.authService.hasPermission('USER')) {
+            this.user = this.userService.getUser();
+        } else {
+            this.error = {
+                status: 401,
+                statusText: 'Unauthorized'
+            };
         }
-    }
-
-    handleError(error) {
-        this.error = error;
-        // switch (error.status) {
-        //     case 404:
-        //         this._404 = true;
-        //         break;
-        //     default:
-        //         throw error;
-        // }
     }
 
     connectSteam() {
@@ -50,13 +38,12 @@ export class UserSettingsComponent implements OnInit {
     }
 
     async disconnectSteam() {
-        this.user = await this.authenticationService.disconnectSteam();
+        this.user = await this.authenticationService.disconnectSteam(); // TODO: сделать через LocalUserService
     }
 
     async updateUserInfo() {
         this.updateBtnState = ClrLoadingState.LOADING;
-        console.log(this.avatar);
-        this.user = await this.userDataService.updateUser(this.user, this.avatar);
+        await this.userService.updateUser(this.avatar);
         this.updateBtnState = ClrLoadingState.SUCCESS;
     }
 

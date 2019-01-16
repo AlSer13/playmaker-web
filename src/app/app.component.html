@@ -10,7 +10,7 @@
                routerLink={{component.link}} class="nav-link nav-text">{{component.text}}</a>
         </div>
         <div class="header-actions">
-            <a class="nav-link nav-icon" routerLink="/subscriptions">
+            <a class="nav-link nav-icon" routerLink="/subscriptions" [appHideForbidden]="'USER'">
                 <clr-icon shape="star"></clr-icon>
             </a>
             <clr-dropdown>
