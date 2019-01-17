@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {User} from '../../entities/User';
 import {LocalUserService} from '../../services/local-user.service';
 import {AuthService} from '../../services/auth.service';
 import {Team} from '../../entities/Team';
 import {UserDataService} from '../../services/entity-data/user-data.service';
+import {AddTeamWizardComponent} from './add-team-wizard/add-team-wizard.component';
 
 @Component({
     selector: 'app-user',
@@ -12,6 +13,8 @@ import {UserDataService} from '../../services/entity-data/user-data.service';
     styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+    @ViewChild('teamWizard') teamWizard: AddTeamWizardComponent;
+
     user: User;
     teams: Team[];
     error: any;
@@ -28,7 +31,8 @@ export class UserComponent implements OnInit {
         }).then();
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+    }
 
     handleError(error) {
         this.error = error;

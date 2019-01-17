@@ -32,9 +32,13 @@
             <hr size="1px">
             <div>No teams yet</div>
         </div>
-        <app-add-team-wizard *ngIf="you"
-                             [captain]="user"
-                             [button_text]="'add a new team'"></app-add-team-wizard>
+        <button class="btn btn-primary btn-link" (click)="teamWizard.openWizard()">add a
+            team
+        </button>
+        <app-add-team-wizard #teamWizard *ngIf="you"
+                             [captain]="user">
+        </app-add-team-wizard>
+
     </section>
 
     <section id="tours">
