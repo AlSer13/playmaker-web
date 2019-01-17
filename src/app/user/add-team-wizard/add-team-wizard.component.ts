@@ -15,7 +15,7 @@ import {AuthenticationService} from '../../../services/authentication.service';
 export class AddTeamWizardComponent implements OnInit {
     @ViewChild('teamWizard') teamWizard: ClrWizard;
     @Input() captain: User;
-    teamWizardOpen: boolean;
+    wizardOpen: boolean;
 
     nameForm = new FormGroup({
         name: new FormControl('', [Validators.required])
@@ -39,7 +39,7 @@ export class AddTeamWizardComponent implements OnInit {
     playersForm = new FormArray([]);
 
     public openWizard() {
-        this.teamWizardOpen = true;
+        this.wizardOpen = true;
     }
 
     addContact() {

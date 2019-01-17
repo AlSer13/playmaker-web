@@ -6,6 +6,8 @@ import {AuthService} from '../../services/auth.service';
 import {Team} from '../../entities/Team';
 import {UserDataService} from '../../services/entity-data/user-data.service';
 import {AddTeamWizardComponent} from './add-team-wizard/add-team-wizard.component';
+import {AddTourWizardComponent} from './add-tour-wizard/add-tour-wizard.component';
+import {Tournament} from '../../entities/Tournament';
 
 @Component({
     selector: 'app-user',
@@ -14,9 +16,11 @@ import {AddTeamWizardComponent} from './add-team-wizard/add-team-wizard.componen
 })
 export class UserComponent implements OnInit {
     @ViewChild('teamWizard') teamWizard: AddTeamWizardComponent;
+    @ViewChild('tourWizard') tourWizard: AddTourWizardComponent;
 
     user: User;
     teams: Team[];
+    tours: Tournament[] = [];
     error: any;
     you: boolean; // is it current users page?
 
@@ -48,6 +52,8 @@ export class UserComponent implements OnInit {
     async initData(username: string) {
         try {
             this.you = this.userService.getUser().username === username;
+            console.log(this.userService.getUser().username);
+            console.log(username);
             if (this.you) {
                 this.user = this.userService.getUser();
                 this.teams = await this.userService.getTeams();

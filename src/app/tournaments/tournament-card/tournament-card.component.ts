@@ -11,7 +11,7 @@ export class TournamentCardComponent implements OnInit {
 
     @Input() tournament: Tournament;
     isSelected: boolean;
-    loadingSubscription: boolean;
+    loadingSubscription = true;
 
     constructor(private userService: LocalUserService) {
     }

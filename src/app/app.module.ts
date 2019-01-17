@@ -33,6 +33,7 @@ import { UserSubscriptionsComponent } from './user/user-subscriptions/user-subsc
 import { OverviewComponent } from './match/overview/overview.component';
 import { ScoreboardComponent } from './match/overview/scoreboard/scoreboard.component';
 import { AbilityUpgradesComponent } from './match/overview/ability-upgrades/ability-upgrades.component';
+import { AddTourWizardComponent } from './user/add-tour-wizard/add-tour-wizard.component';
 
 @NgModule({
     declarations: [
@@ -60,6 +61,7 @@ import { AbilityUpgradesComponent } from './match/overview/ability-upgrades/abil
         OverviewComponent,
         ScoreboardComponent,
         AbilityUpgradesComponent,
+        AddTourWizardComponent,
     ],
     imports: [
         BrowserModule,

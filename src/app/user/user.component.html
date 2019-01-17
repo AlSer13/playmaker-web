@@ -28,11 +28,12 @@
                 {{team.name}}
             </li>
         </ul>
-        <div class="no-found" *ngIf="teams && teams.length === 0">
+        <div class="no-found" *ngIf="teams && teams.length === 0 && !you">
             <hr size="1px">
             <div>No teams yet</div>
         </div>
-        <button class="btn btn-primary btn-link" (click)="teamWizard.openWizard()">add a
+        <button class="btn btn-primary btn-link clr-align-self-end" *ngIf="you"
+                (click)="teamWizard.openWizard()">add a
             team
         </button>
         <app-add-team-wizard #teamWizard *ngIf="you"
@@ -43,6 +44,24 @@
 
     <section id="tours">
         <div class="caption">Tournaments</div>
+        <span class="spinner spinner-md loading-spinner" *ngIf="!tours">Loading...</span>
+
+        <ul *ngIf="tours && tours.length != 0">
+            <li *ngFor="let tour of tours" routerLink="/tournament/{{tour._id}}">
+                {{tour.name}}
+            </li>
+        </ul>
+        <div class="no-found" *ngIf="tours && tours.length === 0 && !you">
+            <hr size="1px">
+            <div>No tournaments yet</div>
+        </div>
+        <button class="btn btn-primary btn-link clr-align-self-end"  *ngIf="you"
+                (click)="tourWizard.openWizard()">create a
+            tournament
+        </button>
+        <app-add-tour-wizard #tourWizard *ngIf="you"
+                             [owner]="user">
+        </app-add-tour-wizard>
 
     </section>
 

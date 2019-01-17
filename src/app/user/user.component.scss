@@ -13,6 +13,8 @@ main {
 
     > section:not(.business-card) {
         @extend %section-with-caption;
+        display: grid;
+        grid-template-rows: max-content;
         width: 100%;
         min-height: 200px;
     }
@@ -51,12 +53,6 @@ main {
 
 #history {
     grid-area: feed;
-}
-
-app-add-team-wizard {
-    align-self: end;
-    justify-self: center;
-    margin-bottom: 0;
 }
 
 @media screen and (min-width: 680px) and (max-width: 1237px) {
