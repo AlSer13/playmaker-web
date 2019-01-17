@@ -23,7 +23,9 @@
         <clr-input-container>
             <label>JID</label>
             <input id="JID" type="text" name="JID" clrInput="JID"
-                   placeholder="JID" [(ngModel)]="user.jid"/>
+                   placeholder="JID" [(ngModel)]="user.jid"
+                   pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+            />
         </clr-input-container>
         <button [clrLoading]="updateBtnState" id="update_btn" type="submit" class="btn btn-primary">
             UPDATE

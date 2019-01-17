@@ -1,8 +1,9 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AsyncValidatorFn, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ClrWizard} from '@clr/angular';
 import {TeamService} from '../../../services/entity-data/team.service';
 import {User} from '../../../entities/User';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
     selector: 'app-add-team-wizard',
@@ -46,10 +47,15 @@ export class AddTeamWizardComponent implements OnInit {
     }
 
     addPlayer() {
-        this.playersForm.push(new FormGroup({
-            id_type: new FormControl(this.idTypes[0].name),
-            identifier: new FormControl('', [Validators.required]),
-        }));
+        this.playersForm.push(
+            new FormGroup(
+                {
+                    id_type: new FormControl(this.idTypes[0].name),
+                    identifier: new FormControl('', {updateOn: 'blur', validators: [Validators.required]}),
+                },
+                [], [this.usernameExistsValidator()]
+            )
+        );
     }
 
     removeContact(i: number) {
@@ -60,7 +66,7 @@ export class AddTeamWizardComponent implements OnInit {
         this.playersForm.removeAt(i);
     }
 
-    constructor(private teamService: TeamService) {
+    constructor(private teamService: TeamService, private authenticationService: AuthenticationService) {
     }
 
     ngOnInit() {
@@ -99,5 +105,20 @@ export class AddTeamWizardComponent implements OnInit {
         this.contactsForm.reset();
         this.playersForm.reset();
         this.teamWizard.reset();
+    }
+
+    usernameExistsValidator(): AsyncValidatorFn {
+        return async (control: FormGroup) => {
+            let exists;
+            if (control.get('id_type').value.toLowerCase() === 'username') {
+                exists = await this.authenticationService.usernameExists(control.get('identifier').value);
+                console.log(exists);
+            } else {
+                exists = true;
+            }
+            const errors = !exists ? {'noSuchUser': {value: control.get('identifier').value}} : null;
+            control.get('identifier').setErrors(errors);
+            return errors;
+        };
     }
 }

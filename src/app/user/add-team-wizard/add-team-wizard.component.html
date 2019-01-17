@@ -14,6 +14,7 @@
 
     <clr-wizard-page [clrWizardPageNextDisabled]="!nameForm.valid || !contactsForm.valid">
         <ng-template clrPageTitle>Info</ng-template>
+        <!--TODO: team name validation-->
         <h4>Name</h4>
         <form clrForm [formGroup]="nameForm">
             <clr-input-container>
@@ -81,14 +82,20 @@
                         <option *ngFor="let c of idTypes">{{c.name}}</option>
                     </select>
                 </clr-select-container>
+                <!--TODO: валидация - нельзя два одинаковых пользователя-->
                 <clr-input-container class="input_id">
                     <input
                         clrInput
                         type="text"
-                        [placeholder]="'Enter ' +
-                                player.value.id_type.toLowerCase()"
                         formControlName="identifier"
                     />
+                    <clr-control-helper>Enter
+                        {{player.value.id_type.toLowerCase()}}</clr-control-helper>
+                    <clr-control-error *clrIfError="'noSuchUser'">
+                        No such user
+                    </clr-control-error>
+                    <clr-control-error *clrIfError="'required'">Required field</clr-control-error>
+
                 </clr-input-container>
                 <clr-icon *ngIf="playersForm.controls.length>0" size="25" id="remove_player"
                           shape="trash"
