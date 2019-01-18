@@ -11,6 +11,7 @@ export class Tournament {
     description: string;
     owner: User;
     teams: Team[];
+    started: boolean;
     bracket: [{
         _id: number,
         team1: string,
@@ -32,6 +33,7 @@ export class Tournament {
             this.owner = new User(json.owner);
             this.teams = json.teams;
             this.bracket = json.bracket;
+            this.started = json.started;
         }
     }
 

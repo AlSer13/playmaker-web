@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ElementRef, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ElementRef, Input, ViewChild, OnChanges, SimpleChanges} from '@angular/core';
 import {Tournament} from '../../../../entities/Tournament';
 import {Router} from '@angular/router';
 import {ClrModal} from '@clr/angular';
@@ -14,7 +14,7 @@ declare let $: any;
     styleUrls: ['./bracket.component.css']
 })
 
-export class BracketComponent implements OnInit, AfterViewInit {
+export class BracketComponent implements OnInit, AfterViewInit, OnChanges {
 
     constructor(private matchService: MatchService, private userService: LocalUserService) {
     }
@@ -30,7 +30,7 @@ export class BracketComponent implements OnInit, AfterViewInit {
     isOwner: boolean = false;
 
     ngAfterViewInit() {
-        this.generateBracket();
+        //this.generateBracket();
     }
 
     onclick(data) {
@@ -83,6 +83,7 @@ export class BracketComponent implements OnInit, AfterViewInit {
     }
 
     generateBracket() {
+        if (!this.tournament.bracket.length) return;
         let results = [];
         let stage = (this.tournament.bracket.length + 1) / 2;
 
@@ -121,5 +122,9 @@ export class BracketComponent implements OnInit, AfterViewInit {
             skipConsolationRound: true,
             init: data /* data to initialize the bracket with */
         });
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        this.generateBracket();
     }
 }

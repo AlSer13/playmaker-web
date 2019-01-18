@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Tournament} from '../../entities/Tournament';
 import {environment} from '../../environments/environment';
+import {Team} from '../../entities/Team';
 
 @Injectable({
     providedIn: 'root'
@@ -23,5 +24,10 @@ export class TournamentService {
         console.log('Getting a TOURNAMENT ' + this.tourURL + '/' + id);
         return this.http.get<Tournament>(this.tourURL + '/' + id)
             .pipe(map(data => data['tournament']));
+    }
+
+    async startTournament(tour: Tournament): Promise<Tournament> {
+        return await this.http.post<Tournament>(this.tourURL + '/' + tour._id + '/start', {})
+            .pipe(map(data => data['updatedTournament'])).toPromise();
     }
 }

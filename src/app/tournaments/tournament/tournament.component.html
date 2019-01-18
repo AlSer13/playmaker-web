@@ -4,6 +4,7 @@
                   (click)="goBack()"></clr-icon>
         {{tour.name}}
     </h1>
+    <button class="btn btn-primary" (click)="startTournament()" *ngIf="isOwner && !tour.started">Start tournament</button>
     <h4>
         Id: {{tour._id}}
     </h4>
