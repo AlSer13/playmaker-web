@@ -41,6 +41,12 @@ export class Tournament {
         }
     }
 
+    getTeamById(id: string) {
+        for (let i = 0; i < this.teams.length; i++) {
+            if (this.teams[i]._id === id) return this.teams[i];
+        }
+    }
+
     // constructor() {
     //     this.description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,' +
     //         ' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,' +

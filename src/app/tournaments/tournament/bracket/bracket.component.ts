@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {ClrModal} from '@clr/angular';
 import {TournamentService} from '../../../../services/entity-data/tournament.service';
 import {MatchService} from '../../../../services/entity-data/match.service';
+import {LocalUserService} from '../../../../services/local-user.service';
 
 declare let $: any;
 
@@ -15,7 +16,7 @@ declare let $: any;
 
 export class BracketComponent implements OnInit, AfterViewInit {
 
-    constructor(private matchService: MatchService) {
+    constructor(private matchService: MatchService, private userService: LocalUserService) {
     }
 
     basic: boolean = false;
@@ -25,6 +26,8 @@ export class BracketComponent implements OnInit, AfterViewInit {
     winner: boolean;
     matchIdError: string = '';
     winnerError: string = '';
+    isCaptain: boolean = false;
+    isOwner: boolean = false;
 
     ngAfterViewInit() {
         this.generateBracket();
@@ -35,6 +38,14 @@ export class BracketComponent implements OnInit, AfterViewInit {
         this.matchId = '';
         this.matchIdError = '';
         this.winnerError = '';
+        let team1 = this.tournament.getTeamById(data.team1);
+        let team2 = this.tournament.getTeamById(data.team2);
+
+        console.log(team1);
+        console.log(team2);
+
+        this.isCaptain = this.userService.getUser().equals(team1.captain) || this.userService.getUser().equals(team2.captain);
+
         if (data.team1 && data.team2) {
             this.basic = true;
             this.modalInfo = data;
@@ -54,22 +65,24 @@ export class BracketComponent implements OnInit, AfterViewInit {
             this.winnerError = '';
         }
 
+        console.log(2);
         console.log(this.winner);
 
         if (this.matchId.match(/^\d+$/) && this.winner !== undefined) {
             //TODO: Отлавливать 403 ошибку, если пытается отправить не капитан. Да и вообще у не капитанов убрать кнопку submit
             this.tournament = new Tournament(await this.matchService.submitMatch(this.matchId, this.tournament._id, this.modalInfo._id, this.winner));
+            console.log(1);
             this.generateBracket();
         }
         this.basic = false;
     }
 
     ngOnInit() {
-
+        this.isOwner = this.userService.getUser().equals(this.tournament.owner);
         console.log(this.tournament);
     }
 
-    generateBracket(){
+    generateBracket() {
         let results = [];
         let stage = (this.tournament.bracket.length + 1) / 2;
 

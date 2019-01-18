@@ -12,7 +12,7 @@
 
 
         <div class="clr-row clr-justify-content-center">
-            <form class="clr-form" *ngIf="!modalInfo.finished">
+            <form class="clr-form" *ngIf="!modalInfo.finished && isCaptain || isOwner">
                 <div class="clr-form-control">
                     <label for="matchId" class="clr-control-label">Match ID</label>
                     <div class="clr-control-container">
@@ -41,7 +41,7 @@
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)='submitMatch()' *ngIf="!modalInfo.finished">Submit</button>
+            <button type="button" class="btn btn-primary" (click)='submitMatch()' *ngIf="!modalInfo.finished && isCaptain || isOwner">Submit</button>
         </div>
     </div>
 </clr-modal>
