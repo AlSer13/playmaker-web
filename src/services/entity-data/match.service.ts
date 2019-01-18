@@ -25,7 +25,7 @@ export class MatchService {
 
         return this.http.get<Match>(this.matchURL + '/' + matchId)
             .pipe(map(data => {
-                let match : Match = data['match'];
+                let match: Match = data['match'];
                 match.players.forEach((player) => {
                     player.items = [];
                     for (let i = 0; i < 6; i++) {
@@ -37,5 +37,16 @@ export class MatchService {
             })).toPromise();
     }
 
+    submitMatch(matchId: string, tournamentId: string, matchNum: number, firstTeamWin: boolean): Promise<any> {
+        const body = {
+            matchId: matchId,
+            tournamentId: tournamentId,
+            matchNum: matchNum,
+            firstTeamWin: firstTeamWin
+        };
+        return this.http.post(this.matchURL, body)
+            .pipe(map(data => data['updatedTournament'])).toPromise();
+
+    }
 
 }

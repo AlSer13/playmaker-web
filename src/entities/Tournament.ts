@@ -1,6 +1,7 @@
 import {Team} from './Team';
 import {environment} from '../environments/environment';
 import {User} from './User';
+import {id} from '@swimlane/ngx-charts/release/utils';
 
 export class Tournament {
     _id: string;
@@ -10,6 +11,16 @@ export class Tournament {
     description: string;
     owner: User;
     teams: Team[];
+    bracket: [{
+        _id: number,
+        team1: string,
+        team2: string,
+        stage: number,
+        parentMatch: number,
+        finished: boolean,
+        matchId: number,
+        firstTeamWin: boolean,
+    }];
 
     constructor(json: any) {
         if (json != null) {
@@ -20,6 +31,13 @@ export class Tournament {
             this.description = json.description;
             this.owner = new User(json.owner);
             this.teams = json.teams;
+            this.bracket = json.bracket;
+        }
+    }
+
+    getTeamNameById(id: string) {
+        for (let i = 0; i < this.teams.length; i++) {
+            if (this.teams[i]._id === id) return this.teams[i].name;
         }
     }
 

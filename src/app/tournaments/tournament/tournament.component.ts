@@ -27,7 +27,7 @@ export class TournamentComponent implements OnInit {
         const id = this.route.snapshot.paramMap.get('id');
         this.tourService.getTour(id)
             .subscribe(tour => {
-                this.tour = tour;
+                this.tour = new Tournament(tour);
             });
     }
 

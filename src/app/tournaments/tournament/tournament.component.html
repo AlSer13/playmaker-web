@@ -16,4 +16,6 @@
     <ol>
         <li *ngFor="let team of tour?.teams">{{team.name}}</li>
     </ol>
+
+    <bracket [tournament]="tour"></bracket>
 </div>

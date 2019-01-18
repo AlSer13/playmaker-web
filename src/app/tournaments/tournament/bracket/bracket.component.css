@@ -1,0 +1,12 @@
+.match-input {
+    margin-top: 0;
+}
+
+.team-name {
+    display: inline;
+    margin: 0 20px;
+}
+
+.error {
+    color: red;
+}

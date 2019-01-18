@@ -1,0 +1,47 @@
+<div id="bracket"></div>
+<clr-modal [(clrModalOpen)]="basic">
+    <h3 class="modal-title">Match info</h3>
+    <div class="modal-body" *ngIf="modalInfo" style="height: fit-content">
+        <div class="clr-justify-content-center clr-row">
+            <div class="clr-col-auto">
+                <h3 class="team-name">{{tournament.getTeamNameById(modalInfo.team1) || 'TBD'}}</h3>
+                VS
+                <h3 class="team-name">{{tournament.getTeamNameById(modalInfo.team2) || 'TBD'}}</h3>
+            </div>
+        </div>
+
+
+        <div class="clr-row clr-justify-content-center">
+            <form class="clr-form" *ngIf="!modalInfo.finished">
+                <div class="clr-form-control">
+                    <label for="matchId" class="clr-control-label">Match ID</label>
+                    <div class="clr-control-container">
+                        <div class="clr-input-wrapper">
+                            <input type="text" id="matchId" placeholder="Match ID" name="matchId" class="clr-input"
+                                   [(ngModel)]="matchId" autocomplete="off">
+                            <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                        </div>
+                        <span class="clr-subtext error">{{matchIdError}}</span>
+                    </div>
+                </div>
+                <clr-radio-container clrInline>
+                    <label>Choose winner</label>
+                    <clr-radio-wrapper>
+                        <input type="radio" clrRadio name="options" [value]="true"
+                               [(ngModel)]="winner"/>
+                        <label>{{tournament.getTeamNameById(modalInfo.team1)}}</label>
+                    </clr-radio-wrapper>
+                    <clr-radio-wrapper>
+                        <input type="radio" clrRadio name="options" [value]="false"
+                               [(ngModel)]="winner"/>
+                        <label>{{tournament.getTeamNameById(modalInfo.team2)}}</label>
+                    </clr-radio-wrapper>
+                    <span class="clr-subtext error">{{matchIdError}}</span>
+                </clr-radio-container>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)='submitMatch()' *ngIf="!modalInfo.finished">Submit</button>
+        </div>
+    </div>
+</clr-modal>
