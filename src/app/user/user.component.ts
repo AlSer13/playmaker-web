@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {User} from '../../entities/User';
 import {LocalUserService} from '../../services/local-user.service';
 import {AuthService} from '../../services/auth.service';
 import {Team} from '../../entities/Team';
 import {UserDataService} from '../../services/entity-data/user-data.service';
+import {AddTeamWizardComponent} from './add-team-wizard/add-team-wizard.component';
+import {AddTourWizardComponent} from './add-tour-wizard/add-tour-wizard.component';
+import {Tournament} from '../../entities/Tournament';
 
 @Component({
     selector: 'app-user',
@@ -12,8 +15,12 @@ import {UserDataService} from '../../services/entity-data/user-data.service';
     styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+    @ViewChild('teamWizard') teamWizard: AddTeamWizardComponent;
+    @ViewChild('tourWizard') tourWizard: AddTourWizardComponent;
+
     user: User;
     teams: Team[];
+    tours: Tournament[] = [];
     error: any;
     you: boolean; // is it current users page?
 
@@ -28,7 +35,8 @@ export class UserComponent implements OnInit {
         }).then();
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+    }
 
     handleError(error) {
         this.error = error;
@@ -44,6 +52,8 @@ export class UserComponent implements OnInit {
     async initData(username: string) {
         try {
             this.you = this.userService.getUser().username === username;
+            console.log(this.userService.getUser().username);
+            console.log(username);
             if (this.you) {
                 this.user = this.userService.getUser();
                 this.teams = await this.userService.getTeams();

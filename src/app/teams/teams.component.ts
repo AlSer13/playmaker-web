@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Team} from '../../entities/Team';
 import {TeamService} from '../../services/entity-data/team.service';
+import {LocalUserService} from '../../services/local-user.service';
+import {User} from '../../entities/User';
+import {AddTeamWizardComponent} from '../user/add-team-wizard/add-team-wizard.component';
 
 @Component({
     selector: 'app-teams',
@@ -8,9 +11,12 @@ import {TeamService} from '../../services/entity-data/team.service';
     styleUrls: ['./teams.component.css']
 })
 export class TeamsComponent implements OnInit {
-    teams: Team[];
+    @ViewChild('teamWizard') teamWizard: AddTeamWizardComponent;
 
-    constructor(private teamService: TeamService) {
+    teams: Team[];
+    user: User;
+
+    constructor(private teamService: TeamService, private userService: LocalUserService) {
     }
 
     async getTeams() {
@@ -18,6 +24,7 @@ export class TeamsComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.user = this.userService.getUser();
         this.getTeams();
     }
 

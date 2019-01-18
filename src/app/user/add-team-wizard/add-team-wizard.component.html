@@ -1,6 +1,5 @@
-<button class="btn btn-primary btn-link" (click)="teamWizardOpen = true">{{button_text}}</button>
 <clr-wizard #teamWizard
-            [(clrWizardOpen)]="teamWizardOpen"
+            [(clrWizardOpen)]="wizardOpen"
             (clrWizardOnFinish)="doFinish()"
             (clrWizardOnCancel)="doCancel()"
             clrWizardSize="xl">

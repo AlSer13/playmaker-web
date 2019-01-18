@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Tournament} from '../../entities/Tournament';
 import {TournamentService} from '../../services/entity-data/tournament.service';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {LocalUserService} from '../../services/local-user.service';
+import {AddTourWizardComponent} from '../user/add-tour-wizard/add-tour-wizard.component';
+import {User} from '../../entities/User';
 
 @Component({
     selector: 'app-tournaments',
@@ -11,7 +13,9 @@ import {LocalUserService} from '../../services/local-user.service';
     styleUrls: ['./tournaments.component.css']
 })
 export class TournamentsComponent implements OnInit {
+    @ViewChild('tourWizard') tourWizard: AddTourWizardComponent;
     tours: Tournament[];
+    user: User;
 
     constructor(private tourService: TournamentService,
                 private userService: LocalUserService) {
@@ -27,6 +31,7 @@ export class TournamentsComponent implements OnInit {
     }
 
     async ngOnInit() {
+        this.user = this.userService.getUser();
         this.getTours().subscribe();
         await this.userService.getSelectedTournaments();
     }

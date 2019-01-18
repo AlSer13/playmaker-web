@@ -34,6 +34,7 @@ import { OverviewComponent } from './match/overview/overview.component';
 import { ScoreboardComponent } from './match/overview/scoreboard/scoreboard.component';
 import { AbilityUpgradesComponent } from './match/overview/ability-upgrades/ability-upgrades.component';
 import { BracketComponent } from './tournaments/tournament/bracket/bracket.component';
+import { AddTourWizardComponent } from './user/add-tour-wizard/add-tour-wizard.component';
 
 @NgModule({
     declarations: [
@@ -62,6 +63,7 @@ import { BracketComponent } from './tournaments/tournament/bracket/bracket.compo
         ScoreboardComponent,
         AbilityUpgradesComponent,
         BracketComponent,
+        AddTourWizardComponent,
     ],
     imports: [
         BrowserModule,

@@ -1,0 +1,16 @@
+<clr-wizard #tourWizard
+            [(clrWizardOpen)]="wizardOpen"
+            (clrWizardOnFinish)="doFinish()"
+            (clrWizardOnCancel)="doCancel()"
+            clrWizardSize="xl">
+    <clr-wizard-title>Create tournament</clr-wizard-title>
+
+    <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
+    <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+    <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+    <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+    <clr-wizard-page>
+        <ng-template clrPageTitle>Info</ng-template>
+
+    </clr-wizard-page>
+</clr-wizard>
