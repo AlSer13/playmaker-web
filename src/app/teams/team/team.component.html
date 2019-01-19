@@ -83,7 +83,7 @@
             Are you sure you want to leave the team?
         </div>
         <div class="modal-footer">
-            <button [clrLoading]="inviteBtnState" type="button" class="btn btn-primary" (click)="leave()">
+            <button type="button" class="btn btn-primary" (click)="leave()">
                 Leave
             </button>
         </div>
@@ -94,7 +94,7 @@
             Are you sure you want to kick {{playerForKick.username}} from the team?
         </div>
         <div class="modal-footer">
-            <button [clrLoading]="inviteBtnState" type="button" class="btn btn-primary" (click)="kickPlayer()">
+            <button type="button" class="btn btn-primary" (click)="kickPlayer()">
                 kick
             </button>
         </div>

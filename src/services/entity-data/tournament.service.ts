@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 import {Tournament} from '../../entities/Tournament';
 import {environment} from '../../environments/environment';
 import {Team} from '../../entities/Team';
+import {promise} from 'selenium-webdriver';
 
 @Injectable({
     providedIn: 'root'
@@ -29,5 +30,18 @@ export class TournamentService {
     async startTournament(tour: Tournament): Promise<Tournament> {
         return await this.http.post<Tournament>(this.tourURL + '/' + tour._id + '/start', {})
             .pipe(map(data => data['updatedTournament'])).toPromise();
+    }
+
+    async joinTournament(tour: Tournament, teamId: string): Promise<Tournament> {
+        const body = {teamId: teamId};
+        return await this.http.post<Tournament>(this.tourURL + '/' + tour._id + '/join', body)
+            .pipe(map(data => {
+                console.log(data);
+                if (data['successful'])
+                    return data['updatedTournament'];
+                else {
+                    throw data['error'];
+                }
+            })).toPromise();
     }
 }

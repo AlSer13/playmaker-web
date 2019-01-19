@@ -4,7 +4,10 @@
                   (click)="goBack()"></clr-icon>
         {{tour.name}}
     </h1>
-    <button class="btn btn-primary" (click)="startTournament()" *ngIf="isOwner && !tour.started">Start tournament</button>
+    <button class="btn btn-outline" (click)="joinOpen = true; joinError = ''" *ngIf="!tour.started">join tournament</button>
+
+    <button class="btn btn-primary" (click)="startTournament()" *ngIf="isOwner && !tour.started">Start tournament
+    </button>
     <h4>
         Id: {{tour._id}}
     </h4>
@@ -19,4 +22,25 @@
     </ol>
 
     <bracket [tournament]="tour"></bracket>
+
+
+    <clr-modal [(clrModalOpen)]="joinOpen" [clrModalSize]="'sm'">
+        <div class="modal-title">
+            Join tournament
+        </div>
+        <div class="modal-body team-picker">
+            <clr-select-container>
+                <label for="select">Choose team</label>
+                <select id="select" clrSelect name="options" [(ngModel)]="chosenTeam">
+                    <option *ngFor="let team of teams" [value]="team._id">{{team.name}}</option>
+                </select>
+            </clr-select-container>
+            <div class="clr-subtext">{{joinError}}</div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="joinTournament()">
+                Join
+            </button>
+        </div>
+    </clr-modal>
 </div>

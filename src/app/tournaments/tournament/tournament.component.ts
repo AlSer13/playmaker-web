@@ -4,6 +4,8 @@ import {ActivatedRoute} from '@angular/router';
 import {TournamentService} from '../../../services/entity-data/tournament.service';
 import {Location} from '@angular/common';
 import {LocalUserService} from '../../../services/local-user.service';
+import {Team} from '../../../entities/Team';
+import {UserDataService} from '../../../services/entity-data/user-data.service';
 
 @Component({
     selector: 'app-tournament',
@@ -13,17 +15,27 @@ import {LocalUserService} from '../../../services/local-user.service';
 export class TournamentComponent implements OnInit {
     tour: Tournament;
     isOwner: boolean = false;
+    joinOpen: boolean = false;
+    chosenTeam: string;
+    joinError: string;
+    teams: Team[];
 
     constructor(
         private route: ActivatedRoute,
         private tourService: TournamentService,
         private location: Location,
-        private  userService: LocalUserService
+        private userService: LocalUserService,
+        private userDataService: UserDataService,
     ) {
     }
 
-    ngOnInit(): void {
+    async ngOnInit() {
         this.getTour();
+        this.teams = await this.userDataService.getTeams(this.userService.getUser()._id);
+        console.log(this.teams);
+        this.teams = this.teams.filter((team) => {
+            return this.userService.getUser().equals(team.captain) ;//&& team.players.length === 5;
+        });
     }
 
     getTour(): void {
@@ -45,4 +57,15 @@ export class TournamentComponent implements OnInit {
         console.log(this.tour);
     }
 
+    async joinTournament() {
+        try {
+            console.log(1);
+            this.tour = new Tournament(await this.tourService.joinTournament(this.tour, this.chosenTeam));
+            console.log(1);
+            this.joinOpen = false;
+        } catch (err) {
+            this.joinError = err;
+            console.log(err);
+        }
+    }
 }
