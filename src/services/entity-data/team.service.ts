@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Team} from '../../entities/Team';
 import {Tournament} from '../../entities/Tournament';
 import {Match} from '../../entities/Match';
+import {User} from '../../entities/User';
+import {RequestOptions} from '@angular/http';
 
 @Injectable({
     providedIn: 'root'
@@ -57,5 +59,14 @@ export class TeamService {
         const options = {params: new HttpParams().set('limit', '5')};
         return this.http.get<Match>(this.matchURL, options)
             .pipe(map(data => data['matches'])).toPromise();
+    }
+
+    async kickPlayer(user: User, team: Team): Promise<Team> {
+        return this.http.request<Team>('DELETE', this.teamURL + '/' + team._id + '/players', {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            }),
+            body: {userId: user._id}
+        }).pipe(map(data => data['updatedTeam'])).toPromise();
     }
 }

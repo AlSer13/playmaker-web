@@ -12,6 +12,10 @@ section {
     height: 30px;
 }
 
+.leave-btn {
+    margin: 0;
+}
+
 .card-media-text {
     font-size: 3em;
 }
@@ -37,7 +41,7 @@ section {
 
 }
 
-li:hover{
+li span:hover{
     cursor: pointer;
 }
 

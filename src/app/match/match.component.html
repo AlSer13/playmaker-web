@@ -5,7 +5,7 @@
             <overview [match]="match"></overview>
         </clr-tab-content>
     </clr-tab>
-    <clr-tab>
+    <clr-tab *ngIf="parsedMatch">
         <button clrTabLink>Team graphs</button>
         <clr-tab-content id="Team-adv" *clrIfActive>
             <div class="clr-row clr-justify-content-center">
@@ -26,7 +26,7 @@
             </div>
         </clr-tab-content>
     </clr-tab>
-    <clr-tab>
+    <clr-tab *ngIf="parsedMatch">
         <button clrTabLink>Gold</button>
         <clr-tab-content id="Gold" *clrIfActive>
             <div class="clr-row clr-justify-content-center">
@@ -56,7 +56,7 @@
             </div>
         </clr-tab-content>
     </clr-tab>
-    <clr-tab>
+    <clr-tab *ngIf="parsedMatch">
         <button clrTabLink>Exp</button>
         <clr-tab-content *clrIfActive>
             <clr-tab-content id="Exp" *clrIfActive>
@@ -88,7 +88,7 @@
             </clr-tab-content>
         </clr-tab-content>
     </clr-tab>
-    <clr-tab>
+    <clr-tab *ngIf="parsedMatch">
         <button clrTabLink>Laning</button>
         <clr-tab-content *clrIfActive>
             <clr-tab-content id="Laning" *clrIfActive>

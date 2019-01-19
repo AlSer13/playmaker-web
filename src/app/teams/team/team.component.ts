@@ -7,6 +7,7 @@ import {ClrLoadingState} from '@clr/angular';
 import {Tournament} from '../../../entities/Tournament';
 import {Match} from '../../../entities/Match';
 import {LocalUserService} from '../../../services/local-user.service';
+import {User} from '../../../entities/User';
 
 @Component({
     selector: 'app-team',
@@ -17,14 +18,18 @@ export class TeamComponent implements OnInit {
     team: Team;
     tournaments: Tournament[];
     matches: Match[];
+    playerForKick: User;
     error: any;
     avatarURL = environment.avatarURL;
     heroIconURL = environment.steamMediaURL + '/heroes/';
     inviteOpen = false;
+    leaveOpen = false;
+    kickOpen = false;
     username: string;
     inviteBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
     userNotFound = false;
     isCaptain = false;
+    isMember = false;
 
     constructor(private route: ActivatedRoute,
                 private teamService: TeamService,
@@ -36,6 +41,13 @@ export class TeamComponent implements OnInit {
         try {
             this.team = await this.teamService.getTeam(id);
             this.isCaptain = this.userService.getUser().equals(this.team.captain);
+            console.log(this.team);
+            this.team.players.forEach((player) => {
+                if (this.userService.getUser().equals(player)) {
+                    this.isMember = true;
+                }
+            });
+
             this.tournaments = await this.teamService.getTournaments(this.team);
             this.matches = await this.teamService.getMatches();
             console.log(this.matches);
@@ -65,6 +77,22 @@ export class TeamComponent implements OnInit {
             this.userNotFound = true;
             this.inviteBtnState = ClrLoadingState.ERROR;
         }
+    }
+
+    async leave() {
+        this.team = await this.teamService.kickPlayer(this.userService.getUser(), this.team);
+        this.isMember = false;
+        this.leaveOpen = false;
+    }
+
+    async kickPlayer() {
+        this.team = await this.teamService.kickPlayer(this.playerForKick, this.team);
+        this.kickOpen = false;
+    }
+
+    openKickModal(user: User) {
+        this.playerForKick = user;
+        this.kickOpen = true;
     }
 
 }
