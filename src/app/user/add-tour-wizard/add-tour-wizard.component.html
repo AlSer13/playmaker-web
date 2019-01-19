@@ -9,8 +9,120 @@
     <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
     <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
     <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+    <clr-wizard-page [(clrWizardPageNextDisabled)]="!descriptionForm.valid">
+        <ng-template clrPageTitle>Name + Info</ng-template>
+        <form clrForm [formGroup]="descriptionForm">
+            <clr-input-container>
+                <label>Name</label>
+                <input
+                    clrInput
+                    type="text"
+                    formControlName="name"
+                />
+            </clr-input-container>
+            <clr-textarea-container>
+                <label>Description</label>
+                <textarea clrTextarea
+                          formControlName="description"></textarea>
+                <clr-control-error *clrIfError="'required'">Please, write
+                    something about your tournament
+                </clr-control-error>
+            </clr-textarea-container>
+        </form>
+    </clr-wizard-page>
+
+    <clr-wizard-page [(clrWizardPageNextDisabled)]="!parametersForm.valid">
+        <ng-template clrPageTitle>Parameters</ng-template>
+
+        <form clrForm [formGroup]="parametersForm">
+
+            <clr-input-container>
+                <label>Prize pool</label>
+                <input
+                    clrInput
+                    type="text"
+                    formControlName="prizePool"
+                />
+            </clr-input-container>
+            <clr-select-container>
+                <select clrSelect name="currency" formControlName="prizePoolCurrency">
+                    <option *ngFor="let c of currencies">{{c.sign}}</option>
+                </select>
+            </clr-select-container>
+
+            <clr-input-container>
+                <label>Team count</label>
+                <input
+                    clrInput
+                    type="text"
+                    formControlName="teamCount"
+                />
+                <clr-control-error *clrIfError="'min'">Can't have less than
+                    2 teams
+                </clr-control-error>
+                <clr-control-error *clrIfError="'max'">Can't have more than
+                    100 teams
+                </clr-control-error>
+            </clr-input-container>
+
+            <!--TODO: убрать или реализовать-->
+            <clr-checkbox-container>
+                <label>Start when ready</label>
+                <clr-checkbox-wrapper>
+                    <input type="checkbox" name="rememberMe" formControlName="startWhenReady"
+                           clrCheckbox
+                           title="rememberme"/>
+                </clr-checkbox-wrapper>
+            </clr-checkbox-container>
+
+        </form>
+    </clr-wizard-page>
+
+    <clr-wizard-page [(clrWizardPageNextDisabled)]="!contactsForm.valid">
+        <ng-template clrPageTitle>Contacts</ng-template>
+        <div id="contacts_wrap">
+            <form class="contacts_form"
+                  *ngFor="let contact of contactsForm.controls; let i = index;"
+                  clrForm
+                  [formGroup]="contact">
+                <select clrSelect
+                        type="text"
+                        formControlName="contact_type">
+                    <option *ngFor="let c of contactTypes">{{c.name}}</option>
+                </select>
+                <input
+                    clrInput
+                    type="text"
+                    formControlName="contact_value"
+                />
+                <clr-icon *ngIf="contactsForm.controls.length>0" shape="trash"
+                          class="btn btn-link remove-contact-btn" size="27"
+                          (click)="removeContact(i)"></clr-icon>
+            </form>
+
+            <clr-icon *ngIf="contactsForm.controls.length<=20" size="32" id="add_contact"
+                      shape="plus-circle"
+                      class="btn btn-link"
+                      (click)="addContact()"></clr-icon>
+        </div>
+    </clr-wizard-page>
     <clr-wizard-page>
-        <ng-template clrPageTitle>Info</ng-template>
+        <ng-template clrPageTitle>Summary</ng-template>
+        <div id="summary">
+            <h4>Tournament name: <b>{{descriptionForm.value.name}}</b></h4>
+            <h4>Owner: <b>{{owner.username}}</b></h4>
+            <h4>Prize pool:
+                <b>{{parametersForm.value.prizePool}} {{parametersForm.value.prizePoolCurrency}}</b>
+            </h4>
+            <h4>Team count: <b>{{parametersForm.value.teamCount}}</b></h4>
+            <h4 *ngIf="parametersForm.value.startWhenReady">The tournament will start when the
+                {{parametersForm.value.teamCount}} teams pool will be full</h4>
+
+            <h4 *ngIf="contactsForm.controls.length!=0">Tournament contacts: </h4>
+            <h6 *ngFor="let contact of contactsForm.controls">{{contact.value.contact_type}}:
+                {{contact.value.contact_value}}</h6>
+        </div>
 
     </clr-wizard-page>
+
 </clr-wizard>

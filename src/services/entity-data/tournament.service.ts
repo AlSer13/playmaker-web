@@ -4,8 +4,6 @@ import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Tournament} from '../../entities/Tournament';
 import {environment} from '../../environments/environment';
-import {Team} from '../../entities/Team';
-import {promise} from 'selenium-webdriver';
 
 @Injectable({
     providedIn: 'root'
@@ -37,11 +35,18 @@ export class TournamentService {
         return await this.http.post<Tournament>(this.tourURL + '/' + tour._id + '/join', body)
             .pipe(map(data => {
                 console.log(data);
-                if (data['successful'])
+                if (data['successful']) {
                     return data['updatedTournament'];
-                else {
+                } else {
                     throw data['error'];
                 }
+            })).toPromise();
+    }
+
+    async addTour(tourJSON: any) {
+        return await this.http.post(this.tourURL + '/', tourJSON)
+            .pipe(map(data => {
+                return data['addedTournament'];
             })).toPromise();
     }
 }

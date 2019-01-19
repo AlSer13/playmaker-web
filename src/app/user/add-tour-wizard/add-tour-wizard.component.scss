@@ -1,0 +1,42 @@
+#contacts_wrap{
+    display: grid;
+    width: 420px;
+    grid-template-columns: 1fr;
+    align-items: start;
+    justify-items: start;
+}
+
+.remove-contact-btn {
+    margin: 0;
+    align-self: end;
+    justify-self: start;
+}
+
+.contacts_form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.3fr;
+    grid-gap: 15px;
+    width: 420px;
+    justify-items: center;
+    align-items: center;
+}
+
+#add_contact {
+    margin: 14px 0;
+    justify-self: center;
+}
+
+clr-icon {
+    margin: auto 0;
+}
+
+textarea {
+    width: 100%;
+    min-height: 150px;
+
+}
+
+#summary > h6 {
+    margin-left: 20px;
+    margin-top: 10px
+}

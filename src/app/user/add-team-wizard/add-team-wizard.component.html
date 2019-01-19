@@ -27,7 +27,6 @@
         </form>
         <h4>Contacts</h4>
         <div id="contacts_wrap">
-
             <form class="contacts_form"
                   *ngFor="let contact of contactsForm.controls; let i = index;"
                   clrForm
@@ -110,7 +109,6 @@
     </clr-wizard-page>
 
     <clr-wizard-page>
-        <ng-template clrPageNavTitle>Summary</ng-template>
         <ng-template clrPageTitle>Summary</ng-template>
         <div id="summary">
             <h4>Team name: <b>{{nameForm.value.name}}</b></h4>

@@ -23,7 +23,7 @@ export class AddTeamWizardComponent implements OnInit {
 
     contactTypes = [
         {name: 'E-mail'},
-        {name: 'Phone'},
+        {name: 'Phone number'},
         {name: 'Social network link'},
         {name: 'WhatsApp'},
         {name: 'Telegram'},
@@ -77,9 +77,7 @@ export class AddTeamWizardComponent implements OnInit {
 
     async doFinish() {
         const name = this.nameForm.value.name;
-        console.log(name);
         const addedTeam = await this.teamService.addTeam(name);
-        console.log(addedTeam);
         if (addedTeam !== null) {
             this.playersForm.controls.forEach(pf => {
                 if (pf.value.id_type.toLowerCase() === 'username') {

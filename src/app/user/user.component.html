@@ -32,7 +32,7 @@
             <hr size="1px">
             <div>No teams yet</div>
         </div>
-        <button class="btn btn-primary btn-link clr-align-self-end" *ngIf="you"
+        <button class="btn btn-primary btn-link clr-align-self-end add-btn" *ngIf="you"
                 (click)="teamWizard.openWizard()">add a
             team
         </button>
@@ -55,7 +55,7 @@
             <hr size="1px">
             <div>No tournaments yet</div>
         </div>
-        <button class="btn btn-primary btn-link clr-align-self-end"  *ngIf="you"
+        <button class="btn btn-primary btn-link add-btn"  *ngIf="you"
                 (click)="tourWizard.openWizard()">create a
             tournament
         </button>
