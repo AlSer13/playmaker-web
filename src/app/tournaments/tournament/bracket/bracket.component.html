@@ -39,9 +39,14 @@
                     <span class="clr-subtext error">{{matchIdError}}</span>
                 </clr-radio-container>
             </form>
+            <a class="btn btn-outline btn-sm" *ngIf="modalInfo.matchId" routerLink="/match/{{modalInfo.matchId}}">
+                match stats
+            </a>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)='submitMatch()' *ngIf="!modalInfo.finished && isCaptain || isOwner">Submit</button>
+            <button type="button" class="btn btn-primary" (click)='submitMatch()'
+                    *ngIf="!modalInfo.finished && isCaptain || isOwner">Submit
+            </button>
         </div>
     </div>
 </clr-modal>

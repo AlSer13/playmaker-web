@@ -1,0 +1,90 @@
+.dire-ward {
+    position: absolute;
+    width: 86px;
+    height: 86px;
+    background: rgba(255, 171, 64, 0.3);
+    border-radius: 50%;
+    border: 2.5px solid rgb(255, 76, 76);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-wrapper {
+    position: relative;
+    width: 550px;
+    height: 550px;
+    max-width: 550px;
+    max-height: 550px;
+}
+
+.radiant-ward {
+    position: absolute;
+    width: 86px;
+    height: 86px;
+    background: rgba(255, 171, 64, 0.3);
+    border-radius: 50%;
+    border: 2.5px solid rgb(102, 187, 106);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ward-img {
+    width: 18px;
+    height: 14px;
+}
+
+.vision-map {
+    width: 550px;
+    height: 550px;
+    background-image: url("https://raw.githubusercontent.com/odota/web/master/public/assets/images/dota2/map/detailed_720.jpg");
+    background-size: contain;
+    position: absolute;
+}
+
+::ng-deep {
+    .custom-slider .ng5-slider .ng5-slider-bar {
+        background: #ffe4d1;
+        height: 2px;
+    }
+    .custom-slider .ng5-slider .ng5-slider-selection {
+        background: orange;
+    }
+
+    .custom-slider .ng5-slider .ng5-slider-pointer {
+        width: 8px;
+        height: 16px;
+        top: auto; /* to remove the default positioning */
+        bottom: 0;
+        background-color: #333;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+
+    .custom-slider .ng5-slider .ng5-slider-pointer:after {
+        display: none;
+    }
+
+    .custom-slider .ng5-slider .ng5-slider-bubble {
+        bottom: 14px;
+    }
+
+    .custom-slider .ng5-slider .ng5-slider-limit {
+        font-weight: bold;
+        color: orange;
+    }
+
+    .custom-slider .ng5-slider .ng5-slider-tick {
+        width: 1px;
+        height: 10px;
+        margin-left: 4px;
+        border-radius: 0;
+        background: #ffe4d1;
+        top: -1px;
+    }
+
+    .custom-slider .ng5-slider .ng5-slider-tick.ng5-slider-selected {
+        background: orange;
+    }
+}

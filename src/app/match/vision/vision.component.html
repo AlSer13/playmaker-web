@@ -1,0 +1,25 @@
+<div>
+    <div class="clr-row clr-justify-content-between map-wrapper">
+        <div class="vision-map">
+            <div *ngFor="let ward of parsedMatch.radiant_obs_log">
+                <div class="radiant-ward tooltip tooltip-xs"
+                     [style.top.px]="550 - ((ward.y - 54) / 127 * 550)" [style.left.px]="(ward.x - 73) / 127 * 550"
+                     *ngIf="(time-ward.time) <= 360 && time >=ward.time">
+                    <span class="tooltip-content">{{secondsToMMSS(ward.time)}}</span>
+                    <img class="ward-img" src="../../../assets/goodguys_observer.png" alt="">
+                </div>
+            </div>
+            <div *ngFor="let ward of parsedMatch.dire_obs_log">
+                <div class="dire-ward tooltip tooltip-xs"
+                     [style.top.px]="550 - ((ward.y - 54) / 127 * 550)" [style.left.px]="(ward.x - 73) / 127 * 550"
+                     *ngIf="(time-ward.time) <= 360 && time >=ward.time">
+                    <span class="tooltip-content">{{secondsToMMSS(ward.time)}}</span>
+                    <img class="ward-img" src="../../../assets/badguys_observer.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clr-row custom-slider">
+        <ng5-slider [(value)]="time" [options]="options"></ng5-slider>
+    </div>
+</div>

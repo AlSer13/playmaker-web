@@ -55,7 +55,7 @@ export class MatchComponent implements OnInit {
     async ngOnInit() {
         this.matchId = this.route.snapshot.paramMap.get('matchId');
         this.match = await this.matchService.getMatch(this.matchId);
-        this.parsedMatch = await this.matchService.getParsedMatch(this.matchId);
+        this.parsedMatch = new ParsedMatch(await this.matchService.getParsedMatch(this.matchId));
         this.selectedPlayer = this.parsedMatch.players[0];
         this.gold_data = this.parsedMatch.players.map((item) => {
             return {

@@ -35,6 +35,8 @@ import { ScoreboardComponent } from './match/overview/scoreboard/scoreboard.comp
 import { AbilityUpgradesComponent } from './match/overview/ability-upgrades/ability-upgrades.component';
 import { BracketComponent } from './tournaments/tournament/bracket/bracket.component';
 import { AddTourWizardComponent } from './user/add-tour-wizard/add-tour-wizard.component';
+import { VisionComponent } from './match/vision/vision.component';
+import {Ng5SliderModule} from 'ng5-slider';
 
 @NgModule({
     declarations: [
@@ -64,6 +66,7 @@ import { AddTourWizardComponent } from './user/add-tour-wizard/add-tour-wizard.c
         AbilityUpgradesComponent,
         BracketComponent,
         AddTourWizardComponent,
+        VisionComponent,
     ],
     imports: [
         BrowserModule,
@@ -73,7 +76,8 @@ import { AddTourWizardComponent } from './user/add-tour-wizard/add-tour-wizard.c
         ClarityModule,
         FormsModule,
         ReactiveFormsModule,
-        NgxChartsModule
+        NgxChartsModule,
+        Ng5SliderModule,
     ],
     providers: [
         AuthorizationDataService,

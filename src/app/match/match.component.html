@@ -107,5 +107,13 @@
             </clr-tab-content>
         </clr-tab-content>
     </clr-tab>
+    <clr-tab *ngIf="parsedMatch">
+        <button clrTabLink>Vision</button>
+        <clr-tab-content *clrIfActive>
+            <clr-tab-content id="Vision" *clrIfActive>
+                <vision [parsedMatch]="parsedMatch"></vision>
+            </clr-tab-content>
+        </clr-tab-content>
+    </clr-tab>
 </clr-tabs>
 
