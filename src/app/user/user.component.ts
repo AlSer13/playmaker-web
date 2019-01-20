@@ -61,6 +61,7 @@ export class UserComponent implements OnInit {
                 this.user = new User(await this.userDataService.getUserInfo(username));
                 this.teams = await this.userDataService.getTeams(this.user._id);
             }
+            this.tours = await this.userDataService.getTournaments(this.user);
         } catch (error) {
             this.handleError(error);
         }

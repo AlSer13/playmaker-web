@@ -41,7 +41,7 @@
         <span class="spinner spinner-md loading-spinner" *ngIf="!tours">Loading...</span>
 
         <ul *ngIf="tours && tours.length != 0">
-            <li *ngFor="let tour of tours" routerLink="/tournament/{{tour._id}}">
+            <li *ngFor="let tour of tours" routerLink="/tournaments/{{tour._id}}">
                 {{tour.name}}
             </li>
         </ul>

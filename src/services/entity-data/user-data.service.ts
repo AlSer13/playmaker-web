@@ -47,6 +47,11 @@ export class UserDataService {
             .pipe(map(data => data['teams'])).toPromise();
     }
 
+    getTournaments(user: User) {
+        return this.http.get(this.userURL + '/tournaments/' + user._id)
+            .pipe(map(data => data['tournaments'])).toPromise();
+    }
+
     followTournament(tournamentId: string) {
         const body = {};
         return this.http.post(this.userURL + '/fav/follow/' + tournamentId, body)
