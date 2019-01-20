@@ -49,7 +49,7 @@ export class TeamComponent implements OnInit {
             });
 
             this.tournaments = await this.teamService.getTournaments(this.team);
-            this.matches = await this.teamService.getMatches();
+            this.matches = await this.teamService.getMatches(this.team);
             console.log(this.matches);
         } catch (error) {
             this.handleError(error);

@@ -55,9 +55,9 @@ export class TeamService {
             .pipe(map(data => data['tournaments'])).toPromise();
     }
 
-    async getMatches(): Promise<Match[]> {
+    async getMatches(team: Team): Promise<Match[]> {
         const options = {params: new HttpParams().set('limit', '5')};
-        return this.http.get<Match>(this.matchURL, options)
+        return this.http.get<Match>(`${this.teamURL}/${team._id}/matches`, options)
             .pipe(map(data => data['matches'])).toPromise();
     }
 
