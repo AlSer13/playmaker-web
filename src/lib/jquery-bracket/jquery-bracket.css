@@ -354,3 +354,7 @@ div.jQBracket.rl .highlightWinner .bubble:after {
 div.jQBracket.rl .highlightLoser .bubble:after {
     border-left-color: #ccc
 }
+
+.jlabel {
+    color: #122335
+}
