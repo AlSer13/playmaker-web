@@ -94,6 +94,9 @@ export class LocalUserService {
             const data = await this.userDataService.getUserInfo(this.user.username);
             this.user.selectedTournaments = data.selectedTournaments;
             this.user.selectedMatches = data.selectedMatches;
+            this.user.jid = data.jid;
+            this.user.accountId = data.accountId;
+            this.user.email = data.email;
         } else {
             return null;
         }

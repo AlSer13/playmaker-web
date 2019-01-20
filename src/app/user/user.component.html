@@ -11,12 +11,6 @@
         <section id="bio">
 
         </section>
-
-        <section class="debug_info">
-            <h4>id: {{user._id}}</h4>
-            <h4>email: {{user.email}}</h4>
-            <h4>account_id: {{user.accountId}}</h4>
-        </section>
     </section>
 
     <section id="teams">
@@ -55,7 +49,7 @@
             <hr size="1px">
             <div>No tournaments yet</div>
         </div>
-        <button class="btn btn-primary btn-link add-btn"  *ngIf="you"
+        <button class="btn btn-primary btn-link add-btn" *ngIf="you"
                 (click)="tourWizard.openWizard()">create a
             tournament
         </button>

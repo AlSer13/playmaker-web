@@ -4,6 +4,7 @@ import {LocalUserService} from '../../../services/local-user.service';
 import {AuthService} from '../../../services/auth.service';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {ClrLoadingState} from '@clr/angular';
+import {log} from 'util';
 
 @Component({
     selector: 'app-user-settings',
@@ -16,6 +17,7 @@ export class UserSettingsComponent implements OnInit {
     loading = false;
     updateBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
     avatar: File = null;
+    avatarUrl;
 
     constructor(private userService: LocalUserService,
                 private authService: AuthService,
@@ -24,7 +26,9 @@ export class UserSettingsComponent implements OnInit {
 
     async ngOnInit() {
         if (this.authService.hasPermission('USER')) {
+            await this.userService.loadExtraInfo();
             this.user = this.userService.getUser();
+            this.avatarUrl = this.user.avatar;
         } else {
             this.error = {
                 status: 401,
@@ -44,11 +48,16 @@ export class UserSettingsComponent implements OnInit {
     async updateUserInfo() {
         this.updateBtnState = ClrLoadingState.LOADING;
         await this.userService.updateUser(this.avatar);
+        //this.user.avatar;
         this.updateBtnState = ClrLoadingState.SUCCESS;
     }
 
     onFileSelected(event) {
         this.avatar = <File>event.target.files[0];
-        console.log(event);
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            this.avatarUrl = event.target.result;
+        };
+        reader.readAsDataURL(this.avatar);
     }
 }

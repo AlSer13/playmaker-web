@@ -1,11 +1,14 @@
 <div *ngIf="!error && user">
     <form clrForm clrLayout="vertical" (submit)="updateUserInfo()">
-        <img class='avatar_image' [src]="user.avatar" alt="none" width="250" height="250">
 
-        <clr-input-container>
-            <label>FILE</label>
-            <input type="file" (change)="onFileSelected($event)">
-        </clr-input-container>
+        <div class="img__wrap" (click)="fileInput.click()">
+            <img class='avatar_image' [src]="avatarUrl" alt="none" width="250" height="250">
+            <div class="img__description_layer">
+                <p class="img__description">Change avatar</p>
+            </div>
+        </div>
+
+        <input style="display: none;" type="file" (change)="onFileSelected($event)" #fileInput>
 
         <p class="p1">id: {{user._id}}</p>
         <p class="p1">{{user.email}}</p>
@@ -24,7 +27,7 @@
             <label>JID</label>
             <input id="JID" type="text" name="JID" clrInput="JID"
                    placeholder="JID" [(ngModel)]="user.jid"
-                   pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                   autocomplete="off"
             />
         </clr-input-container>
         <button [clrLoading]="updateBtnState" id="update_btn" type="submit" class="btn btn-primary">
