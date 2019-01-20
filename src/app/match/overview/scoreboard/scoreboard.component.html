@@ -1,6 +1,7 @@
 <div>
     <h2>Scoreboard</h2>
-    <h4>Radiant</h4>
+    <h4>Radiant - {{match.radiant_team.name}}</h4>
+    <h4 *ngIf="match.radiant_win">Winner</h4>
     <table class="table table-noborder scrollable-table">
         <thead>
         <tr>
@@ -43,7 +44,8 @@
         </tbody>
     </table>
 
-    <h4>Dire</h4>
+    <h4>Dire - {{match.dire_team.name}}</h4>
+    <h4 *ngIf="!match.radiant_win">Winner</h4>
     <table class="table table-noborder scrollable-table">
         <thead>
         <tr>

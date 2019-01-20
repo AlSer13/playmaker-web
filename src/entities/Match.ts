@@ -1,5 +1,6 @@
 import {User} from './User';
 import {Player} from './Player';
+import {Team} from './Team';
 
 export class Match {
     _id: number;
@@ -11,8 +12,9 @@ export class Match {
     barracks_status_dire: number;
     radiant_score: number;
     dire_score: number;
-    radiant_team: string;
-    dire_team: string;
+    radiant_win: Boolean;
+    radiant_team: Team;
+    dire_team: Team;
     tournament: string;
     players: Player[];
 }
