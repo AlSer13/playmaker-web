@@ -80,7 +80,6 @@ export class AddTourWizardComponent implements OnInit {
             startWhenReady: this.parametersForm.value.startWhenReady,
             contacts: contacts
         };
-        console.log(tourJSON);
         const addedTour = await this.tourService.addTour(tourJSON);
         if (addedTour !== null) {
             this.doReset();

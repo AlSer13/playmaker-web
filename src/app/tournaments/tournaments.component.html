@@ -1,22 +1,28 @@
-<div class="clr-row clr-justify-content-center">
-    <div class="clr-col-lg-6 clr-col-md-8">
-        <div class="top-panel">
-            <form class="search">
-                <label for="search_input">
-                    <input #searchInput id="search_input" (keyup)="keyUp.next($event.target.value)"
-                           type="text"
-                           placeholder="Search for keywords..." autocomplete="off">
-                </label>
-            </form>
-            <clr-icon [appHideForbidden]="'USER'" size="31" id="add-tour" shape="plus"
-                      class="btn btn-outline"
-                      (click)="tourWizard.openWizard()"></clr-icon>
-            <app-add-tour-wizard #tourWizard [appHideForbidden]="'USER'"
-                                 [owner]="user">
-            </app-add-tour-wizard>
-
+<div class="scroller"
+     appInfiniteScroller
+     scrollPercent="90"
+     [immediateCallback]="true"
+     [scrollCallback]="scrollCallback">
+    <div class="clr-row clr-justify-content-center">
+        <div class="clr-col-lg-6 clr-col-md-8">
+            <div class="top-panel">
+                <form class="search">
+                    <label for="search_input">
+                        <input #searchInput id="search_input" [(ngModel)]="query"
+                               (keyup)="keyUp.next(query)"
+                               name="search"
+                               type="text"
+                               placeholder="Search for keywords..." autocomplete="off">
+                    </label>
+                </form>
+                <clr-icon [appHideForbidden]="'USER'" size="31" id="add-tour" shape="plus"
+                          class="btn btn-outline"
+                          (click)="tourWizard.openWizard()"></clr-icon>
+                <app-add-tour-wizard #tourWizard [appHideForbidden]="'USER'"
+                                     [owner]="user">
+                </app-add-tour-wizard>
+            </div>
         </div>
     </div>
+    <app-tournament-card *ngFor="let tour of tours" [tournament]="tour"></app-tournament-card>
 </div>
-
-<app-tournament-card *ngFor="let tour of tours" [tournament]="tour"></app-tournament-card>

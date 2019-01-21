@@ -6,13 +6,13 @@ import {Team} from '../../entities/Team';
 import {Tournament} from '../../entities/Tournament';
 import {Match} from '../../entities/Match';
 import {User} from '../../entities/User';
+import {Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TeamService {
     private teamURL = environment.localURL + '/teams';
-    private matchURL = environment.localURL + '/matches';
 
     constructor(private http: HttpClient) {
     }
@@ -22,10 +22,14 @@ export class TeamService {
             .pipe(map(data => data['team'])).toPromise();
     }
 
-    getTeams(query: string): Promise<Team[]> {
-        const options = {params: new HttpParams().set('searchQuery', query)};
+    getTeams(query: string, skip: number, limit: number): Observable<Team[]> {
+        const params = new HttpParams()
+            .set('searchQuery', query)
+            .set('skip', String(skip))
+            .set('limit', String(limit));
+        const options = {params: params};
         return this.http.get<Team[]>(this.teamURL, options)
-            .pipe(map(data => data['teams'])).toPromise();
+            .pipe(map(data => data['teams']));
     }
 
     async addTeam(name: string): Promise<Team> {

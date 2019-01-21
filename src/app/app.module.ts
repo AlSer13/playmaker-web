@@ -37,6 +37,7 @@ import { BracketComponent } from './tournaments/tournament/bracket/bracket.compo
 import { AddTourWizardComponent } from './user/add-tour-wizard/add-tour-wizard.component';
 import { VisionComponent } from './match/vision/vision.component';
 import {Ng5SliderModule} from 'ng5-slider';
+import { InfiniteScrollerDirective } from '../directives/infinite-scroller.directive';
 
 @NgModule({
     declarations: [
@@ -67,6 +68,7 @@ import {Ng5SliderModule} from 'ng5-slider';
         BracketComponent,
         AddTourWizardComponent,
         VisionComponent,
+        InfiniteScrollerDirective,
     ],
     imports: [
         BrowserModule,

@@ -4,8 +4,8 @@ import {TeamService} from '../../services/entity-data/team.service';
 import {LocalUserService} from '../../services/local-user.service';
 import {User} from '../../entities/User';
 import {AddTeamWizardComponent} from '../user/add-team-wizard/add-team-wizard.component';
-import {Subject, Subscription} from 'rxjs';
-import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {Observable, Subject, Subscription} from 'rxjs';
+import {debounceTime, distinctUntilChanged, switchMap, tap} from 'rxjs/operators';
 
 
 @Component({
@@ -14,32 +14,43 @@ import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
     styleUrls: ['./teams.component.css']
 })
 export class TeamsComponent implements OnInit {
-    @ViewChild('teamWizard') teamWizard: AddTeamWizardComponent;
 
-    teams: Team[];
+    @ViewChild('teamWizard') teamWizard: AddTeamWizardComponent;
+    teams: Team[] = [];
     user: User;
-    searchQuery: string = '';
+    query = '';
+    limit = 4;
+
+    scrollCallback;
 
     public keyUp = new Subject<string>();
 
     private subscription: Subscription;
 
-    constructor(private teamService: TeamService, private userService: LocalUserService) {
-    }
-
-    async getTeams() {
-        this.teams = await this.teamService.getTeams('');
+    constructor(private teamService: TeamService,
+                private userService: LocalUserService) {
+        this.scrollCallback = this.scroll.bind(this);
     }
 
     ngOnInit() {
         this.subscription = this.keyUp.pipe(
-            debounceTime(1000),
+            debounceTime(700),
             distinctUntilChanged(),
-            switchMap(query => this.teamService.getTeams(query))
-        ).subscribe(result => {
-            this.teams = result;
-        });
+            switchMap(() => this.search())
+        ).subscribe();
+
         this.user = this.userService.getUser();
-        this.getTeams();
+    }
+
+    scroll(): Observable<Team[]> {
+        console.log('scroll');
+        return this.teamService.getTeams(this.query, this.teams.length, this.limit)
+            .pipe(tap((teams) => this.teams = this.teams.concat(teams)));
+    }
+
+    search(): Observable<Team[]> {
+        console.log('search');
+        return this.teamService.getTeams(this.query, 0, this.limit)
+            .pipe(tap((teams) => this.teams = teams));
     }
 }
