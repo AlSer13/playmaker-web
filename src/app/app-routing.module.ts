@@ -15,6 +15,7 @@ import {UserSettingsComponent} from './user/user-settings/user-settings.componen
 import {UserInvitesComponent} from './user/user-invites/user-invites.component';
 import {MatchComponent} from './match/match.component';
 import {UserSubscriptionsComponent} from './user/user-subscriptions/user-subscriptions.component';
+import {RestoreComponent} from './restore/restore.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -27,13 +28,13 @@ const routes: Routes = [
     {
         path: 'signup',
         canActivate: [AuthGuardService],
-        data: {required: 'VISITOR', redirect: '/user'},
+        data: {required: 'VISITOR', redirect: '/main'},
         component: SignupComponent
     },
     {
         path: 'login',
         canActivate: [AuthGuardService],
-        data: {required: 'VISITOR', redirect: '/user'},
+        data: {required: 'VISITOR', redirect: '/main'},
         // ОСТОРОЖНО, если у пользователя не будет
         // ни USER, ни VISITOR, всему конец
         // (кольцевой redirect user <-> login)
@@ -45,6 +46,8 @@ const routes: Routes = [
     },
     {
         path: 'settings',
+        canActivate: [AuthGuardService],
+        data: {required: 'USER', redirect: '/login'},
         component: UserSettingsComponent
     },
     {
@@ -59,7 +62,15 @@ const routes: Routes = [
         path: 'match/:matchId',
         component: MatchComponent
     },
-    {path: '**', component: ErrorPageComponent}
+    {
+        path: 'restore/:restoreKey',
+        canActivate: [AuthGuardService],
+        data: {required: 'VISITOR', redirect: '/main'},
+        component: RestoreComponent
+    },
+    {
+        path: '**', component: ErrorPageComponent
+    }
 ];
 
 @NgModule({

@@ -1,0 +1,40 @@
+<div *ngIf="!error">
+    <h1>Reset password</h1>
+    <form [formGroup]="restoreForm" (ngSubmit)="confirmReset()">
+        <clr-password-container>
+            <label>Password</label>
+            <input
+                clrPassword
+                title="password"
+                type="password"
+                name="password"
+
+                formControlName="password"
+            />
+            <clr-control-helper>Enter a password</clr-control-helper>
+            <clr-control-error *clrIfError="'required'">Required field</clr-control-error>
+            <clr-control-error *clrIfError="'mismatch'">Passwords don't match</clr-control-error>
+        </clr-password-container>
+
+        <clr-password-container>
+            <label>Confirm password</label>
+            <input
+                clrPassword
+                title="password_confirm"
+                type="password"
+                name="password_confirm"
+
+                formControlName="confirmPassword"
+            />
+            <clr-control-helper>Enter the password again</clr-control-helper>
+            <clr-control-error *clrIfError="'required'">Required field</clr-control-error>
+            <clr-control-error *clrIfError="'mismatch'">Passwords don't match</clr-control-error>
+        </clr-password-container>
+        <button type="submit" class="btn btn-primary" [disabled]="!restoreForm.valid">
+            Submit
+        </button>
+    </form>
+</div>
+<app-error-page *ngIf="error" [error]="error"></app-error-page>
+
+

@@ -38,6 +38,7 @@ import { AddTourWizardComponent } from './user/add-tour-wizard/add-tour-wizard.c
 import { VisionComponent } from './match/vision/vision.component';
 import {Ng5SliderModule} from 'ng5-slider';
 import { InfiniteScrollerDirective } from '../directives/infinite-scroller.directive';
+import { RestoreComponent } from './restore/restore.component';
 
 @NgModule({
     declarations: [
@@ -69,6 +70,7 @@ import { InfiniteScrollerDirective } from '../directives/infinite-scroller.direc
         AddTourWizardComponent,
         VisionComponent,
         InfiniteScrollerDirective,
+        RestoreComponent,
     ],
     imports: [
         BrowserModule,

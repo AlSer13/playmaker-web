@@ -1,1 +1,1 @@
-<h1>{{error.status}}: {{error.statusText}}</h1>
+<h1><span *ngIf="!error.omitStatus">{{error.status}}: </span>{{error.statusText}}</h1>

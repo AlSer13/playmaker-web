@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ErrorPageComponent implements OnInit {
     @Input()
-    error = {status: 404, statusText: 'Not found'};
+    error = {status: 404, statusText: 'Not found', omitStatus: false};
 
     constructor() {
     }

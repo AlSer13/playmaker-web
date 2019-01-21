@@ -103,7 +103,7 @@ export class MatchComponent implements OnInit {
     }
 
     tickFormating(tick: any) {
-        let time = +tick;
+        const time = +tick;
         return `${Math.floor(time / 60)}:${time % 60}`;
     }
 
