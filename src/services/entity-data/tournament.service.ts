@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Tournament} from '../../entities/Tournament';
 import {environment} from '../../environments/environment';
+import {Team} from '../../entities/Team';
 
 @Injectable({
     providedIn: 'root'
@@ -14,8 +15,10 @@ export class TournamentService {
     constructor(private http: HttpClient) {
     }
 
-    getTours(): Observable<Tournament[]> {
-        return this.http.get(this.tourURL).pipe(map(data => data['tournaments']));
+    getTours(query: string): Promise<Tournament[]> {
+        const options = {params: new HttpParams().set('searchQuery', query)};
+        return this.http.get<Team[]>(this.tourURL, options)
+            .pipe(map(data => data['tournaments'])).toPromise();
         // return of(resp);
     }
 

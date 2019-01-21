@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Tournament} from '../../entities/Tournament';
 import {TournamentService} from '../../services/entity-data/tournament.service';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {Subject, Subscription} from 'rxjs';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {LocalUserService} from '../../services/local-user.service';
 import {AddTourWizardComponent} from '../user/add-tour-wizard/add-tour-wizard.component';
 import {User} from '../../entities/User';
@@ -17,22 +17,26 @@ export class TournamentsComponent implements OnInit {
     tours: Tournament[];
     user: User;
 
+    public keyUp = new Subject<string>();
+
+    private subscription: Subscription;
+
     constructor(private tourService: TournamentService,
                 private userService: LocalUserService) {
     }
 
-    getTours(): Observable<any> {
-        return this.tourService.getTours()
-            .pipe(tap(tours => {
-                    tours = tours.map(t => new Tournament(t));
-                    this.tours = tours;
-                }
-            ));
-    }
 
     async ngOnInit() {
+        this.subscription = this.keyUp.pipe(
+            debounceTime(1000),
+            distinctUntilChanged(),
+            switchMap(query => this.tourService.getTours(query))
+        ).subscribe(result => {
+            this.tours = result;
+        });
+
         this.user = this.userService.getUser();
-        this.getTours().subscribe();
+        this.tours = await this.tourService.getTours('');
         await this.userService.getSelectedTournaments();
     }
 

@@ -6,7 +6,6 @@ import {Team} from '../../entities/Team';
 import {Tournament} from '../../entities/Tournament';
 import {Match} from '../../entities/Match';
 import {User} from '../../entities/User';
-import {RequestOptions} from '@angular/http';
 
 @Injectable({
     providedIn: 'root'
@@ -23,8 +22,9 @@ export class TeamService {
             .pipe(map(data => data['team'])).toPromise();
     }
 
-    getTeams(): Promise<Team[]> {
-        return this.http.get<Team[]>(this.teamURL)
+    getTeams(query: string): Promise<Team[]> {
+        const options = {params: new HttpParams().set('searchQuery', query)};
+        return this.http.get<Team[]>(this.teamURL, options)
             .pipe(map(data => data['teams'])).toPromise();
     }
 
