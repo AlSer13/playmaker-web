@@ -18,6 +18,10 @@ export class LoginComponent {
     password: string;
     error = false;
     errorMessage = 'error';
+    forgotOpen = false;
+    restoringEmail: string;
+    info = false;
+    infoMessage: string;
 
     // ctrl alt 4 1 2
     @HostListener('document:keydown', ['$event'])
@@ -77,5 +81,12 @@ export class LoginComponent {
     displayError(text: string) {
         this.errorMessage = text;
         this.error = true;
+    }
+
+    async restorePassword() {
+        this.forgotOpen = false;
+        await this.authenticationService.restorePassword(this.restoringEmail);
+        this.infoMessage = 'If ' + this.restoringEmail + ' is your correct email, you will receive a letter soon';
+        this.info = true;
     }
 }

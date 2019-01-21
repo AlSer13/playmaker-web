@@ -15,23 +15,44 @@
                     </select>
                 </clr-select-container>
                 <clr-input-container>
-                    <input type="text" name="username" clrInput="username"
+                    <input id="username-input" type="text" name="username" clrInput="username"
                            placeholder="Username" [(ngModel)]="username"/>
                 </clr-input-container>
                 <clr-password-container>
-                    <input type="password" name="password" [(ngModel)]="password" clrPassword
+                    <input id="password-input" type="password" name="password"
+                           [(ngModel)]="password" clrPassword
                            placeholder="Password"/>
                 </clr-password-container>
 
-                <!--TODO: убрать или реализовать-->
-                <clr-checkbox-wrapper>
-                    <label>Remember me</label>
-                    <input type="checkbox" name="rememberMe" [(ngModel)]="rememberMe" clrCheckbox
-                           title="rememberme"/>
-                </clr-checkbox-wrapper>
+                <div class="login-form-footer">
+                    <!--TODO: убрать или реализовать-->
+                    <clr-checkbox-wrapper class="remember-check">
+                        <label>Remember me</label>
+                        <input type="checkbox" name="rememberMe" [(ngModel)]="rememberMe"
+                               clrCheckbox
+                               title="rememberme"/>
+                    </clr-checkbox-wrapper>
+                    <div class="forgot-link-wrap">
+                        <a class="forgot-link" (click)="forgotOpen = true">Forgot password?</a>
+                    </div>
+                </div>
+
             </div>
             <div class="error" [class.active]="error">
                 {{errorMessage}}
+            </div>
+            <div class="alert alert-success" role="alert" *ngIf="info">
+                <div class="alert-items">
+                    <div class="alert-item static">
+                        <div class="alert-icon-wrapper">
+                            <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+                        </div>
+                        <span class="alert-text">{{infoMessage}}</span>
+                    </div>
+                </div>
+                <button type="button" class="close" aria-label="Close"  (click)="info = false">
+                    <clr-icon aria-hidden="true" shape="close"></clr-icon>
+                </button>
             </div>
             <button id="submit_btn" type="submit" class="btn btn-primary"
                     [class.small_margin]="error">Log In
@@ -42,5 +63,21 @@
             <a class="signup" routerLink="/signup">Sign up</a>
         </div>
     </form>
+    <clr-modal [(clrModalOpen)]="forgotOpen" [clrModalSize]="'sm'">
+        <div class="modal-title">
+            Restore password
+        </div>
+        <div class="modal-body">
+            <clr-input-container>
+                <label>Enter your email</label>
+                <input clrInput [(ngModel)]="restoringEmail" name="restoringEmail">
+            </clr-input-container>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="restorePassword()">
+                Submit
+            </button>
+        </div>
+    </clr-modal>
 </div>
 

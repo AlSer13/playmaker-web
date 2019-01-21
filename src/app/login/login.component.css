@@ -18,3 +18,29 @@
 #submit_btn.small_margin {
     margin-top: 0.75rem !important;
 }
+
+.login-form-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.forgot-link-wrap {
+    justify-self: end;
+}
+
+.forgot-link {
+    cursor: pointer;
+}
+
+.remember-check {
+    margin: 0 !important;
+}
+
+.modal-body {
+    height: 46px !important;
+}
+
+.login {
+    min-width: 400px;
+}

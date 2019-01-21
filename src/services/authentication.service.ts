@@ -16,6 +16,7 @@ export class AuthenticationService {
     private steamLoginURL = environment.localURL + '/user/steam/login';
     private connectSteamURL = environment.localURL + '/user/steam/add';
     private disconnectSteamURL = environment.localURL + '/user/steam/delete';
+    private restorePassURL = environment.localURL + '/user/restorePass';
 
 
     constructor(private http: HttpClient,
@@ -68,5 +69,11 @@ export class AuthenticationService {
         const body = {username: username, password: password, email: email};
         const options = {};
         return await this.http.post(environment.localURL + '/user/signup', body, options).toPromise();
+    }
+
+    restorePassword(restoringEmail: string) {
+        console.log(restoringEmail);
+        const body = {email: restoringEmail};
+        this.http.post(this.restorePassURL, body);
     }
 }
