@@ -4,6 +4,7 @@ export class Player {
     player_slot: number;
     hero_id: number;
     hero_name: String;
+    nickname: string;
     item_0: any;
     item_1: any;
     item_2: any;
@@ -28,7 +29,7 @@ export class Player {
     gold: number;
     gold_spent: number;
     ability_upgrades: [{
-        name:string,
+        name: string,
         ability: number,
         time: number,
         level: number
