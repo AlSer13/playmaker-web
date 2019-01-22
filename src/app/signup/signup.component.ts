@@ -41,7 +41,6 @@ export class SignupComponent implements OnInit {
             this.signUpForm.get('email').value,
             this.signUpForm.get('password').value);
         if (data) {
-            // TODO: app level alert: success
             await this.router.navigate(['/login']);
         }
     }

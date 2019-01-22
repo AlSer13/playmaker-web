@@ -11,7 +11,6 @@ import {AuthenticationService} from '../../../services/authentication.service';
     styleUrls: ['./add-team-wizard.component.css']
 })
 
-// TODO: async validation
 export class AddTeamWizardComponent implements OnInit {
     @ViewChild('teamWizard') teamWizard: ClrWizard;
     @Input() captain: User;
