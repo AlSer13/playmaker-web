@@ -12,6 +12,7 @@ export class Tournament {
     owner: User;
     teams: Team[];
     started: boolean;
+    finished: boolean;
     bracket: [{
         _id: number,
         team1: string,

@@ -10,6 +10,7 @@ import {LocalUserService} from '../../../services/local-user.service';
 export class TournamentCardComponent implements OnInit {
 
     @Input() tournament: Tournament;
+    tournamentCondition: string;
     isSelected: boolean;
     loadingSubscription = true;
 
@@ -18,6 +19,12 @@ export class TournamentCardComponent implements OnInit {
 
     ngOnInit() {
         this.checkSelected();
+        if (this.tournament.finished)
+            this.tournamentCondition = 'Finished';
+        else {
+            if (this.tournament.started) this.tournamentCondition = 'Ongoing';
+            else this.tournamentCondition = 'Upcoming';
+        }
     }
 
     followBtnClicked() {
