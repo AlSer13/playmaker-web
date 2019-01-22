@@ -44,6 +44,7 @@ export class TournamentComponent implements OnInit {
         const id = this.route.snapshot.paramMap.get('id');
         this.tourService.getTour(id)
             .subscribe(tour => {
+                console.log(this.tour);
                 this.tour = new Tournament(tour);
                 this.isOwner = this.userService.getUser().equals(this.tour.owner);
             });

@@ -32,10 +32,13 @@
                     Teams: {{tournament.teamCount}}
                 </span>
                         <span class="card-media-text" *ngIf="tournament.prizePool">
-                    Prize pool: {{tournament.prizePool}}
+                    Prize pool: {{tournament.prizePool}} {{tournament.prizePoolCurrency}}
                 </span>
                         <span class="card-media-text" *ngIf="tournamentCondition">
                     Status: {{tournamentCondition}}
+                </span>
+                        <span class="card-media-text" *ngIf="tournament.winnerTeam">
+                    Winner: {{tournament.winnerTeam.name}}
                 </span>
                     </div>
                 </div>
