@@ -9,7 +9,7 @@
     <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
     <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
     <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
-    <clr-wizard-page [(clrWizardPageNextDisabled)]="!descriptionForm.valid">
+    <clr-wizard-page [clrWizardPageNextDisabled]="!descriptionForm.valid">
         <ng-template clrPageTitle>Name + Info</ng-template>
         <form clrForm [formGroup]="descriptionForm">
             <clr-input-container>
@@ -31,7 +31,7 @@
         </form>
     </clr-wizard-page>
 
-    <clr-wizard-page [(clrWizardPageNextDisabled)]="!parametersForm.valid">
+    <clr-wizard-page [clrWizardPageNextDisabled]="!parametersForm.valid">
         <ng-template clrPageTitle>Parameters</ng-template>
 
         <form clrForm [formGroup]="parametersForm">
@@ -77,7 +77,7 @@
         </form>
     </clr-wizard-page>
 
-    <clr-wizard-page [(clrWizardPageNextDisabled)]="!contactsForm.valid">
+    <clr-wizard-page [clrWizardPageNextDisabled]="!contactsForm.valid">
         <ng-template clrPageTitle>Contacts</ng-template>
         <div id="contacts_wrap">
             <form class="contacts_form"
