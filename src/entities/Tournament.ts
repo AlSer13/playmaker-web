@@ -14,6 +14,7 @@ export class Tournament {
     teams: Team[];
     started: boolean;
     finished: boolean;
+    startWhenReady: boolean;
     bracket: [{
         _id: number,
         team1: string,

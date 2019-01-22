@@ -1,36 +1,35 @@
-import {AfterViewInit, Component, OnInit, ElementRef, Input, ViewChild, OnChanges, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Tournament} from '../../../../entities/Tournament';
-import {Router} from '@angular/router';
-import {ClrModal} from '@clr/angular';
-import {TournamentService} from '../../../../services/entity-data/tournament.service';
 import {MatchService} from '../../../../services/entity-data/match.service';
 import {LocalUserService} from '../../../../services/local-user.service';
+import {AuthService} from '../../../../services/auth.service';
 
 declare let $: any;
 
 @Component({
-    selector: 'bracket',
+    selector: 'app-bracket',
     templateUrl: './bracket.component.html',
     styleUrls: ['./bracket.component.css']
 })
 
 export class BracketComponent implements OnInit, AfterViewInit, OnChanges {
 
-    constructor(private matchService: MatchService, private userService: LocalUserService) {
+    constructor(private matchService: MatchService, private userService: LocalUserService,
+                private authService: AuthService) {
     }
 
-    basic: boolean = false;
+    basic = false;
     modalInfo: any;
     @Input() tournament: Tournament;
     matchId: string;
     winner: boolean;
-    matchIdError: string = '';
-    winnerError: string = '';
-    isCaptain: boolean = false;
-    isOwner: boolean = false;
+    matchIdError = '';
+    winnerError = '';
+    isCaptain = false;
+    isOwner = false;
 
     ngAfterViewInit() {
-        //this.generateBracket();
+        // this.generateBracket();
     }
 
     onclick(data) {
@@ -38,8 +37,8 @@ export class BracketComponent implements OnInit, AfterViewInit, OnChanges {
         this.matchId = '';
         this.matchIdError = '';
         this.winnerError = '';
-        let team1 = this.tournament.getTeamById(data.team1);
-        let team2 = this.tournament.getTeamById(data.team2);
+        const team1 = this.tournament.getTeamById(data.team1);
+        const team2 = this.tournament.getTeamById(data.team2);
 
         console.log(team1);
         console.log(team2);
@@ -69,8 +68,10 @@ export class BracketComponent implements OnInit, AfterViewInit, OnChanges {
         console.log(this.winner);
 
         if (this.matchId.match(/^\d+$/) && this.winner !== undefined) {
-            //TODO: Отлавливать 403 ошибку, если пытается отправить не капитан. Да и вообще у не капитанов убрать кнопку submit
-            this.tournament = new Tournament(await this.matchService.submitMatch(this.matchId, this.tournament._id, this.modalInfo._id, this.winner));
+            // TODO: Отлавливать 403 ошибку, если пытается отправить не капитан. Да и вообще у не капитанов убрать кнопку submit
+            this.tournament
+                = new Tournament(await this.matchService
+                .submitMatch(this.matchId, this.tournament._id, this.modalInfo._id, this.winner));
             console.log(1);
             this.generateBracket();
         }
@@ -78,24 +79,30 @@ export class BracketComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     ngOnInit() {
-        this.isOwner = this.userService.getUser().equals(this.tournament.owner);
+        this.isOwner =
+            this.userService.getUser().equals(this.tournament.owner)
+            || this.authService.hasPermission('ADMIN');
         console.log(this.tournament);
     }
 
     generateBracket() {
-        if (!this.tournament.bracket.length) return;
-        let results = [];
+        if (!this.tournament.bracket.length) {
+            return;
+        }
+        const results = [];
         let stage = (this.tournament.bracket.length + 1) / 2;
 
         while (stage >= 1) {
-            let stageResults = [];
+            const stageResults = [];
 
             this.tournament.bracket.forEach((node) => {
                 if (node.stage === stage) {
                     if (node.firstTeamWin !== undefined) {
-                        let tmp = node.firstTeamWin ? [1, 0, node] : [0, 1, node];
+                        const tmp = node.firstTeamWin ? [1, 0, node] : [0, 1, node];
                         stageResults.push(tmp);
-                    } else stageResults.push([null, null, node]);
+                    } else {
+                        stageResults.push([null, null, node]);
+                    }
                 }
             });
 
@@ -105,10 +112,10 @@ export class BracketComponent implements OnInit, AfterViewInit, OnChanges {
 
         console.log(results);
 
-        let data = {
+        const data = {
             teams: this.tournament.bracket.map((node) => {
-                let team1 = this.tournament.getTeamNameById(node.team1) || null;
-                let team2 = this.tournament.getTeamNameById(node.team2) || null;
+                const team1 = this.tournament.getTeamNameById(node.team1) || null;
+                const team2 = this.tournament.getTeamNameById(node.team2) || null;
                 return [team1, team2];
             }).slice(0, this.tournament.bracket[0].stage),
 

@@ -6,6 +6,7 @@ import {Location} from '@angular/common';
 import {LocalUserService} from '../../../services/local-user.service';
 import {Team} from '../../../entities/Team';
 import {UserDataService} from '../../../services/entity-data/user-data.service';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
     selector: 'app-tournament',
@@ -14,8 +15,8 @@ import {UserDataService} from '../../../services/entity-data/user-data.service';
 })
 export class TournamentComponent implements OnInit {
     tour: Tournament;
-    isOwner: boolean = false;
-    joinOpen: boolean = false;
+    isOwner = false;
+    joinOpen = false;
     chosenTeam: string;
     joinError: string;
     teams: Team[];
@@ -26,6 +27,7 @@ export class TournamentComponent implements OnInit {
         private location: Location,
         private userService: LocalUserService,
         private userDataService: UserDataService,
+        private authService: AuthService
     ) {
     }
 
@@ -35,7 +37,7 @@ export class TournamentComponent implements OnInit {
             this.teams = await this.userDataService.getTeams(this.userService.getUser()._id);
             console.log(this.teams);
             this.teams = this.teams.filter((team) => {
-                return this.userService.getUser().equals(team.captain);//&& team.players.length === 5;
+                return this.userService.getUser().equals(team.captain); // && team.players.length === 5;
             });
         }
     }
@@ -46,12 +48,10 @@ export class TournamentComponent implements OnInit {
             .subscribe(tour => {
                 console.log(this.tour);
                 this.tour = new Tournament(tour);
-                this.isOwner = this.userService.getUser().equals(this.tour.owner);
+                this.isOwner =
+                    this.userService.getUser().equals(this.tour.owner)
+                    || this.authService.hasPermission('ADMIN');
             });
-    }
-
-    goBack(): void {
-        this.location.back();
     }
 
     async startTournament() {

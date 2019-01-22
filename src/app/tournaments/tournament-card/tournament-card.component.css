@@ -31,3 +31,10 @@
 .card-media-text {
     line-height: 1.5;
 }
+
+.card-media-description {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+}
