@@ -5,7 +5,7 @@
             <polygon points="0 0 250 100 500 0 0 0" fill="#21343e" stroke="black"></polygon>
         </svg>
         <h1 align="center">Welcome to Playmaker</h1>
-        <h4 align="center">Here you can:</h4>
+        <h4 align="center">Here you can</h4>
 
     </div>
 
@@ -74,7 +74,8 @@
             </svg>
         </div>
 
-        <a id="go-btn" class="btn btn-primary" routerLink="/signup">GO</a>
+        <a *ngIf="!logged" class="go-btn btn btn-primary" routerLink="/signup">GO</a>
+        <a *ngIf="logged" class="go-btn btn btn-primary" routerLink="/tournaments">GO</a>
 
         <div id="right-bracket">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 300"
