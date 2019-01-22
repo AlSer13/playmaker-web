@@ -67,4 +67,14 @@ export class UserDataService {
         return this.http.post(this.userURL + '/fav/unfollow/' + tournamentId, body)
             .pipe(map(data => data['removedTournament'])).toPromise();
     }
+
+    sendFeedback(email: string, message: string) {
+        const body = {
+            email: email,
+            message: message
+        };
+
+        return this.http.post(this.userURL + '/feedback', body)
+            .pipe(map(data => data['successful'])).toPromise();
+    }
 }
