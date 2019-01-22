@@ -4,6 +4,10 @@
     width: 250px;
 }
 
+.bold {
+    font-weight: 600;
+}
+
 html {
     font-family: helvetica, arial, sans-serif;
 }

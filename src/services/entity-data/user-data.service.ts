@@ -21,12 +21,16 @@ export class UserDataService {
             .pipe(map(data => data['user_info'])).toPromise();
     }
 
-    updateUser(user: User, avatar: File): Promise<User> {
+    updateUser(avatar: File, jid: string, email: string, currentPass: string, newPass: string): Promise<User> {
         // ./cookie-interceptor.ts встраивает опции всем запросам
 
         const body = new FormData();
-        body.set('jid', user.jid);
+        body.set('jid', jid);
         body.set('avatar', avatar);
+        body.set('email', email);
+        body.set('currentPass', currentPass);
+        body.set('newPass', newPass);
+
 
         return this.http.patch(this.userURL, body)
             .pipe(map(data => {
