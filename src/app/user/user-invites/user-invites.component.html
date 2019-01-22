@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<div *ngIf="invites == false">
+<div *ngIf="invites.length === 0">
     <p class="p1"> You have no invites</p>
 </div>
 <app-error-page *ngIf="error" [error]="error"></app-error-page>
