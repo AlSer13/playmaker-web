@@ -102,12 +102,14 @@ export class LocalUserService {
         }
     }
 
-    async updateUser(avatar: File) {
-        const user = await this.userDataService.updateUser(this.user, avatar);
+    async updateUser(avatar: File, jid: string, email: string, currentPass: string, newPass: string) {
+
+        const user = await this.userDataService.updateUser(avatar, jid, email, currentPass, newPass);
         console.log(user);
         // TODO: update cached info
         this.user.avatar = user.avatar;
         this.user.jid = user.jid;
+        this.user.email = user.email;
         return user;
     }
 }

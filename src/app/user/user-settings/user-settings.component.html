@@ -1,5 +1,5 @@
 <div *ngIf="!error && user">
-    <form clrForm clrLayout="vertical" (submit)="updateUserInfo()">
+    <form  clrForm [formGroup]="updateForm" (submit)="updateUserInfo()">
 
         <div class="img__wrap" (click)="fileInput.click()">
             <img class='avatar_image' [src]="avatarUrl" alt="none" width="250" height="250">
@@ -8,11 +8,9 @@
             </div>
         </div>
 
-        <input style="display: none;" type="file" (change)="onFileSelected($event)" #fileInput>
+        <input style="display: none;" type="file" (change)="onFileSelected($event)" #fileInput formControlName="avatar">
 
-        <p class="p1">id: {{user._id}}</p>
-        <p class="p1">{{user.email}}</p>
-        <p class="p1" *ngIf="user.accountId">steam id: {{user.accountId}}
+        <p class="p1 bold" *ngIf="user.accountId">steam id: {{user.accountId}}
             <button type="button" class="btn btn-icon btn-link"
                     (click)="disconnectSteam()">
                 <clr-icon shape="trash"></clr-icon>
@@ -24,13 +22,78 @@
             </button>
         </p>
         <clr-input-container>
-            <label>JID</label>
-            <input id="JID" type="text" name="JID" clrInput="JID"
-                   placeholder="JID" [(ngModel)]="user.jid"
-                   autocomplete="off"
+            <label>Jabber ID</label>
+            <input
+                clrInput
+                title="jid"
+                type="text"
+                name="jid"
+
+                formControlName="jid"
             />
+            <clr-control-helper>Enter your Jabber ID</clr-control-helper>
         </clr-input-container>
-        <button [clrLoading]="updateBtnState" id="update_btn" type="submit" class="btn btn-primary">
+
+        <clr-input-container>
+            <label>E-mail</label>
+            <input
+                clrInput
+                title="email"
+                type="text"
+                name="email"
+
+                formControlName="email"
+            />
+            <clr-control-helper>{{emailHelper}}</clr-control-helper>
+            <clr-control-error *clrIfError="'required'">Required field</clr-control-error>
+            <clr-control-error *clrIfError="'email'">Not an email</clr-control-error>
+            <clr-control-error *clrIfError="'emailExists'">Email is already used</clr-control-error>
+        </clr-input-container>
+
+        <clr-password-container>
+            <label>Current password</label>
+            <input
+                clrPassword
+                title="password"
+                type="password"
+                name="password"
+
+                formControlName="currentPassword"
+            />
+            <clr-control-helper>Enter your current password</clr-control-helper>
+        </clr-password-container>
+
+        <clr-password-container>
+            <label>New password</label>
+            <input
+                clrPassword
+                title="password"
+                type="password"
+                name="password"
+
+                formControlName="password"
+            />
+            <clr-control-helper>Enter new password</clr-control-helper>
+            <clr-control-error *clrIfError="'required'">Required field</clr-control-error>
+            <clr-control-error *clrIfError="'mismatch'">Passwords don't match</clr-control-error>
+        </clr-password-container>
+
+        <clr-password-container>
+            <label>Confirm new password</label>
+            <input
+                clrPassword
+                title="password_confirm"
+                type="password"
+                name="password_confirm"
+
+                formControlName="confirmPassword"
+            />
+            <clr-control-helper>Enter new password again</clr-control-helper>
+            <clr-control-error *clrIfError="'required'">Required field</clr-control-error>
+            <clr-control-error *clrIfError="'mismatch'">Passwords don't match</clr-control-error>
+        </clr-password-container>
+
+        <button [clrLoading]="updateBtnState" id="update_btn" type="submit" class="btn btn-primary" [disabled]="!updateForm.valid">
             UPDATE
         </button>
     </form>
