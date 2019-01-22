@@ -23,7 +23,7 @@
         <tr *ngFor="let player of match.players | slice:0:5">
             <td class="left">
                 <img [src]="heroIconURL + player.hero_name + '_sb.png'" alt="">
-                {{player.hero_name.replace('_', ' ') | titlecase }}
+                {{player.nickname}}
             </td>
             <td>{{player.level}}</td>
             <td>{{player.kills}}</td>
@@ -67,7 +67,7 @@
         <tr *ngFor="let player of match.players | slice:5:10">
             <td class="left">
                 <img [src]="heroIconURL + player.hero_name + '_sb.png'" alt="">
-                {{player.hero_name.replace('_', ' ') | titlecase }}
+                {{player.nickname}}
             </td>
             <td>{{player.level}}</td>
             <td>{{player.kills}}</td>

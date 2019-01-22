@@ -31,11 +31,13 @@ export class TournamentComponent implements OnInit {
 
     async ngOnInit() {
         this.getTour();
-        this.teams = await this.userDataService.getTeams(this.userService.getUser()._id);
-        console.log(this.teams);
-        this.teams = this.teams.filter((team) => {
-            return this.userService.getUser().equals(team.captain) ;//&& team.players.length === 5;
-        });
+        if (this.userService.getUser()._id) {
+            this.teams = await this.userDataService.getTeams(this.userService.getUser()._id);
+            console.log(this.teams);
+            this.teams = this.teams.filter((team) => {
+                return this.userService.getUser().equals(team.captain);//&& team.players.length === 5;
+            });
+        }
     }
 
     getTour(): void {
