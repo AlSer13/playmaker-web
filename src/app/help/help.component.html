@@ -1,3 +1,20 @@
-<p>
-  help works!
-</p>
+<form clrForm [formGroup]="feedbackForm" (submit)="sendMessage()">
+    <h1>Feedback</h1>
+    <clr-input-container>
+        <label>E-mail</label>
+        <input clrInput required="required" type="text" formControlName="email" placeholder="Email for the answer">
+        <clr-control-error *clrIfError="'email'">Not an email</clr-control-error>
+        <clr-control-error *clrIfError="'required'">Required field</clr-control-error>
+        <clr-control-error *clrIfError="'maxlength'">Max length: 100 symbols</clr-control-error>
+    </clr-input-container>
+    <clr-textarea-container>
+        <label>Your question/message</label>
+        <textarea clrTextarea required="required" formControlName="message"></textarea>
+        <clr-control-error *clrIfError="'required'">Required field</clr-control-error>
+        <clr-control-error *clrIfError="'maxlength'">Max length: 2000 symbols</clr-control-error>
+    </clr-textarea-container>
+    <button type="submit" class="btn btn-primary submit-btn" [disabled]="!feedbackForm.valid">Send
+    </button>
+
+
+</form>
