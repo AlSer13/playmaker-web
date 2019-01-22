@@ -1,20 +1,20 @@
 import {Team} from './Team';
-import {environment} from '../environments/environment';
 import {User} from './User';
-import {id} from '@swimlane/ngx-charts/release/utils';
+import {getCurrencyByName} from '../models/currencies';
 
 export class Tournament {
     _id: string;
     name: string;
     teamCount: number;
     prizePool: number;
-    prizePoolCurrency: string;
+    prizePoolCurrency: any;
     description: string;
     winnerTeam: Team;
     owner: User;
     teams: Team[];
     started: boolean;
     finished: boolean;
+    startWhenReady: boolean;
     bracket: [{
         _id: number,
         team1: string,
@@ -38,28 +38,19 @@ export class Tournament {
             this.bracket = json.bracket;
             this.winnerTeam = json.winnerTeam;
             this.started = json.started;
-            this.prizePoolCurrency = json.prizePoolCurrency;
+            this.prizePoolCurrency = getCurrencyByName(json.prizePoolCurrency);
         }
     }
 
     getTeamNameById(id: string) {
         for (let i = 0; i < this.teams.length; i++) {
-            if (this.teams[i]._id === id) return this.teams[i].name;
+            if (this.teams[i]._id === id) { return this.teams[i].name; }
         }
     }
 
     getTeamById(id: string) {
         for (let i = 0; i < this.teams.length; i++) {
-            if (this.teams[i]._id === id) return this.teams[i];
+            if (this.teams[i]._id === id) { return this.teams[i]; }
         }
     }
-
-    // constructor() {
-    //     this.description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,' +
-    //         ' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,' +
-    //         ' quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' +
-    //         ' Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' +
-    //         ' Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-    //     this.ownerName = 'John Doe';
-    // }
 }

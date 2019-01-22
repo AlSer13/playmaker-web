@@ -14,11 +14,14 @@ export class TournamentService {
     constructor(private http: HttpClient) {
     }
 
-    getTours(query: string, skip: number, limit: number): Observable<Tournament[]> {
-        const params = new HttpParams()
+    getTours(query: string, skip: number, limit: number, filters: { tourStatus: string } = {tourStatus: 'all'}): Observable<Tournament[]> {
+        let params = new HttpParams()
             .set('searchQuery', query)
             .set('skip', String(skip))
             .set('limit', String(limit));
+        if (filters.tourStatus !== 'all') {
+            params = params.set('tourStatus', filters.tourStatus);
+        }
         const options = {params: params};
         return this.http.get<Tournament[]>(this.tourURL, options)
             .pipe(map(data => data['tournaments']));

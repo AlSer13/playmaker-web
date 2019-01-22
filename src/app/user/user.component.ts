@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
 
     user: User;
     teams: Team[];
-    tours: Tournament[] = [];
+    tours: Tournament[];
     error: any;
     you: boolean; // is it current users page?
 

@@ -3,6 +3,7 @@ import {ClrWizard} from '@clr/angular';
 import {User} from '../../../entities/User';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TournamentService} from '../../../services/entity-data/tournament.service';
+import {currencies} from '../../../models/currencies';
 
 @Component({
     selector: 'app-add-tour-wizard',
@@ -10,9 +11,16 @@ import {TournamentService} from '../../../services/entity-data/tournament.servic
     styleUrls: ['./add-tour-wizard.component.scss']
 })
 export class AddTourWizardComponent implements OnInit {
+
+
+    constructor(private tourService: TournamentService) {
+    }
+
     @ViewChild('tourWizard') tourWizard: ClrWizard;
     @Input() owner: User;
     wizardOpen: boolean;
+
+    currencies = currencies;
 
     contactTypes = [
         {name: 'E-mail'},
@@ -20,11 +28,6 @@ export class AddTourWizardComponent implements OnInit {
         {name: 'Social network link'},
         {name: 'WhatsApp'},
         {name: 'Telegram'},
-    ];
-    currencies = [
-        {sign: '$', name: 'dollar'},
-        {sign: '€', name: 'euro'},
-        {sign: '₽', name: 'ruble'}
     ];
 
     descriptionForm = new FormGroup({
@@ -34,7 +37,7 @@ export class AddTourWizardComponent implements OnInit {
 
     parametersForm = new FormGroup({
         prizePool: new FormControl(0, Validators.pattern('(^[1-9][0-9]*)?(^0)?')),
-        prizePoolCurrency: new FormControl(this.currencies[0].name),
+        prizePoolCurrency: new FormControl(this.currencies[0]),
         teamCount: new FormControl('',
             [Validators.min(2),
                 Validators.max(100), Validators.required, Validators.pattern('^[1-9][0-9]*')]),
@@ -58,10 +61,6 @@ export class AddTourWizardComponent implements OnInit {
         this.wizardOpen = true;
     }
 
-
-    constructor(private tourService: TournamentService) {
-    }
-
     ngOnInit() {
     }
 
@@ -75,7 +74,7 @@ export class AddTourWizardComponent implements OnInit {
             name: this.descriptionForm.value.name,
             description: this.descriptionForm.value.description,
             prizePool: this.parametersForm.value.prizePool,
-            prizePoolCurrency: this.parametersForm.value.prizePoolCurrency,
+            prizePoolCurrency: this.parametersForm.value.prizePoolCurrency.name,
             teamCount: this.parametersForm.value.teamCount,
             startWhenReady: this.parametersForm.value.startWhenReady,
             contacts: contacts

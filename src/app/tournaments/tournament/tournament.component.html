@@ -1,19 +1,16 @@
 <div *ngIf="tour">
     <h1>
-        <clr-icon id="back_btn" shape="circle-arrow" class="btn btn-link" dir="left"
-                  (click)="goBack()"></clr-icon>
         {{tour.name}}
     </h1>
-    <button class="btn btn-outline" (click)="joinOpen = true; joinError = ''" *ngIf="!tour.started">join tournament
+    <button class="btn btn-outline" (click)="joinOpen = true; joinError = ''" *ngIf="!tour.started">
+        join tournament
     </button>
 
-    <button class="btn btn-primary" (click)="startTournament()" *ngIf="isOwner && !tour.started">Start tournament
+    <button class="btn btn-primary" (click)="startTournament()" *ngIf="isOwner && !tour.started">
+        Start tournament
     </button>
-    <h4>
-        Id: {{tour._id}}
-    </h4>
 
-    <h4>
+    <h4 *ngIf="tour.prizePool">
         Prize pool: {{tour.prizePool}} {{tour.prizePoolCurrency}}
     </h4>
 
@@ -21,12 +18,14 @@
         Winner: {{tour.winnerTeam.name}}
     </h4>
 
-    <h4>Teams:</h4>
-    <ol>
-        <li *ngFor="let team of tour?.teams">{{team.name}}</li>
-    </ol>
+    <div *ngIf="teams && teams.length != 0">
+        <h4>Teams:</h4>
+        <ol>
+            <li *ngFor="let team of tour?.teams">{{team.name}}</li>
+        </ol>
+    </div>
 
-    <bracket [tournament]="tour"></bracket>
+    <app-bracket [tournament]="tour"></app-bracket>
 
 
     <clr-modal [(clrModalOpen)]="joinOpen" [clrModalSize]="'sm'">

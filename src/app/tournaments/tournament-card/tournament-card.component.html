@@ -19,35 +19,57 @@
             </div>
             <div class="card-block">
                 <div class="card-media-block">
-                    <img src="../../../assets/dlc.jpeg" class="card-media-image">
+                    <img [alt]="tournament.name" src="../../../assets/dlc.jpeg"
+                         class="card-media-image">
                     <div class="card-media-description">
-                        <!--<span class="card-media-text">-->
-                        <!--Id: {{tour._id}}-->
-                        <!--</span>-->
+
+
+                        <span class="card-media-text" *ngIf="tournamentCondition">
+                            Status: {{tournamentCondition}}
+                        </span>
+
+
                         <span class="card-media-text" *ngIf="tournament.owner &&
                         tournament.owner.username">
-                    Owner: <a>{{tournament.owner.username}}</a>
-                </span>
-                        <span class="card-media-text" *ngIf="tournament.teamCount">
-                    Teams: {{tournament.teamCount}}
-                </span>
-                        <span class="card-media-text" *ngIf="tournament.prizePool">
-                    Prize pool: {{tournament.prizePool}} {{tournament.prizePoolCurrency}}
-                </span>
-                        <span class="card-media-text" *ngIf="tournamentCondition">
-                    Status: {{tournamentCondition}}
-                </span>
+                            Owner:
+                            <a routerLink="/user/{{tournament.owner.username}}">
+                                {{tournament.owner.username}}
+                            </a>
+                        </span>
+
+
                         <span class="card-media-text" *ngIf="tournament.winnerTeam">
-                    Winner: {{tournament.winnerTeam.name}}
-                </span>
+                            Winner: {{tournament.winnerTeam.name}}
+                        </span>
+
+
+                        <span class="card-media-text" *ngIf="tournament.teamCount">
+                            Teams: {{tournament.teamCount}}
+                        </span>
+
+
+                        <span class="card-media-text" *ngIf="tournament.prizePool != null">
+                            Prize pool:
+                            {{tournament.prizePool}}{{tournament.prizePoolCurrency.sign}}
+                        </span>
+
+
                     </div>
                 </div>
                 <div class="card-text">
+                    <b *ngIf="tournament.startWhenReady && tournamentCondition.toLowerCase()
+                    === 'upcoming'">
+                        This tournament will start when {{tournament.teamCount}}
+                        teams join.
+                    </b>
+                    <br>
                     {{tournament.description}}
                 </div>
             </div>
             <div class="card-footer">
-                <button class="btn btn-link" routerLink="/tournaments/{{tournament._id}}">view page</button>
+                <button class="btn btn-link" routerLink="/tournaments/{{tournament._id}}">view
+                    page
+                </button>
             </div>
         </div>
     </div>
