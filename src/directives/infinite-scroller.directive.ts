@@ -1,6 +1,6 @@
 import {AfterViewInit, Directive, ElementRef, Input} from '@angular/core';
 
-import {fromEvent} from 'rxjs';
+import {fromEvent, Observable, Subject} from 'rxjs';
 import {exhaustMap, filter, map, pairwise, startWith} from 'rxjs/operators';
 
 interface ScrollPosition {
@@ -26,6 +26,16 @@ export class InfiniteScrollerDirective implements AfterViewInit {
 
     private requestOnScroll$;
 
+    private scrolling = true;
+    private dummy = Observable.create(function (observer) {
+        setTimeout(() => {
+            observer.complete();
+        }, 500);
+    });
+
+    @Input()
+    continueScrolling: Subject<boolean>;
+
     @Input()
     scrollCallback;
 
@@ -46,17 +56,18 @@ export class InfiniteScrollerDirective implements AfterViewInit {
 
         this.requestCallbackOnScroll();
 
+        this.continueScrolling.asObservable().subscribe((scrolling) => {
+            this.scrolling = scrolling;
+        });
+
     }
 
     private registerScrollEvent() {
-        console.log('registerScrollEvent');
         this.scrollEvent$ = fromEvent(this.elm.nativeElement, 'scroll');
-        console.log(this.elm);
 
     }
 
     private streamScrollEvents() {
-        // console.log('streamScrollEvents');
         this.userScrolledDown$ = this.scrollEvent$
             .pipe(
                 map((e: any): ScrollPosition => ({
@@ -70,8 +81,6 @@ export class InfiniteScrollerDirective implements AfterViewInit {
     }
 
     private requestCallbackOnScroll() {
-        // console.log('requestCallbackOnScroll');
-
         this.requestOnScroll$ = this.userScrolledDown$;
 
         if (this.immediateCallback) {
@@ -83,10 +92,13 @@ export class InfiniteScrollerDirective implements AfterViewInit {
 
         this.requestOnScroll$
             .pipe(exhaustMap(() => {
-                return this.scrollCallback();
+                if (this.scrolling) {
+                    return this.scrollCallback();
+                } else {
+                    return this.dummy;
+                }
             }))
-            .subscribe(() => {
-            });
+            .subscribe();
 
     }
 
