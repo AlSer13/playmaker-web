@@ -58,7 +58,7 @@ export class LoginComponent {
     async logIn() {
         if (this.username && this.password) {
             this.loading = true;
-            const data = await this.authenticationService.logIn(this.asadmin, this.username, this.password, this.rememberMe);
+            const data = await this.authenticationService.logIn(this.asadmin, this.username, this.password,);
             if (data) {
                 this.error = false;
                 console.log(this.userService.getUser());

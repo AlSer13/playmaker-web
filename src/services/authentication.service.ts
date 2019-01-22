@@ -25,8 +25,8 @@ export class AuthenticationService {
 
     }
 
-    async logIn(asadmin: boolean, username: string, password: string, rememberMe: boolean): Promise<any> {
-        const body = {username: username, password: password, asadmin: asadmin, rememberMe: rememberMe};
+    async logIn(asadmin: boolean, username: string, password: string): Promise<any> {
+        const body = {username: username, password: password, asadmin: asadmin};
         try {
             const data = await this.http.post(this.loginURL, body).toPromise();
             await this.authorizationService.initializePermissions();
