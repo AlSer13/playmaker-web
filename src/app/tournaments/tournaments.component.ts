@@ -21,6 +21,7 @@ export class TournamentsComponent implements OnInit {
     limit = 4;
 
     scrollCallback;
+    continueScrolling = new Subject<boolean>();
 
     public keyUp = new Subject<string>();
 
@@ -44,13 +45,18 @@ export class TournamentsComponent implements OnInit {
     }
 
     scroll(): Observable<Tournament[]> {
-        console.log('scroll');
         return this.tourService.getTours(this.query, this.tours.length, this.limit)
-            .pipe(tap((tours) => this.tours = this.tours.concat(tours)));
+            .pipe(tap((tours) => {
+                if (tours.length !== 0) {
+                    this.tours = this.tours.concat(tours);
+                } else {
+                    this.continueScrolling.next(false);
+                }
+            }));
     }
 
     search(): Observable<Tournament[]> {
-        console.log('search');
+        this.continueScrolling.next(true);
         return this.tourService.getTours(this.query, 0, this.limit)
             .pipe(tap((tours) => this.tours = tours));
     }

@@ -22,6 +22,7 @@ export class TeamsComponent implements OnInit {
     limit = 4;
 
     scrollCallback;
+    continueScrolling = new Subject<boolean>();
 
     public keyUp = new Subject<string>();
 
@@ -43,13 +44,18 @@ export class TeamsComponent implements OnInit {
     }
 
     scroll(): Observable<Team[]> {
-        console.log('scroll');
         return this.teamService.getTeams(this.query, this.teams.length, this.limit)
-            .pipe(tap((teams) => this.teams = this.teams.concat(teams)));
+            .pipe(tap((teams) => {
+                if (teams.length !== 0) {
+                    this.teams = this.teams.concat(teams);
+                } else {
+                    this.continueScrolling.next(false);
+                }
+            }));
     }
 
     search(): Observable<Team[]> {
-        console.log('search');
+        this.continueScrolling.next(true);
         return this.teamService.getTeams(this.query, 0, this.limit)
             .pipe(tap((teams) => this.teams = teams));
     }
