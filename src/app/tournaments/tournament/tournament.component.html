@@ -18,7 +18,7 @@
         Winner: {{tour.winnerTeam.name}}
     </h4>
 
-    <div *ngIf="teams && teams.length != 0">
+    <div *ngIf="tour.teams && tour.teams.length != 0">
         <h4>Teams:</h4>
         <ol>
             <li *ngFor="let team of tour?.teams">{{team.name}}</li>
