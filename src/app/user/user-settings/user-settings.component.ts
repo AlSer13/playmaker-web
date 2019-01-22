@@ -4,10 +4,8 @@ import {LocalUserService} from '../../../services/local-user.service';
 import {AuthService} from '../../../services/auth.service';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {ClrLoadingState} from '@clr/angular';
-import {log} from 'util';
-import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SignupComponent} from '../../signup/signup.component';
-import {debounceTime, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-user-settings',

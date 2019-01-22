@@ -37,7 +37,7 @@ export class AddTourWizardComponent implements OnInit {
 
     parametersForm = new FormGroup({
         prizePool: new FormControl(0, Validators.pattern('(^[1-9][0-9]*)?(^0)?')),
-        prizePoolCurrency: new FormControl(this.currencies[0]),
+        prizePoolCurrency: new FormControl(this.currencies[0].name),
         teamCount: new FormControl('',
             [Validators.min(2),
                 Validators.max(100), Validators.required, Validators.pattern('^[1-9][0-9]*')]),
@@ -74,7 +74,7 @@ export class AddTourWizardComponent implements OnInit {
             name: this.descriptionForm.value.name,
             description: this.descriptionForm.value.description,
             prizePool: this.parametersForm.value.prizePool,
-            prizePoolCurrency: this.parametersForm.value.prizePoolCurrency.name,
+            prizePoolCurrency: this.parametersForm.value.prizePoolCurrency,
             teamCount: this.parametersForm.value.teamCount,
             startWhenReady: this.parametersForm.value.startWhenReady,
             contacts: contacts
@@ -90,6 +90,7 @@ export class AddTourWizardComponent implements OnInit {
     }
 
     doCancel() {
+        console.log(this.parametersForm.value.prizePoolCurrency);
         this.doReset();
     }
 
