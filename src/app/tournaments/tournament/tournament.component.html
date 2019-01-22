@@ -4,7 +4,8 @@
                   (click)="goBack()"></clr-icon>
         {{tour.name}}
     </h1>
-    <button class="btn btn-outline" (click)="joinOpen = true; joinError = ''" *ngIf="!tour.started">join tournament</button>
+    <button class="btn btn-outline" (click)="joinOpen = true; joinError = ''" *ngIf="!tour.started">join tournament
+    </button>
 
     <button class="btn btn-primary" (click)="startTournament()" *ngIf="isOwner && !tour.started">Start tournament
     </button>
@@ -13,7 +14,11 @@
     </h4>
 
     <h4>
-        Prize pool: {{tour.prizePool}}
+        Prize pool: {{tour.prizePool}} {{tour.prizePoolCurrency}}
+    </h4>
+
+    <h4 *ngIf="tour.winnerTeam">
+        Winner: {{tour.winnerTeam.name}}
     </h4>
 
     <h4>Teams:</h4>

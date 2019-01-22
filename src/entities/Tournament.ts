@@ -8,7 +8,9 @@ export class Tournament {
     name: string;
     teamCount: number;
     prizePool: number;
+    prizePoolCurrency: string;
     description: string;
+    winnerTeam: Team;
     owner: User;
     teams: Team[];
     started: boolean;
@@ -34,7 +36,9 @@ export class Tournament {
             this.owner = new User(json.owner);
             this.teams = json.teams;
             this.bracket = json.bracket;
+            this.winnerTeam = json.winnerTeam;
             this.started = json.started;
+            this.prizePoolCurrency = json.prizePoolCurrency;
         }
     }
 
