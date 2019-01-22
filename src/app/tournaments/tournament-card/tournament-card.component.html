@@ -31,9 +31,13 @@
                         <span class="card-media-text" *ngIf="tournament.teamCount">
                     Teams: {{tournament.teamCount}}
                 </span>
-                        <span class="card-media-text" *ngIf="tournament.prizePool">
-                    Prize pool: {{tournament.prizePool}} {{tournament.prizePoolCurrency}}
-                </span>
+                        <span class="card-media-text" *ngIf="tournament.prizePool != null">
+                            Prize pool: {{tournament.prizePool}}
+                            <span *ngIf="tournament.prizePoolCurrency != null">
+                                {{tournament.prizePoolCurrency.sign}}
+                            </span>
+                        </span>
+
                         <span class="card-media-text" *ngIf="tournamentCondition">
                     Status: {{tournamentCondition}}
                 </span>
@@ -47,7 +51,9 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button class="btn btn-link" routerLink="/tournaments/{{tournament._id}}">view page</button>
+                <button class="btn btn-link" routerLink="/tournaments/{{tournament._id}}">view
+                    page
+                </button>
             </div>
         </div>
     </div>

@@ -46,7 +46,7 @@
             </clr-input-container>
             <clr-select-container>
                 <select clrSelect name="currency" formControlName="prizePoolCurrency">
-                    <option *ngFor="let c of currencies">{{c.sign}}</option>
+                    <option *ngFor="let c of currencies" [value]="c">{{c.sign}}</option>
                 </select>
             </clr-select-container>
 
@@ -112,7 +112,8 @@
             <h4>Tournament name: <b>{{descriptionForm.value.name}}</b></h4>
             <h4>Owner: <b>{{owner.username}}</b></h4>
             <h4>Prize pool:
-                <b>{{parametersForm.value.prizePool}} {{parametersForm.value.prizePoolCurrency}}</b>
+                <b>{{parametersForm.value.prizePool}}
+                    {{parametersForm.value.prizePoolCurrency.sign}}</b>
             </h4>
             <h4>Team count: <b>{{parametersForm.value.teamCount}}</b></h4>
             <h4 *ngIf="parametersForm.value.startWhenReady">The tournament will start when the

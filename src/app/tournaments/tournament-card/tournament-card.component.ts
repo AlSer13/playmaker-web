@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tournament} from '../../../entities/Tournament';
 import {LocalUserService} from '../../../services/local-user.service';
+import {getCurrencyByName} from '../../../models/currencies';
 
 @Component({
     selector: 'app-tournament-card',
@@ -18,6 +19,7 @@ export class TournamentCardComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.tournament.prizePoolCurrency = getCurrencyByName(this.tournament.prizePoolCurrency);
         this.checkSelected().then();
         if (this.tournament.finished) {
             this.tournamentCondition = 'Finished';
