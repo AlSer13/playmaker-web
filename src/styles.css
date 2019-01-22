@@ -20,8 +20,14 @@ ul[class="nav"] {
     height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
-    padding-right: 10px;
+    padding-right: 1rem;
 }
 
-.content-area {
+clr-radio-wrapper label {
+    cursor: default;
+    z-index: 0;
+}
+clr-radio-wrapper input {
+    cursor: pointer;
+    z-index: 1;
 }

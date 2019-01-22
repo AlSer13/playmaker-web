@@ -18,12 +18,15 @@ export class TournamentCardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.checkSelected();
-        if (this.tournament.finished)
+        this.checkSelected().then();
+        if (this.tournament.finished) {
             this.tournamentCondition = 'Finished';
-        else {
-            if (this.tournament.started) this.tournamentCondition = 'Ongoing';
-            else this.tournamentCondition = 'Upcoming';
+        } else {
+            if (this.tournament.started) {
+                this.tournamentCondition = 'Ongoing';
+            } else {
+                this.tournamentCondition = 'Upcoming';
+            }
         }
     }
 
