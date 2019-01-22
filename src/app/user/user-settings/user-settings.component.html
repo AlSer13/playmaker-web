@@ -8,7 +8,7 @@
             </div>
         </div>
 
-        <input style="display: none;" type="file" (change)="onFileSelected($event)" #fileInput formControlName="avatar">
+        <input style="display: none;" type="file" (change)="onFileSelected($event)" #fileInput formControlName="avatar" accept="image/jpeg,image/png">
 
         <p class="p1 bold" *ngIf="user.accountId">steam id: {{user.accountId}}
             <button type="button" class="btn btn-icon btn-link"
