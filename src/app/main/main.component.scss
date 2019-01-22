@@ -12,16 +12,17 @@
             z-index: 2;
             grid-column: 1;
             grid-row: 1;
-            font-size: 3vw;
-            line-height: 4vw;
+            font-size: 2rem;
+            line-height: 2rem;
         }
 
         .sub-title {
+            align-self: start;
             z-index: 2;
             grid-column: 1;
             grid-row: 2;
-            font-size: 2vw;
-            line-height: 4vw;
+            font-size: 1.5rem;
+            line-height: 2rem;
         }
 
         svg {
@@ -44,8 +45,8 @@
             padding-right: 100px;
             padding-top: 13vh;
             h1 {
-                font-size: 3vw;
-                line-height: 3vw;
+                font-size: 2rem;
+                line-height: 2rem;
             }
         }
     }
@@ -100,6 +101,7 @@
         }
 
         .go-btn {
+            box-shadow: 5px 5px black;
             grid-column: 2;
             align-self: center;
             justify-self: center;
@@ -109,6 +111,23 @@
             text-align: center;
             line-height: 3rem;
         }
+
+        .go-btn:active {
+            box-shadow: none;
+        }
     }
 
 }
+
+@media screen and (max-width: 1000px) {
+    #title svg {
+        display: none
+    }
+}
+
+@media screen and (max-width: 679px) {
+    svg {
+        display: none
+    }
+}
+
