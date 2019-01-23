@@ -3,7 +3,8 @@
 
         <figure class="avatar">
             <figcaption>
-                {{user.username}}
+                {{user.username}} <clr-icon size="31" shape="check-circle"
+                                            *ngIf="user.confirmed"></clr-icon>
             </figcaption>
             <img class="avatar_image" [src]="user.avatar" alt="none" width="250" height="250">
         </figure>
@@ -57,11 +58,16 @@
                              [owner]="user">
         </app-add-tour-wizard>
 
+
     </section>
 
-    <section id="history">
+    <section id="info">
         <div class="caption">Info</div>
         <div class="content">
+            <div *ngIf="admin">ADMIN</div>
+            <div *ngIf="user.jid">JID: {{user.jid}}</div>
+            <div *ngIf="user.email">E-mail: {{user.email}}</div>
+            <div *ngIf="user.accountId">Steam AccountId: {{user.accountId}}</div>
 
         </div>
     </section>

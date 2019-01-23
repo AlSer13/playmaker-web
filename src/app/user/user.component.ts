@@ -22,7 +22,10 @@ export class UserComponent implements OnInit {
     teams: Team[];
     tours: Tournament[];
     error: any;
-    you: boolean; // is it current users page?
+    you: boolean;
+    admin = false;
+
+    // is it current users page?
 
     constructor(private route: ActivatedRoute,
                 private authService: AuthService,
@@ -36,6 +39,7 @@ export class UserComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.admin = this.authService.hasPermission('ADMIN');
     }
 
     handleError(error) {
@@ -52,10 +56,10 @@ export class UserComponent implements OnInit {
     async initData(username: string) {
         try {
             this.you = this.userService.getUser().username === username;
-            console.log(this.userService.getUser().username);
-            console.log(username);
+            console.log(this.userService.getUser());
             if (this.you) {
                 this.user = this.userService.getUser();
+                this.userService.loadExtraInfo();
                 this.teams = await this.userService.getTeams();
             } else {
                 this.user = new User(await this.userDataService.getUserInfo(username));
