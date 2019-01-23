@@ -13,6 +13,7 @@ export class User {
     invites: Team[];
     selectedMatches: Match[];
     selectedTournaments: Tournament[];
+    confirmed: boolean;
 
     teams: Team[];
 
@@ -31,6 +32,7 @@ export class User {
             this.invites = json.invites;
             this.selectedMatches = json.selectedMatches;
             this.selectedTournaments = json.selectedTournaments;
+            this.confirmed = json.confirmed;
         }
     }
 }

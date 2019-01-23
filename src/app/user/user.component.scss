@@ -28,6 +28,7 @@ main {
         figcaption {
             color: #e9ecef;
             font-size: 25px;
+            margin-bottom: 10px;
         }
 
         .avatar_image {
@@ -51,7 +52,7 @@ main {
     grid-area: tour;
 }
 
-#history {
+#info {
     grid-area: feed;
 }
 
