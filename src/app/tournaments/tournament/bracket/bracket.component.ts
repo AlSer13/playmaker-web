@@ -9,7 +9,7 @@ declare let $: any;
 @Component({
     selector: 'app-bracket',
     templateUrl: './bracket.component.html',
-    styleUrls: ['./bracket.component.css']
+    styleUrls: ['./bracket.component.scss']
 })
 
 export class BracketComponent implements OnInit, AfterViewInit, OnChanges {

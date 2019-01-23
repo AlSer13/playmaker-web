@@ -11,7 +11,7 @@ import {AuthService} from '../../../services/auth.service';
 @Component({
     selector: 'app-tournament',
     templateUrl: './tournament.component.html',
-    styleUrls: ['./tournament.component.css']
+    styleUrls: ['./tournament.component.scss']
 })
 export class TournamentComponent implements OnInit {
     tour: Tournament;
@@ -20,6 +20,7 @@ export class TournamentComponent implements OnInit {
     chosenTeam: string;
     joinError: string;
     teams: Team[];
+    tournamentCondition: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -51,6 +52,15 @@ export class TournamentComponent implements OnInit {
                 this.isOwner =
                     this.userService.getUser().equals(this.tour.owner)
                     || this.authService.hasPermission('ADMIN');
+                if (this.tour.finished) {
+                    this.tournamentCondition = 'Finished';
+                } else {
+                    if (this.tour.started) {
+                        this.tournamentCondition = 'Ongoing';
+                    } else {
+                        this.tournamentCondition = 'Upcoming';
+                    }
+                }
             });
     }
 

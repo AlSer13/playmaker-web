@@ -10,22 +10,45 @@
         Start tournament
     </button>
 
-    <h4 *ngIf="tour.prizePool">
-        Prize pool: {{tour.prizePool}} {{tour.prizePoolCurrency.sign}}
-    </h4>
+    <div class="clr-row clr-justify-content-between">
+        <div class="clr-col-auto">
+            <section id="tour">
+                <div class="caption">Info</div>
+                <h4 *ngIf="tour.owner">
+                    Owner : <a routerLink="/user/{{tour.owner.username}}">{{tour.owner.username}}</a>
+                </h4>
+                <b *ngIf="tour.startWhenReady && tournamentCondition.toLowerCase()
+                    === 'upcoming'">
+                    This tournament will start when {{tour.teamCount}}
+                    teams join.
+                </b>
+                <br>
+                {{tour.description}}
+                <h4 *ngIf="tour.teamCount">
+                    Max team count: {{tour.teamCount}}
+                </h4>
 
-    <h4 *ngIf="tour.winnerTeam">
-        Winner: {{tour.winnerTeam.name}}
-    </h4>
+                <h4 *ngIf="tour.prizePool">
+                    Prize pool: {{tour.prizePool}} {{tour.prizePoolCurrency.sign}}
+                </h4>
 
-    <div *ngIf="teams && teams.length != 0">
-        <h4>Teams:</h4>
-        <ol>
-            <li *ngFor="let team of tour?.teams">{{team.name}}</li>
-        </ol>
+                <h4 *ngIf="tour.winnerTeam">
+                    Winner: {{tour.winnerTeam.name}}
+                </h4>
+
+                <div *ngIf="tour.teams && tour.teams.length != 0">
+                    <h4>Teams:</h4>
+                    <ol>
+                        <li *ngFor="let team of tour?.teams">{{team.name}}</li>
+                    </ol>
+                </div>
+            </section>
+        </div>
+
+        <div class="clr-col-lg-8">
+            <app-bracket [tournament]="tour"></app-bracket>
+        </div>
     </div>
-
-    <app-bracket [tournament]="tour"></app-bracket>
 
 
     <clr-modal [(clrModalOpen)]="joinOpen" [clrModalSize]="'sm'">
